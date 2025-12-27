@@ -23,6 +23,14 @@ function App(): JSX.Element {
     console.log(newCase);
   };
 
+  const deleteCase = (caseData: CaseProtocol): void => {
+    setCases((prevCases) =>
+      prevCases.map((caseMap) =>
+        caseMap.id === caseData.id ? { ...caseMap, active: false } : caseMap,
+      ),
+    );
+  };
+
   return (
     <>
       <h1>Sistema de Ponteiras PCB</h1>
@@ -32,6 +40,7 @@ function App(): JSX.Element {
       ) : (
         <CaseList
           casesState={cases}
+          onDelete={deleteCase}
           onOpenCase={setOpenCase}
           onOpenCaseForm={setOpenCaseForm}
         />
