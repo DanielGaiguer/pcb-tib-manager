@@ -5,8 +5,11 @@ import { loadLocal } from './storage/loadLocal';
 import { saveLocal } from './storage/saveLocal';
 import { CaseForm } from './components/CaseForm';
 import React from 'react';
+import { CaseList } from './components/caseList';
+import { CaseDetail } from './components/CaseDetail';
 
 function App(): JSX.Element {
+  const [openCase, setOpenCase] = useState<CaseProtocol | null>(null);
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
 
@@ -25,6 +28,12 @@ function App(): JSX.Element {
       <div className="case-form">
         <CaseForm onSubmit={addCase} />
       </div>
+
+      {openCase ? (
+        <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
+      ) : (
+        <CaseList casesState={cases} onOpenCase={setOpenCase} />
+      )}
     </>
   );
 }

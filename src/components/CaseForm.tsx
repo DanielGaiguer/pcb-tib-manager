@@ -9,7 +9,7 @@ type Props = {
 
 export function CaseForm({ onSubmit }: Props): JSX.Element {
   const [form, setForm] = useState<CaseProtocol>({
-    id: '',
+    id: crypto.randomUUID(),
     name: '',
     lines: 0,
     rows: 0,
@@ -24,16 +24,6 @@ export function CaseForm({ onSubmit }: Props): JSX.Element {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="id">ID da case: </label>
-      <input
-        type="text"
-        id="id"
-        name="id"
-        value={form.id}
-        onChange={(e) => setForm({ ...form, id: e.target.value })}
-      />
-
-      <br />
       <label htmlFor="name">Nome da Case: </label>
       <input
         type="text"
@@ -89,7 +79,7 @@ export function CaseForm({ onSubmit }: Props): JSX.Element {
       </label>
 
       <br />
-      <button type="submit">Adicionar</button>
+      <button type="submit">Salvar</button>
     </form>
   );
 }
