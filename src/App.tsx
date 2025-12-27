@@ -10,6 +10,7 @@ import { CaseDetail } from './components/CaseDetail';
 
 function App(): JSX.Element {
   const [openCase, setOpenCase] = useState<CaseProtocol | null>(null);
+  const [openCaseForm, setOpenCaseForm] = useState<boolean>(false);
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
 
@@ -25,15 +26,25 @@ function App(): JSX.Element {
   return (
     <>
       <h1>Sistema de Ponteiras PCB</h1>
-      <div className="case-form">
-        <CaseForm onSubmit={addCase} />
-      </div>
 
       {openCase ? (
         <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
       ) : (
-        <CaseList casesState={cases} onOpenCase={setOpenCase} />
+        <CaseList
+          casesState={cases}
+          onOpenCase={setOpenCase}
+          onOpenCaseForm={setOpenCaseForm}
+        />
       )}
+
+      <div className="case-form">
+        {openCaseForm && (
+          <CaseForm
+            onSubmit={addCase}
+            onOpenCaseForm={() => setOpenCaseForm(false)}
+          />
+        )}
+      </div>
     </>
   );
 }

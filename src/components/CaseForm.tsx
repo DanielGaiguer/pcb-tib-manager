@@ -5,9 +5,10 @@ import React from 'react';
 
 type Props = {
   onSubmit: (data: CaseProtocol) => void;
+  onOpenCaseForm: () => void;
 };
 
-export function CaseForm({ onSubmit }: Props): JSX.Element {
+export function CaseForm({ onSubmit, onOpenCaseForm }: Props): JSX.Element {
   const [form, setForm] = useState<CaseProtocol>({
     id: crypto.randomUUID(),
     name: '',
@@ -19,11 +20,13 @@ export function CaseForm({ onSubmit }: Props): JSX.Element {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSubmit(form);
+    onOpenCaseForm();
     setForm({ id: '', name: '', lines: 0, rows: 0, active: true });
   };
 
   return (
     <form onSubmit={handleSubmit}>
+      <button onClick={onOpenCaseForm}> Voltar</button>
       <label htmlFor="name">Nome da Case: </label>
       <input
         type="text"

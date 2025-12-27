@@ -15,10 +15,10 @@ export function CaseDetail({ caseData, onBack }: Props): JSX.Element {
       <h2>{caseData.name}</h2>
 
       <ul>
-        <li>{caseData.lines}</li>
-        <li>{caseData.id}</li>
-        <li>{caseData.rows}</li>
-        <li>{caseData.active}</li>
+        <li>ID do case: {caseData.id}</li>
+        <li>Quantidade de Linhas: {caseData.lines}</li>
+        <li>Quantidade de Colunas: {caseData.rows}</li>
+        <li>Status: {caseData.active ? 'Ativo' : 'Inativo'}</li>
       </ul>
     </>
   );

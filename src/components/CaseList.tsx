@@ -4,9 +4,14 @@ import type { CaseProtocol } from '../types/case';
 type Props = {
   casesState: CaseProtocol[];
   onOpenCase: (caseData: CaseProtocol) => void;
+  onOpenCaseForm: (arg0: boolean) => void;
 };
 
-export function CaseList({ casesState, onOpenCase }: Props): JSX.Element {
+export function CaseList({
+  casesState,
+  onOpenCase,
+  onOpenCaseForm,
+}: Props): JSX.Element {
   const casesActive = casesState.filter((c) => c.active);
   console.log(casesState);
 
@@ -22,7 +27,7 @@ export function CaseList({ casesState, onOpenCase }: Props): JSX.Element {
           </li>
         ))}
       </ul>
-      <button>Nova Case</button>
+      <button onClick={() => onOpenCaseForm(true)}>Nova Case</button>
     </>
   );
 }
