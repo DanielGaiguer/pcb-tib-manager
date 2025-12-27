@@ -1,5 +1,6 @@
 import { useState, type JSX } from 'react';
 import { type CaseProtocol } from '../types/case';
+//import { Button } from './button';
 import React from 'react';
 
 type Props = {
@@ -23,7 +24,7 @@ export function CaseForm({ onSubmit }: Props): JSX.Element {
 
   return (
     <form onSubmit={handleSubmit}>
-      <label htmlFor="id">ID da case</label>
+      <label htmlFor="id">ID da case: </label>
       <input
         type="text"
         id="id"
@@ -33,7 +34,7 @@ export function CaseForm({ onSubmit }: Props): JSX.Element {
       />
 
       <br />
-      <label htmlFor="Name">Nome da Case</label>
+      <label htmlFor="name">Nome da Case: </label>
       <input
         type="text"
         id="name"
@@ -43,14 +44,49 @@ export function CaseForm({ onSubmit }: Props): JSX.Element {
       />
 
       <br />
-      <label htmlFor="Name">Nome da Case</label>
+      <label htmlFor="lines">Quantidade de Linhas: </label>
       <input
-        type="text"
-        id="name"
-        name="name"
-        value={form.name}
-        onChange={(e) => setForm({ ...form, name: e.target.value })}
+        type="number"
+        id="lines"
+        name="lines"
+        value={form.lines}
+        onChange={(e) => setForm({ ...form, lines: Number(e.target.value) })}
       />
+
+      <br />
+      <label htmlFor="rows">Quantidade de Colunas: </label>
+      <input
+        type="number"
+        id="rows"
+        name="rows"
+        value={form.rows}
+        onChange={(e) => setForm({ ...form, rows: Number(e.target.value) })}
+      />
+
+      <br />
+      <label htmlFor="active">A case está ativa? </label>
+      <br />
+      <label>
+        <input
+          type="radio"
+          id="active"
+          name="active"
+          checked={form.active === true}
+          onChange={() => setForm({ ...form, active: true })}
+        />
+        Sim
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          id="active"
+          name="active"
+          checked={form.active === false}
+          onChange={() => setForm({ ...form, active: false })}
+        />
+        Não
+      </label>
 
       <br />
       <button type="submit">Adicionar</button>

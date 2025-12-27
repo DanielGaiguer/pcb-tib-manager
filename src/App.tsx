@@ -16,13 +16,15 @@ function App(): JSX.Element {
 
   const addCase = (newCase: CaseProtocol): void => {
     setCases((prev) => [...prev, newCase]);
+    console.log(newCase);
   };
 
   return (
     <>
       <h1>Sistema de Ponteiras PCB</h1>
-
-      <CaseForm onSubmit={addCase} />
+      <div className="case-form">
+        <CaseForm onSubmit={addCase} />
+      </div>
     </>
   );
 }
