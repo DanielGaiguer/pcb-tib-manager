@@ -1,7 +1,30 @@
-import './App.css';
+import { useEffect, useState, type JSX } from 'react';
+import { type CaseProtocol } from './types/case';
+import { type TibProtocol } from './types/tib';
+import { loadLocal } from './storage/loadLocal';
+import { saveLocal } from './storage/saveLocal';
+import { CaseForm } from './components/CaseForm';
+import React from 'react';
 
-function App() {
-  return null;
+function App(): JSX.Element {
+  const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
+  const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
+
+  useEffect(() => {
+    saveLocal(cases, tibs);
+  }, [cases, tibs]);
+
+  const addCase = (newCase: CaseProtocol): void => {
+    setCases((prev) => [...prev, newCase]);
+  };
+
+  return (
+    <>
+      <h1>Sistema de Ponteiras PCB</h1>
+
+      <CaseForm onSubmit={addCase} />
+    </>
+  );
 }
 
 export default App;

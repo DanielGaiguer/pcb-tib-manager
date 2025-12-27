@@ -1,7 +1,7 @@
-export interface caseProtocol {
+export interface CaseProtocol {
   id: string;
-  nome: string;
-  linhas: number;
-  colunas: number;
-  ativa: boolean;
+  name: string;
+  lines: number;
+  rows: number;
+  active: boolean;
 }

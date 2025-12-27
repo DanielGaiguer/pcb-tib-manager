@@ -1,4 +1,4 @@
-export interface tibProtocol {
+export interface TibProtocol {
   id: string;
   caixaId: string;
   linha: number;
