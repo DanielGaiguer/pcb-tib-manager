@@ -5,14 +5,16 @@ import { loadLocal } from './storage/loadLocal';
 import { saveLocal } from './storage/saveLocal';
 import { CaseForm } from './components/CaseForm';
 import React from 'react';
-import { CaseList } from './components/caseList';
+import { CaseList } from './components/CaseList';
 import { CaseDetail } from './components/CaseDetail';
+import { CaseMatrix } from './components/CaseMatrix';
+//import { CaseMatrix } from './components/CaseMatrix';
 
 function App(): JSX.Element {
   const [openCase, setOpenCase] = useState<CaseProtocol | null>(null);
   const [openCaseForm, setOpenCaseForm] = useState<boolean>(false);
   const [dataEditCase, setDataEditCase] = useState<CaseProtocol | undefined>(
-    null,
+    undefined,
   );
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
@@ -50,10 +52,14 @@ function App(): JSX.Element {
       <h1>Sistema de Ponteiras PCB</h1>
 
       {openCase ? (
-        <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
+        <>
+          <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
+          <CaseMatrix caseData={openCase} tibs={tibs} mode="detail" />
+        </>
       ) : (
         <CaseList
           casesState={cases}
+          tibsState={tibs}
           onDelete={deleteCase}
           onEdit={editCase}
           onOpenCase={setOpenCase}

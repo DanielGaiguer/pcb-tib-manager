@@ -1,44 +1,60 @@
 import React from 'react';
-import { useState, type JSX } from 'react';
-import { type TibProtocol } from '../types/Tib';
+import type { JSX } from 'react';
+import type { CaseProtocol } from '../types/Case';
+import type { TibProtocol } from '../types/Tib';
+import '../styles/caseMatrix.css';
 
-export function CaseMatrix(): JSX.Element {
-  function toggleCell(row: number, col: number) {
-    setMatrix((prev) =>
-      prev.map((r, rIdx) =>
-        r.map((c, cIdx) =>
-          rIdx === row && cIdx === col ? { ...c, active: !c.active } : c,
-        ),
-      ),
-    );
-  }
+interface CaseMatrixProps {
+  caseData: CaseProtocol;
+  tibs: TibProtocol[];
+  mode?: 'preview' | 'detail';
+}
 
-  function createMatrix(rows: number, cols: number): TibProtocol[][] {
-    return Array.from({ length: rows }, () =>
-      Array.from({ length: cols }, () => ({
-        ativa: false,
-        id: null,
-      })),
-    );
-  }
+export function CaseMatrix({
+  caseData,
+  tibs,
+  mode = 'detail',
+}: CaseMatrixProps): JSX.Element {
+  console.log('CaseMatrix props:', caseData);
+  const { rows, cols, id } = caseData;
 
-  const [matrix, setMatrix] = useState(() => createMatrix(rows, cols));
+  const isPreview = mode === 'preview';
+
+  const dotSize = isPreview ? 20 : 30;
+  const gap = isPreview ? 4 : 8;
 
   return (
-    <>
-      <div className="matrix">
-        {matrix.map((row, rowIndex) => (
-          <div key={rowIndex} className="row">
-            {row.map((cell, colIndex) => (
-              <div
-                key={colIndex}
-                className="cell"
-                onClick={() => toggleCell(rowIndex, colIndex)}
+    <div className="matrix" style={{ gap }}>
+      {Array.from({ length: rows }).map((_, row) => (
+        <div key={row} className="matrix-row">
+          {Array.from({ length: cols }).map((_, col) => {
+            const occupied = tibs.some(
+              (tib) =>
+                tib.caseId === id &&
+                tib.rows === row &&
+                tib.cols === col &&
+                tib.occupied,
+            );
+
+            return (
+              <span
+                key={col}
+                className={`dot ${occupied ? 'occupied' : 'free'}`}
+                style={{
+                  width: dotSize,
+                  height: dotSize,
+                  cursor: isPreview ? 'default' : 'pointer',
+                }}
+                title={
+                  !isPreview
+                    ? `Linha ${row + 1} - Coluna ${col + 1}`
+                    : undefined
+                }
               />
-            ))}
-          </div>
-        ))}
-      </div>
-    </>
+            );
+          })}
+        </div>
+      ))}
+    </div>
   );
 }

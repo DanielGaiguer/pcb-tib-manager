@@ -1,0 +1,24 @@
+.matrix {
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  padding: 5px;
+}
+
+.matrix-row {
+  display: flex;
+}
+
+.dot {
+  border-radius: 50%;
+  border: 1.5px solid #696969;
+}
+
+.dot.free {
+  background: #FAEBD7;
+  margin: 3px;
+}
+
+.dot.occupied {
+  background: #3232CD;
+}
