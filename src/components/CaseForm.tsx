@@ -6,15 +6,20 @@ import React from 'react';
 type Props = {
   onSubmit: (data: CaseProtocol) => void;
   onOpenCaseForm: () => void;
+  onDataEdit?: CaseProtocol;
 };
 
-export function CaseForm({ onSubmit, onOpenCaseForm }: Props): JSX.Element {
+export function CaseForm({
+  onSubmit,
+  onOpenCaseForm,
+  onDataEdit,
+}: Props): JSX.Element {
   const [form, setForm] = useState<CaseProtocol>({
-    id: crypto.randomUUID(),
-    name: '',
-    lines: 0,
-    rows: 0,
-    active: true,
+    id: onDataEdit?.id ? onDataEdit.id : crypto.randomUUID(),
+    name: onDataEdit?.name ? onDataEdit.name : '',
+    lines: onDataEdit?.lines ? onDataEdit.lines : 0,
+    rows: onDataEdit?.rows ? onDataEdit.lines : 0,
+    active: onDataEdit?.active ? onDataEdit.active : true,
   });
 
   const handleSubmit = (e: React.FormEvent) => {

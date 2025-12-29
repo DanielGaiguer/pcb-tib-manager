@@ -4,6 +4,7 @@ import type { CaseProtocol } from '../types/case';
 type Props = {
   casesState: CaseProtocol[];
   onDelete: (caseData: CaseProtocol) => void;
+  onEdit: (caseData: CaseProtocol) => void;
   onOpenCase: (caseData: CaseProtocol) => void;
   onOpenCaseForm: (arg0: boolean) => void;
 };
@@ -11,6 +12,7 @@ type Props = {
 export function CaseList({
   casesState,
   onDelete,
+  onEdit,
   onOpenCase,
   onOpenCaseForm,
 }: Props): JSX.Element {
@@ -26,6 +28,7 @@ export function CaseList({
             {caseData.name}
             <button onClick={() => onOpenCase(caseData)}>Abrir</button>
             <button onClick={() => onDelete(caseData)}>Deletar</button>
+            <button onClick={() => onEdit(caseData)}>Editar</button>
           </li>
         ))}
       </ul>

@@ -11,6 +11,7 @@ import { CaseDetail } from './components/CaseDetail';
 function App(): JSX.Element {
   const [openCase, setOpenCase] = useState<CaseProtocol | null>(null);
   const [openCaseForm, setOpenCaseForm] = useState<boolean>(false);
+  const [dataEditCase, setDataEditCase] = useState<CaseProtocol | undefined>(null);
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
 
@@ -31,6 +32,17 @@ function App(): JSX.Element {
     );
   };
 
+  const editCase = (caseData: CaseProtocol): void => {
+    console.log(caseData);
+    setOpenCaseForm(true);
+    setDataEditCase(caseData);
+    setCases((prevCases) =>
+      prevCases.map((caseMap) =>
+        caseMap.id === caseData.id ? { ...caseMap, ...caseData } : caseMap,
+      ),
+    );
+  };
+
   return (
     <>
       <h1>Sistema de Ponteiras PCB</h1>
@@ -41,6 +53,7 @@ function App(): JSX.Element {
         <CaseList
           casesState={cases}
           onDelete={deleteCase}
+          onEdit={editCase}
           onOpenCase={setOpenCase}
           onOpenCaseForm={setOpenCaseForm}
         />
@@ -51,6 +64,7 @@ function App(): JSX.Element {
           <CaseForm
             onSubmit={addCase}
             onOpenCaseForm={() => setOpenCaseForm(false)}
+            onDataEdit={dataEditCase}
           />
         )}
       </div>
