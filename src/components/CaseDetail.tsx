@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 import React from 'react';
-import type { CaseProtocol } from '../types/case';
+import type { CaseProtocol } from '../types/Case';
 
 type Props = {
   caseData: CaseProtocol;

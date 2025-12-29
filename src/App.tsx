@@ -1,6 +1,6 @@
 import { useEffect, useState, type JSX } from 'react';
-import { type CaseProtocol } from './types/case';
-import { type TibProtocol } from './types/tib';
+import { type CaseProtocol } from './types/Case';
+import { type TibProtocol } from './types/Tib';
 import { loadLocal } from './storage/loadLocal';
 import { saveLocal } from './storage/saveLocal';
 import { CaseForm } from './components/CaseForm';
@@ -11,7 +11,9 @@ import { CaseDetail } from './components/CaseDetail';
 function App(): JSX.Element {
   const [openCase, setOpenCase] = useState<CaseProtocol | null>(null);
   const [openCaseForm, setOpenCaseForm] = useState<boolean>(false);
-  const [dataEditCase, setDataEditCase] = useState<CaseProtocol | undefined>(null);
+  const [dataEditCase, setDataEditCase] = useState<CaseProtocol | undefined>(
+    null,
+  );
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
 

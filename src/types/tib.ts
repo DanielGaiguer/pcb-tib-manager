@@ -1,10 +1,10 @@
 export interface TibProtocol {
   id: string;
   caseId: string;
-  l: number;
-  coluna: number;
-  tipo: string;
-  diametro: number;
-  usos: number;
-  ativa: boolean;
+  rows: number;
+  cols: number;
+  type: string;
+  diameter: number;
+  uses: number;
+  active: boolean;
 }

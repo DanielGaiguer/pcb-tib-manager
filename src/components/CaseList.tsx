@@ -1,5 +1,5 @@
 import React, { type JSX } from 'react';
-import type { CaseProtocol } from '../types/case';
+import type { CaseProtocol } from '../types/Case';
 
 type Props = {
   casesState: CaseProtocol[];

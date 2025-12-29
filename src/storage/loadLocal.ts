@@ -1,5 +1,5 @@
-import type { CaseProtocol } from '../types/case';
-import type { TibProtocol } from '../types/tib';
+import type { CaseProtocol } from '../types/Case';
+import type { TibProtocol } from '../types/Tib';
 
 const CASES_KEY = 'cases';
 const TIBS_KEY = 'tibs';
