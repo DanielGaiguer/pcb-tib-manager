@@ -16,8 +16,8 @@ export function CaseDetail({ caseData, onBack }: Props): JSX.Element {
 
       <ul>
         <li>ID do case: {caseData.id}</li>
-        <li>Quantidade de Linhas: {caseData.lines}</li>
-        <li>Quantidade de Colunas: {caseData.rows}</li>
+        <li>Quantidade de Linhas: {caseData.rows}</li>
+        <li>Quantidade de Colunas: {caseData.cols}</li>
         <li>Status: {caseData.active ? 'Ativo' : 'Inativo'}</li>
       </ul>
     </>

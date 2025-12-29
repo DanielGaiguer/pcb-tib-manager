@@ -17,8 +17,8 @@ export function CaseForm({
   const [form, setForm] = useState<CaseProtocol>({
     id: onDataEdit?.id ? onDataEdit.id : crypto.randomUUID(),
     name: onDataEdit?.name ? onDataEdit.name : '',
-    lines: onDataEdit?.lines ? onDataEdit.lines : 0,
-    rows: onDataEdit?.rows ? onDataEdit.lines : 0,
+    rows: onDataEdit?.rows ? onDataEdit.rows : 0,
+    cols: onDataEdit?.cols ? onDataEdit.cols : 0,
     active: onDataEdit?.active ? onDataEdit.active : true,
   });
 
@@ -26,7 +26,7 @@ export function CaseForm({
     e.preventDefault();
     onSubmit(form);
     onOpenCaseForm();
-    setForm({ id: '', name: '', lines: 0, rows: 0, active: true });
+    setForm({ id: '', name: '', rows: 0, cols: 0, active: true });
   };
 
   return (
@@ -42,23 +42,23 @@ export function CaseForm({
       />
 
       <br />
-      <label htmlFor="lines">Quantidade de Linhas: </label>
-      <input
-        type="number"
-        id="lines"
-        name="lines"
-        value={form.lines}
-        onChange={(e) => setForm({ ...form, lines: Number(e.target.value) })}
-      />
-
-      <br />
-      <label htmlFor="rows">Quantidade de Colunas: </label>
+      <label htmlFor="rows">Quantidade de Linhas: </label>
       <input
         type="number"
         id="rows"
         name="rows"
         value={form.rows}
         onChange={(e) => setForm({ ...form, rows: Number(e.target.value) })}
+      />
+
+      <br />
+      <label htmlFor="cols">Quantidade de Colunas: </label>
+      <input
+        type="number"
+        id="cols"
+        name="cols"
+        value={form.cols}
+        onChange={(e) => setForm({ ...form, cols: Number(e.target.value) })}
       />
 
       <br />

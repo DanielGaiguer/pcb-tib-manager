@@ -1,7 +1,7 @@
 export interface TibProtocol {
   id: string;
-  caixaId: string;
-  linha: number;
+  caseId: string;
+  l: number;
   coluna: number;
   tipo: string;
   diametro: number;
