@@ -54,7 +54,12 @@ function App(): JSX.Element {
       {openCase ? (
         <>
           <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
-          <CaseMatrix caseData={openCase} tibs={tibs} mode="detail" />
+          <CaseMatrix
+            caseData={openCase}
+            tibs={tibs}
+            setStateTib={() => setTibs}
+            mode="detail"
+          />
         </>
       ) : (
         <CaseList

@@ -21,7 +21,7 @@ export function CaseList({
   onOpenCaseForm,
 }: Props): JSX.Element {
   const casesActive = casesState.filter((c) => c.active);
-  console.log(casesState);
+  //console.log(casesState);
 
   return (
     <>
