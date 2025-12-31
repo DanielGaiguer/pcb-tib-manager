@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import type { JSX } from 'react';
 import type { CaseProtocol } from '../types/Case';
 import type { TibProtocol } from '../types/Tib';
+import { TibForm } from './TibForm';
 import '../styles/caseMatrix.css';
 
 interface CaseMatrixProps {
@@ -16,16 +17,45 @@ export function CaseMatrix({
   tibs,
   mode = 'detail',
 }: CaseMatrixProps): JSX.Element {
-  console.log('CaseMatrix props:', caseData);
+  //console.log('CaseMatrix props:', caseData);
+  //console.log(tibs);
+  const [selectedTib, setSelectedTib] = useState<TibProtocol | null>(null);
+  const [statePositionTib, setStatePositionTib] = useState<
+    [[number, number], [number, string]]
+  >([
+    [0, 0],
+    [0, ''],
+  ]);
+  const [openTibForm, onOpenTibForm] = useState<boolean>(false);
   const { rows, cols, id } = caseData;
   const isPreview = mode === 'preview';
 
   const dotSize = isPreview ? 20 : 30;
   const gap = isPreview ? 4 : 8;
 
+  const findTibAtPosition = (
+    row: number,
+    col: number,
+  ): TibProtocol | undefined => {
+    return tibs.find(
+      (tib) =>
+        tib.caseId === id &&
+        tib.rows === row &&
+        tib.cols === col &&
+        tib.occupied,
+    );
+  };
+
   const selectTib = (row: number, col: number): void => {
-    console.log(row, col);
-    console.log(row + 1, columnLabel(col));
+    const tib = findTibAtPosition(row, col);
+
+    setStatePositionTib([
+      [row, col],
+      [row + 1, columnLabel(col)],
+    ]);
+
+    setSelectedTib(tib ?? null); // salva a tib inteira (ou null)
+    onOpenTibForm(true);
   };
 
   const columnLabel = (index: number): string => {
@@ -81,6 +111,16 @@ export function CaseMatrix({
           })}
         </React.Fragment>
       ))}
+      <div className="Form-tib">
+        {openTibForm && (
+          <TibForm
+            caseData={caseData}
+            tibData={selectedTib}
+            positionTib={statePositionTib}
+            onOpenTibForm={() => onOpenTibForm(false)}
+          />
+        )}
+      </div>
     </div>
   );
 }

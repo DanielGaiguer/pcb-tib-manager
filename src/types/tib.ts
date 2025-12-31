@@ -3,6 +3,7 @@ export interface TibProtocol {
   caseId: string;
   rows: number;
   cols: number;
+  position: string;
   type: string;
   diameter: number;
   uses: number;
