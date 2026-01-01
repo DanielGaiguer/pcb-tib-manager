@@ -42,6 +42,75 @@ export function TibForm({
     <form onSubmit={handleSubmit}>
       <button onClick={onOpenTibForm}> Voltar</button>
       <h2>{isEditing ? 'Editar Tib' : 'Cadastrar Tib'}</h2>
+
+      <label htmlFor="rows">Linha da Ponteira (Sistema):</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={form.rows}
+        onChange={(e) => setForm({ ...form, rows: Number(e.target.value) })}
+      />
+
+      <br />
+      <label htmlFor="rows">Coluna da Ponteira (Sistema):</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={form.cols}
+        onChange={(e) => setForm({ ...form, cols: Number(e.target.value) })}
+      />
+
+      <br />
+      <label htmlFor="position">Posição da Ponteira:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={form.position}
+        onChange={(e) => setForm({ ...form, position: e.target.value })}
+      />
+
+      <br />
+      <label htmlFor="position">Tipo da Ponteira:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={form.type}
+        onChange={(e) => setForm({ ...form, type: e.target.value })}
+      />
+
+      <br />
+      <label htmlFor="position">Diametro da Ponteira:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={form.diameter}
+        onChange={(e) => setForm({ ...form, diameter: Number(e.target.value) })}
+      />
+
+      <br />
+      <label htmlFor="position">Quantidade de usos da ponteira:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={form.uses}
+        onChange={(e) => setForm({ ...form, uses: Number(e.target.value) })}
+      />
+
+      <br />
+      <label htmlFor="position">Status da ponteira:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={form.uses}
+        onChange={(e) => setForm({ ...form, uses: Number(e.target.value) })}
+      />
     </form>
   );
 }

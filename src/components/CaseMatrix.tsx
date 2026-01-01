@@ -63,54 +63,56 @@ export function CaseMatrix({
   };
 
   return (
-    <div
-      className="matrix-grid"
-      style={{
-        gridTemplateColumns: `30px repeat(${cols}, ${dotSize}px)`,
-        gap,
-      }}
-    >
-      <div />
+    <>
+      <div
+        className="matrix-grid"
+        style={{
+          gridTemplateColumns: `30px repeat(${cols}, ${dotSize}px)`,
+          gap,
+        }}
+      >
+        <div />
 
-      {/* Cabeçalho das colunas */}
-      {Array.from({ length: cols }).map((_, col) => (
-        <div key={col} className="matrix-header column">
-          {columnLabel(col)}
-        </div>
-      ))}
+        {/* Cabeçalho das colunas */}
+        {Array.from({ length: cols }).map((_, col) => (
+          <div key={col} className="matrix-header column">
+            {columnLabel(col)}
+          </div>
+        ))}
 
-      {/* Linhas */}
-      {Array.from({ length: rows }).map((_, row) => (
-        <React.Fragment key={row}>
-          {/* Cabeçalho da linha */}
-          <div className="matrix-header row">{row + 1}</div>
+        {/* Linhas */}
+        {Array.from({ length: rows }).map((_, row) => (
+          <React.Fragment key={row}>
+            {/* Cabeçalho da linha */}
+            <div className="matrix-header row">{row + 1}</div>
 
-          {/* Bolinhas */}
-          {Array.from({ length: cols }).map((_, col) => {
-            const occupied = tibs.some(
-              (tib) =>
-                tib.caseId === id &&
-                tib.rows === row &&
-                tib.cols === col &&
-                tib.occupied,
-            );
+            {/* Bolinhas */}
+            {Array.from({ length: cols }).map((_, col) => {
+              const occupied = tibs.some(
+                (tib) =>
+                  tib.caseId === id &&
+                  tib.rows === row &&
+                  tib.cols === col &&
+                  tib.occupied,
+              );
 
-            return (
-              <span
-                key={col}
-                className={`dot ${occupied ? 'occupied' : 'free'}`}
-                style={{
-                  width: dotSize,
-                  height: dotSize,
-                  cursor: isPreview ? 'default' : 'pointer',
-                }}
-                title={`Linha ${row + 1} - Coluna ${columnLabel(col)}`}
-                onClick={() => !isPreview && selectTib(row, col)}
-              />
-            );
-          })}
-        </React.Fragment>
-      ))}
+              return (
+                <span
+                  key={col}
+                  className={`dot ${occupied ? 'occupied' : 'free'}`}
+                  style={{
+                    width: dotSize,
+                    height: dotSize,
+                    cursor: isPreview ? 'default' : 'pointer',
+                  }}
+                  title={`Linha ${row + 1} - Coluna ${columnLabel(col)}`}
+                  onClick={() => !isPreview && selectTib(row, col)}
+                />
+              );
+            })}
+          </React.Fragment>
+        ))}
+      </div>
       <div className="Form-tib">
         {openTibForm && (
           <TibForm
@@ -121,6 +123,6 @@ export function CaseMatrix({
           />
         )}
       </div>
-    </div>
+    </>
   );
 }
