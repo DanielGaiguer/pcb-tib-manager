@@ -113,14 +113,16 @@ export function CaseMatrix({
       </div>
       <div className="Form-tib">
         {openTibForm && (
-          <TibForm
-            key={`${statePositionTib[0][0]}-${statePositionTib[0][1]}`} //Quando a key muda, o React pensa: “Isso não é o mesmo componente Vou destruir o antigo E criar um novo do zero”, isso e para mudar o formulario.
-            caseData={caseData}
-            tibData={selectedTib}
-            onSubmit={onSubmit}
-            positionTib={statePositionTib}
-            onOpenTibForm={() => onOpenTibForm(false)}
-          />
+          <div className="center-form-tib">
+            <TibForm
+              key={`${statePositionTib[0][0]}-${statePositionTib[0][1]}`} //Quando a key muda, o React pensa: “Isso não é o mesmo componente Vou destruir o antigo E criar um novo do zero”, isso e para mudar o formulario.
+              caseData={caseData}
+              tibData={selectedTib}
+              onSubmit={onSubmit}
+              positionTib={statePositionTib}
+              onOpenTibForm={() => onOpenTibForm(false)}
+            />
+          </div>
         )}
       </div>
     </>
