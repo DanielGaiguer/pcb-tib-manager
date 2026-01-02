@@ -31,7 +31,14 @@ export function CaseList({
           <React.Fragment key={caseData.id}>
             <li key={caseData.id}>
               {caseData.name}
-              <button onClick={() => onOpenCase(caseData)}>Abrir</button>
+              <button
+                onClick={() => {
+                  onOpenCase(caseData);
+                  onOpenCaseForm(false);
+                }}
+              >
+                Abrir
+              </button>
               <button onClick={() => onDelete(caseData)}>Deletar</button>
               <button onClick={() => onEdit(caseData)}>Editar</button>
             </li>
@@ -39,7 +46,13 @@ export function CaseList({
           </React.Fragment>
         ))}
       </ul>
-      <button onClick={() => onOpenCaseForm(true)}>Nova Case</button>
+      <button
+        onClick={() => {
+          onOpenCaseForm(true);
+        }}
+      >
+        Nova Case
+      </button>
     </>
   );
 }

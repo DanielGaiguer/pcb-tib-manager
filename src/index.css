@@ -99,4 +99,12 @@ body .Toastify .Toastify__toast-container .Toastify__toast--error {
   margin: 20px;
 }
 
-
+.center-form-case {
+  position: fixed;
+  inset: 0;              /* top, right, bottom, left = 0 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  background-color: red;
+}

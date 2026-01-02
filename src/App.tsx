@@ -36,7 +36,7 @@ function App(): JSX.Element {
       ),
     );
   };
- 
+
   const editCase = (caseData: CaseProtocol): void => {
     console.log(caseData);
     setOpenCaseForm(true);
@@ -78,15 +78,15 @@ function App(): JSX.Element {
         />
       )}
 
-      <div className="case-form">
-        {openCaseForm && (
+      {openCaseForm && (
+        <div className="center-form-case">
           <CaseForm
             onSubmit={addCase}
             onOpenCaseForm={() => setOpenCaseForm(false)}
             onDataEdit={dataEditCase}
           />
-        )}
-      </div>
+        </div>
+      )}
     </>
   );
 }
