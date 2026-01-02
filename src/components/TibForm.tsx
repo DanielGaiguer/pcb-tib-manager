@@ -42,6 +42,7 @@ export function TibForm({
     e.preventDefault();
     onSubmit(form);
     console.log(form);
+    onOpenTibForm();
     toast.success('Ponteira cadastrada com sucesso!');
   };
 
