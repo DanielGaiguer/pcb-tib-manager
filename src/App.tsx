@@ -21,6 +21,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     saveLocal(cases, tibs);
+    console.log('Todas as Ponteiras no State:', tibs);
   }, [cases, tibs]);
 
   const addCase = (newCase: CaseProtocol): void => {
@@ -47,6 +48,11 @@ function App(): JSX.Element {
     );
   };
 
+  const addTib = (newTib: TibProtocol): void => {
+    setTibs((prev) => [...prev, newTib]);
+    console.log(newTib);
+  };
+
   return (
     <>
       <h1>Sistema de Ponteiras PCB</h1>
@@ -57,7 +63,7 @@ function App(): JSX.Element {
           <CaseMatrix
             caseData={openCase}
             tibs={tibs}
-            setStateTib={() => setTibs}
+            onSubmit={addTib}
             mode="detail"
           />
         </>

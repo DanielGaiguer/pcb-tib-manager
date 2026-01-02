@@ -8,13 +8,14 @@ import '../styles/caseMatrix.css';
 interface CaseMatrixProps {
   caseData: CaseProtocol;
   tibs: TibProtocol[];
-  setStateTib?: (tib: TibProtocol) => void;
+  onSubmit: (tib: TibProtocol) => void;
   mode?: 'preview' | 'detail';
 }
 
 export function CaseMatrix({
   caseData,
   tibs,
+  onSubmit,
   mode = 'detail',
 }: CaseMatrixProps): JSX.Element {
   //console.log('CaseMatrix props:', caseData);
@@ -39,10 +40,7 @@ export function CaseMatrix({
   ): TibProtocol | undefined => {
     return tibs.find(
       (tib) =>
-        tib.caseId === id &&
-        tib.rows === row &&
-        tib.cols === col &&
-        tib.occupied,
+        tib.caseId === id && tib.rows === row && tib.cols === col && tib.active,
     );
   };
 
@@ -93,7 +91,7 @@ export function CaseMatrix({
                   tib.caseId === id &&
                   tib.rows === row &&
                   tib.cols === col &&
-                  tib.occupied,
+                  tib.active,
               );
 
               return (
@@ -118,6 +116,7 @@ export function CaseMatrix({
           <TibForm
             caseData={caseData}
             tibData={selectedTib}
+            onSubmit={onSubmit}
             positionTib={statePositionTib}
             onOpenTibForm={() => onOpenTibForm(false)}
           />
