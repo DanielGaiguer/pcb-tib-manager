@@ -128,6 +128,10 @@ export function TibForm({
         />
         Não
       </label>
+
+      <br />
+
+      <button type="submit">Salvar</button>
     </form>
   );
 }
