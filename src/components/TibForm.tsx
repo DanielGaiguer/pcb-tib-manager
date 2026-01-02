@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { type JSX } from 'react';
 import { type TibProtocol } from '../types/Tib';
 import type { CaseProtocol } from '../types/Case';
+import { ToastContainer, toast } from 'react-toastify';
 
 type Props = {
   caseData: CaseProtocol;
@@ -36,6 +37,8 @@ export function TibForm({
   console.log(tibData);
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    toast.success('Ponteira cadastrada com sucesso!');
+    console.log('Oi');
   };
 
   return (
@@ -132,6 +135,7 @@ export function TibForm({
       <br />
 
       <button type="submit">Salvar</button>
+      <ToastContainer />
     </form>
   );
 }
