@@ -29,7 +29,6 @@ export function TibForm({
     diameter: tibData?.diameter || 0,
     uses: tibData?.uses || 0,
     active: tibData?.active || false,
-    occupied: tibData?.occupied || false,
   });
 
   const isEditing = Boolean(tibData);

@@ -8,6 +8,7 @@ import React from 'react';
 import { CaseList } from './components/CaseList';
 import { CaseDetail } from './components/CaseDetail';
 import { CaseMatrix } from './components/CaseMatrix';
+import { RegisterUses } from './components/RegisterUses';
 //import { CaseMatrix } from './components/CaseMatrix';
 
 function App(): JSX.Element {
@@ -16,6 +17,7 @@ function App(): JSX.Element {
   const [dataEditCase, setDataEditCase] = useState<CaseProtocol | undefined>(
     undefined,
   );
+  const [openRegisterUse, onOpenRegisterUse] = useState<boolean>(false);
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
 
@@ -37,7 +39,6 @@ function App(): JSX.Element {
   };
 
   const editCase = (caseData: CaseProtocol): void => {
-    console.log(caseData);
     setOpenCaseForm(true);
     setDataEditCase(caseData);
     setCases((prevCases) =>
@@ -96,6 +97,14 @@ function App(): JSX.Element {
             onOpenCaseForm={() => setOpenCaseForm(false)}
             onDataEdit={dataEditCase}
           />
+        </div>
+      )}
+
+      <br />
+      <button onClick={() => onOpenRegisterUse(true)}>Usar ponteiras</button>
+      {openRegisterUse && (
+        <div className="center-form-case">
+          <RegisterUses buttonBack={() => onOpenRegisterUse(false)} />
         </div>
       )}
     </>

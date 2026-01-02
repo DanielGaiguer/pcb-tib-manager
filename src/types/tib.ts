@@ -8,5 +8,4 @@ export interface TibProtocol {
   diameter: number;
   uses: number;
   active: boolean;
-  occupied: boolean;
 }
