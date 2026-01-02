@@ -8,7 +8,7 @@ import '../styles/caseMatrix.css';
 interface CaseMatrixProps {
   caseData: CaseProtocol;
   tibs: TibProtocol[];
-  onSubmit: (tib: TibProtocol) => void;
+  onSubmit?: ((tib: TibProtocol) => void) | undefined;
   mode?: 'preview' | 'detail';
 }
 

@@ -36,7 +36,7 @@ function App(): JSX.Element {
       ),
     );
   };
-
+ 
   const editCase = (caseData: CaseProtocol): void => {
     console.log(caseData);
     setOpenCaseForm(true);

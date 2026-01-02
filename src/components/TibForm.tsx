@@ -7,7 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 type Props = {
   caseData: CaseProtocol;
   tibData: TibProtocol | null;
-  onSubmit: (tibData: TibProtocol) => void;
+  onSubmit: ((tibData: TibProtocol) => void) | undefined;
   positionTib: [[number, number], [number, string]];
   onOpenTibForm: () => void;
 };
@@ -40,7 +40,7 @@ export function TibForm({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(form);
+    if (onSubmit) onSubmit(form);
     console.log(form);
     onOpenTibForm();
     toast.success('Ponteira cadastrada com sucesso!');
