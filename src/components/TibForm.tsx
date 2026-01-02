@@ -34,10 +34,6 @@ export function TibForm({
 
   const isEditing = Boolean(tibData);
 
-  console.log(caseData);
-  console.log(positionTib);
-  console.log(tibData);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (onSubmit) onSubmit(form);

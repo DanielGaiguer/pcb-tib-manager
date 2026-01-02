@@ -8,7 +8,6 @@ type Props = {
 };
 
 export function CaseDetail({ caseData, onBack }: Props): JSX.Element {
-  console.log(caseData);
   return (
     <>
       <button onClick={onBack}> Voltar</button>

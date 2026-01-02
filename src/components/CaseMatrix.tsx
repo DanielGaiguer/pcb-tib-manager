@@ -46,6 +46,7 @@ export function CaseMatrix({
 
   const selectTib = (row: number, col: number): void => {
     const tib = findTibAtPosition(row, col);
+    console.log('Tib encontrada:', tib);
 
     setStatePositionTib([
       [row, col],

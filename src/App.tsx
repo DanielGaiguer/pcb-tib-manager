@@ -21,7 +21,6 @@ function App(): JSX.Element {
 
   useEffect(() => {
     saveLocal(cases, tibs);
-    console.log('Todas as Ponteiras no State:', tibs);
   }, [cases, tibs]);
 
   const addCase = (newCase: CaseProtocol): void => {
@@ -49,7 +48,20 @@ function App(): JSX.Element {
   };
 
   const addTib = (newTib: TibProtocol): void => {
-    setTibs((prev) => [...prev, newTib]);
+    setTibs((prevTibs) => {
+      // Verifica existência
+      // Retorna boolean
+      // Não altera o array
+      const exists = prevTibs.some((tib) => tib.id === newTib.id);
+
+      if (exists) {
+        //“Na posição onde o id bate, coloque OUTRO objeto”
+        // Isso é substituição, não adição.
+        return prevTibs.map((tib) => (tib.id === newTib.id ? newTib : tib));
+      }
+
+      return [...prevTibs, newTib];
+    });
     console.log(newTib);
   };
 
