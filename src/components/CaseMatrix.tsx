@@ -18,8 +18,6 @@ export function CaseMatrix({
   onSubmit,
   mode = 'detail',
 }: CaseMatrixProps): JSX.Element {
-  //console.log('CaseMatrix props:', caseData);
-  //console.log(tibs);
   const [selectedTib, setSelectedTib] = useState<TibProtocol | null>(null);
   const [statePositionTib, setStatePositionTib] = useState<
     [[number, number], [number, string]]
@@ -46,7 +44,6 @@ export function CaseMatrix({
 
   const selectTib = (row: number, col: number): void => {
     const tib = findTibAtPosition(row, col);
-    console.log('Tib encontrada:', tib);
 
     setStatePositionTib([
       [row, col],

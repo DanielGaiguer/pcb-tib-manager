@@ -37,7 +37,6 @@ export function TibForm({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (onSubmit) onSubmit(form);
-    console.log(form);
     onOpenTibForm();
     toast.success('Ponteira cadastrada com sucesso!');
   };

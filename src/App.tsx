@@ -62,7 +62,6 @@ function App(): JSX.Element {
 
       return [...prevTibs, newTib];
     });
-    console.log(newTib);
   };
 
   return (
