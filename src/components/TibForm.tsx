@@ -103,14 +103,31 @@ export function TibForm({
       />
 
       <br />
-      <label htmlFor="position">Status da ponteira:</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value={form.uses}
-        onChange={(e) => setForm({ ...form, uses: Number(e.target.value) })}
-      />
+
+      <label htmlFor="active">Status da Ponteira: </label>
+
+      <br />
+      <label>
+        <input
+          type="radio"
+          id="active"
+          name="active"
+          checked={form.active === true}
+          onChange={() => setForm({ ...form, active: true })}
+        />
+        Sim
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          id="active"
+          name="active"
+          checked={form.active === false}
+          onChange={() => setForm({ ...form, active: false })}
+        />
+        Não
+      </label>
     </form>
   );
 }
