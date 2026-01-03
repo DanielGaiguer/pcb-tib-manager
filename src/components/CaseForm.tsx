@@ -38,7 +38,7 @@ export function CaseForm({
       toast.error('A case deve possuir no mínimo uma coluna.');
       errors++;
     }
-    if (errors > 0) return;
+    if (errors) return;
     onSubmit(form);
     onOpenCaseForm();
     setForm({ id: '', name: '', rows: 0, cols: 0, active: true });

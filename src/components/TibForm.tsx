@@ -26,7 +26,7 @@ export function TibForm({
     cols: tibData?.cols || positionTib[0][1],
     position: tibData?.position || positionTib[1][0] + positionTib[1][1],
     type: tibData?.type || '',
-    diameter: tibData?.diameter || 0,
+    diameter: tibData?.diameter || '0',
     uses: tibData?.uses || 0,
     active: tibData?.active || false,
   });
@@ -34,7 +34,22 @@ export function TibForm({
   const isEditing = Boolean(tibData);
 
   const handleSubmit = (e: React.FormEvent) => {
+    let errors = 0;
     e.preventDefault();
+    if (form.type.length <= 0) {
+      toast.error('Campo tipo não pode ficar vazio.');
+      errors++;
+    }
+    if (form.diameter.length <= 0) {
+      toast.error('Campo diâmetro não pode ficar vazio.');
+      errors++;
+    }
+    if (Number(form.diameter) <= 0) {
+      toast.error('Campo diâmetro não deve ser nulo.');
+      errors++;
+    }
+    if (errors) return;
+
     if (onSubmit) onSubmit(form);
     onOpenTibForm();
     toast.success('Ponteira cadastrada com sucesso!');
@@ -45,26 +60,6 @@ export function TibForm({
       <button onClick={onOpenTibForm}> Voltar</button>
       <h2>{isEditing ? 'Editar Tib' : 'Cadastrar Tib'}</h2>
 
-      <label htmlFor="rows">Linha da Ponteira (Sistema):</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value={form.rows}
-        onChange={(e) => setForm({ ...form, rows: Number(e.target.value) })}
-      />
-
-      <br />
-      <label htmlFor="rows">Coluna da Ponteira (Sistema):</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value={form.cols}
-        onChange={(e) => setForm({ ...form, cols: Number(e.target.value) })}
-      />
-
-      <br />
       <label htmlFor="position">Posição da Ponteira:</label>
       <input
         type="text"
@@ -85,13 +80,22 @@ export function TibForm({
       />
 
       <br />
-      <label htmlFor="position">Diametro da Ponteira:</label>
+      <label htmlFor="position">Diâmetro da Ponteira:</label>
       <input
         type="text"
         id="name"
         name="name"
         value={form.diameter}
-        onChange={(e) => setForm({ ...form, diameter: Number(e.target.value) })}
+        onChange={(e) => {
+          const value = e.target.value.replace(',', '.');
+
+          if (!/^\d*([.,]?\d*)?$/.test(value)) {
+            toast.error('Este campo não deve conter letras.');
+            return;
+          }
+
+          setForm({ ...form, diameter: value });
+        }}
       />
 
       <br />
@@ -101,14 +105,19 @@ export function TibForm({
         id="name"
         name="name"
         value={form.uses}
-        onChange={(e) => setForm({ ...form, uses: Number(e.target.value) })}
+        onChange={(e) => {
+          if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
+            toast.error('Este campo não deve conter letras.');
+            return;
+          }
+          setForm({ ...form, uses: Number(e.target.value) });
+        }}
       />
 
       <br />
 
       <label htmlFor="active">Status da Ponteira: </label>
 
-      <br />
       <label>
         <input
           type="radio"
@@ -117,7 +126,7 @@ export function TibForm({
           checked={form.active === true}
           onChange={() => setForm({ ...form, active: true })}
         />
-        Sim
+        Ativa
       </label>
 
       <label>
@@ -128,8 +137,41 @@ export function TibForm({
           checked={form.active === false}
           onChange={() => setForm({ ...form, active: false })}
         />
-        Não
+        Inativa
       </label>
+
+      <br />
+
+      <label htmlFor="rows">Linha da Ponteira (Sistema):</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={form.rows}
+        onChange={(e) => {
+          if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
+            toast.error('Este campo não deve conter letras.');
+            return;
+          }
+          setForm({ ...form, rows: Number(e.target.value) });
+        }}
+      />
+
+      <br />
+      <label htmlFor="rows">Coluna da Ponteira (Sistema):</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        value={form.cols}
+        onChange={(e) => {
+          if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
+            toast.error('Este campo não deve conter letras.');
+            return;
+          }
+          setForm({ ...form, cols: Number(e.target.value) });
+        }}
+      />
 
       <br />
 

@@ -5,7 +5,7 @@ export interface TibProtocol {
   cols: number;
   position: string;
   type: string;
-  diameter: number;
+  diameter: string;
   uses: number;
   active: boolean;
 }
