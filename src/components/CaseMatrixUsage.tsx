@@ -137,11 +137,14 @@ export function CaseMatrixUsage({
         <p>Quantidade de Ponteiras selecionadas: {selectedPositions.length}</p>
       </div>
       <br />
-      <button onClick={() => setConfirmeUse(true)}>Salvar usos</button>
+      {!confirmeUse && (
+        <button onClick={() => setConfirmeUse(true)}>Salvar usos</button>
+      )}
       {confirmeUse && (
         <div>
           <ConfirmeTib
             selectedTibs={selectedPositions}
+            caseData={caseData}
             buttonBack={() => setConfirmeUse(false)}
           />
         </div>
