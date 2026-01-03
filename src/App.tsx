@@ -23,15 +23,12 @@ function App(): JSX.Element {
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
 
-  //const [tibUsages, setTibUsages] = useState<TibUsage[]>([]);
-
   useEffect(() => {
     saveLocal(cases, tibs);
   }, [cases, tibs]);
 
   const addCase = (newCase: CaseProtocol): void => {
     setCases((prev) => [...prev, newCase]);
-    console.log(newCase);
   };
 
   const deleteCase = (caseData: CaseProtocol): void => {
@@ -86,6 +83,11 @@ function App(): JSX.Element {
     );
   };
 
+  const hasCases = (): boolean => {
+    if (cases.find((caseItem) => caseItem.active === true)) return true;
+    return false;
+  };
+
   return (
     <>
       <h1>Sistema de Ponteiras PCB</h1>
@@ -122,7 +124,7 @@ function App(): JSX.Element {
       )}
 
       <br />
-      {!openCase && (
+      {!openCase && hasCases() && (
         <button onClick={() => onOpenRegisterUse(true)}>Usar ponteiras</button>
       )}
       {openRegisterUse && (

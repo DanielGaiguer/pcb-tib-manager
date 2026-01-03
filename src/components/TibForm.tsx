@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { type JSX } from 'react';
 import { type TibProtocol } from '../types/Tib';
 import type { CaseProtocol } from '../types/Case';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 type Props = {
   caseData: CaseProtocol;
@@ -134,7 +134,6 @@ export function TibForm({
       <br />
 
       <button type="submit">Salvar</button>
-      <ToastContainer />
     </form>
   );
 }
