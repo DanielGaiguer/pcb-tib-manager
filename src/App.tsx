@@ -9,6 +9,7 @@ import { CaseList } from './components/CaseList';
 import { CaseDetail } from './components/CaseDetail';
 import { CaseMatrix } from './components/CaseMatrix';
 import { RegisterUses } from './components/RegisterUses';
+import { ToastContainer } from 'react-toastify';
 //import { CaseMatrix } from './components/CaseMatrix';
 
 function App(): JSX.Element {
@@ -101,12 +102,19 @@ function App(): JSX.Element {
       )}
 
       <br />
-      <button onClick={() => onOpenRegisterUse(true)}>Usar ponteiras</button>
+      {!openCase && (
+        <button onClick={() => onOpenRegisterUse(true)}>Usar ponteiras</button>
+      )}
       {openRegisterUse && (
         <div className="center-form-case">
-          <RegisterUses buttonBack={() => onOpenRegisterUse(false)} />
+          <RegisterUses
+            cases={cases}
+            tibs={tibs}
+            buttonBack={() => onOpenRegisterUse(false)}
+          />
         </div>
       )}
+      <ToastContainer />
     </>
   );
 }

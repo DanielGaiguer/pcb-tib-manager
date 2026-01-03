@@ -118,3 +118,8 @@ body .Toastify .Toastify__toast-container .Toastify__toast--error {
   z-index: 1000;
   background-color: red;
 }
+
+.dot.selected {
+  background: #3498db;
+  outline: 2px solid #1f6feb;
+}
