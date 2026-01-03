@@ -23,7 +23,7 @@ function App(): JSX.Element {
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
 
-  const [tibUsages, setTibUsages] = useState<TibUsage[]>([]);
+  //const [tibUsages, setTibUsages] = useState<TibUsage[]>([]);
 
   useEffect(() => {
     saveLocal(cases, tibs);
@@ -70,7 +70,20 @@ function App(): JSX.Element {
   };
 
   const saveTibUsages = (usages: TibUsage[]) => {
-    setTibUsages((prev) => [...prev, ...usages]);
+    setTibs((prevTibs) =>
+      prevTibs.map((tib) => {
+        const usage = usages.find(
+          (u) =>
+            u.caseId === tib.caseId && u.col === tib.cols && u.row === tib.rows,
+        );
+
+        if (usage) {
+          return { ...tib, uses: tib.uses + usage.uses };
+        }
+
+        return tib;
+      }),
+    );
   };
 
   return (

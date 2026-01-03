@@ -16,14 +16,32 @@ export function ConfirmeTib({
   onSaveTibUsages,
   buttonBack,
 }: ConfirmeTibsProtocol): JSX.Element {
-  const [tibUses, setTibUses] = useState<number>(1);
+  const [tibStates, setTibStates] = useState(
+    selectedTibs.map((tib) => ({ ...tib })), // cria cópia de cada tib
+  );
 
   const columnLabel = (index: number): string => {
     return String.fromCharCode(65 + index); // A, B, C...
   };
 
   const handleConfirm = () => {
-    onSaveTibUsages(selectedTibs);
+    console.log(tibStates);
+    onSaveTibUsages(tibStates);
+  };
+
+  const changeTibUses = (
+    caseId: string,
+    row: number,
+    col: number,
+    delta: number,
+  ) => {
+    setTibStates((prev) =>
+      prev.map((tib) =>
+        tib.caseId === caseId && tib.row === row && tib.col === col
+          ? { ...tib, uses: Math.max(0, tib.uses + delta) } // evita negativo
+          : tib,
+      ),
+    );
   };
 
   return (
@@ -31,7 +49,7 @@ export function ConfirmeTib({
       <button onClick={buttonBack}>Voltar</button>
 
       {caseData.map((caseItem) => {
-        const tibsInCase = selectedTibs.filter(
+        const tibsInCase = tibStates.filter(
           (tib) => tib.caseId === caseItem.id,
         );
 
@@ -49,12 +67,18 @@ export function ConfirmeTib({
                     {columnLabel(tib.col)}
                   </span>
                   <button
-                    onClick={() => tibUses > 0 && setTibUses(() => tibUses - 1)}
+                    onClick={() =>
+                      changeTibUses(tib.caseId, tib.row, tib.col, -1)
+                    }
                   >
                     -
                   </button>
-                  <span key={index}>{tibUses}</span>
-                  <button onClick={() => setTibUses(() => tibUses + 1)}>
+                  <span>{tib.uses}</span>
+                  <button
+                    onClick={() =>
+                      changeTibUses(tib.caseId, tib.row, tib.col, 1)
+                    }
+                  >
                     +
                   </button>
                 </div>
@@ -63,7 +87,7 @@ export function ConfirmeTib({
           </div>
         );
       })}
-      <button onClick={handleConfirm}>Salvar</button>
+      <button onClick={handleConfirm}>Confirmar</button>
     </>
   );
 }
