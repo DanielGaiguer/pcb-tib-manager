@@ -5,6 +5,7 @@ import type { TibProtocol } from '../types/Tib';
 //import { TibForm } from './TibForm';
 import '../styles/caseMatrix.css';
 import { toast } from 'react-toastify';
+import { InformationTibs } from './informationTibs';
 
 interface CaseMatrixProps {
   caseData: CaseProtocol[];
@@ -15,11 +16,16 @@ export function CaseMatrixUsage({
   caseData,
   tibs,
 }: CaseMatrixProps): JSX.Element {
+  const [selectedCell, setSelectedCell] = useState<{
+    caseItem: CaseProtocol;
+    row: number;
+    col: number;
+  } | null>(null);
+
   const [selectedPositions, setSelectedPositions] = useState<
     { caseId: string; row: number; col: number }[]
   >([]);
 
-  console.log(caseData);
   const dotSize = 18;
   const gap = 6;
 
@@ -105,6 +111,7 @@ export function CaseMatrixUsage({
                             return;
                           }
                           selectTib(id, row, col);
+                          setSelectedCell({ caseItem, row, col });
                         }}
                       />
                     );
@@ -115,6 +122,11 @@ export function CaseMatrixUsage({
           </div>
         );
       })}
+      <br />
+      <div>
+        {selectedCell && <InformationTibs caseItem={selectedCell.caseItem} />}
+        <p>Quantidade de Ponteiras selecionadas: {selectedPositions.length}</p>
+      </div>
     </>
   );
 }
