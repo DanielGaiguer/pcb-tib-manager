@@ -7,20 +7,23 @@ import '../styles/caseMatrix.css';
 import { toast } from 'react-toastify';
 import { InformationTibs } from './InformationTibs';
 import { ConfirmeTib } from './ConfirmeTib';
+import type { TibUsage } from '../types/tibUsage';
 
 interface CaseMatrixProps {
   caseData: CaseProtocol[];
   tibs: TibProtocol[];
+  onSaveTibUsages: (tibs: TibUsage[]) => void;
 }
 
 export function CaseMatrixUsage({
   caseData,
   tibs,
+  onSaveTibUsages,
 }: CaseMatrixProps): JSX.Element {
   const [selectedCell, setSelectedCell] = useState<TibProtocol | null>(null);
 
   const [selectedPositions, setSelectedPositions] = useState<
-    { caseId: string; row: number; col: number }[]
+    { caseId: string; row: number; col: number; uses: number }[]
   >([]);
 
   const [confirmeUse, setConfirmeUse] = useState<boolean>(false);
@@ -28,7 +31,12 @@ export function CaseMatrixUsage({
   const dotSize = 18;
   const gap = 6;
 
-  const selectTib = (caseId: string, row: number, col: number): void => {
+  const selectTib = (
+    caseId: string,
+    row: number,
+    col: number,
+    uses: number,
+  ): void => {
     setSelectedPositions((prev) => {
       const exists = prev.some(
         (pos) => pos.caseId === caseId && pos.row === row && pos.col === col,
@@ -41,7 +49,7 @@ export function CaseMatrixUsage({
         );
       }
 
-      return [...prev, { caseId, row, col }];
+      return [...prev, { caseId, row, col, uses }];
     });
   };
 
@@ -109,7 +117,7 @@ export function CaseMatrixUsage({
                             emptyWarning();
                             return;
                           }
-                          selectTib(id, row, col);
+                          selectTib(id, row, col, 1);
                           const tib = tibs.find(
                             (t) =>
                               t.caseId === id &&
@@ -145,6 +153,7 @@ export function CaseMatrixUsage({
           <ConfirmeTib
             selectedTibs={selectedPositions}
             caseData={caseData}
+            onSaveTibUsages={onSaveTibUsages}
             buttonBack={() => setConfirmeUse(false)}
           />
         </div>

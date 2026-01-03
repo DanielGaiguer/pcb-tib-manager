@@ -10,6 +10,7 @@ import { CaseDetail } from './components/CaseDetail';
 import { CaseMatrix } from './components/CaseMatrix';
 import { RegisterUses } from './components/RegisterUses';
 import { ToastContainer } from 'react-toastify';
+import type { TibUsage } from './types/tibUsage';
 //import { CaseMatrix } from './components/CaseMatrix';
 
 function App(): JSX.Element {
@@ -21,6 +22,8 @@ function App(): JSX.Element {
   const [openRegisterUse, onOpenRegisterUse] = useState<boolean>(false);
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
+
+  const [tibUsages, setTibUsages] = useState<TibUsage[]>([]);
 
   useEffect(() => {
     saveLocal(cases, tibs);
@@ -64,6 +67,10 @@ function App(): JSX.Element {
 
       return [...prevTibs, newTib];
     });
+  };
+
+  const saveTibUsages = (usages: TibUsage[]) => {
+    setTibUsages((prev) => [...prev, ...usages]);
   };
 
   return (
@@ -110,6 +117,7 @@ function App(): JSX.Element {
           <RegisterUses
             cases={cases}
             tibs={tibs}
+            onSaveTibUsages={saveTibUsages}
             buttonBack={() => onOpenRegisterUse(false)}
           />
         </div>
