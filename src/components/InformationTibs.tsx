@@ -1,16 +1,20 @@
 import type { JSX } from 'react';
-import type { CaseProtocol } from '../types/Case';
 import React from 'react';
+import type { TibProtocol } from '../types/Tib';
 
 interface InformationTibsProps {
-  caseItem: CaseProtocol;
+  selectedTib: TibProtocol;
 }
 
-export function InformationTibs(caseItem: InformationTibsProps): JSX.Element {
-  console.log(caseItem);
+export function InformationTibs({
+  selectedTib,
+}: InformationTibsProps): JSX.Element {
   return (
     <>
       <h3>Informações da Ponteira: </h3>
+      <h4>Posição da Ponteira: {selectedTib.position}</h4>
+      <h4>Tipo da Ponteira: {selectedTib.type}</h4>
+      <h4>Diametro da Ponteira: {selectedTib.diameter}</h4>
     </>
   );
 }

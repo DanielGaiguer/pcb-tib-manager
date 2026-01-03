@@ -5,7 +5,7 @@ import type { TibProtocol } from '../types/Tib';
 //import { TibForm } from './TibForm';
 import '../styles/caseMatrix.css';
 import { toast } from 'react-toastify';
-import { InformationTibs } from './informationTibs';
+import { InformationTibs } from './InformationTibs';
 
 interface CaseMatrixProps {
   caseData: CaseProtocol[];
@@ -16,11 +16,7 @@ export function CaseMatrixUsage({
   caseData,
   tibs,
 }: CaseMatrixProps): JSX.Element {
-  const [selectedCell, setSelectedCell] = useState<{
-    caseItem: CaseProtocol;
-    row: number;
-    col: number;
-  } | null>(null);
+  const [selectedCell, setSelectedCell] = useState<TibProtocol | null>(null);
 
   const [selectedPositions, setSelectedPositions] = useState<
     { caseId: string; row: number; col: number }[]
@@ -111,7 +107,17 @@ export function CaseMatrixUsage({
                             return;
                           }
                           selectTib(id, row, col);
-                          setSelectedCell({ caseItem, row, col });
+                          const tib = tibs.find(
+                            (t) =>
+                              t.caseId === id &&
+                              t.rows === row &&
+                              t.cols === col &&
+                              t.active,
+                          );
+
+                          if (tib) {
+                            setSelectedCell(tib);
+                          }
                         }}
                       />
                     );
@@ -124,7 +130,7 @@ export function CaseMatrixUsage({
       })}
       <br />
       <div>
-        {selectedCell && <InformationTibs caseItem={selectedCell.caseItem} />}
+        {selectedCell && <InformationTibs selectedTib={selectedCell} />}
         <p>Quantidade de Ponteiras selecionadas: {selectedPositions.length}</p>
       </div>
     </>
