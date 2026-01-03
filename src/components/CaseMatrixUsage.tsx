@@ -146,7 +146,15 @@ export function CaseMatrixUsage({
       </div>
       <br />
       {!confirmeUse && (
-        <button onClick={() => setConfirmeUse(true)}>Salvar usos</button>
+        <button
+          onClick={() =>
+            selectedPositions.length > 0
+              ? setConfirmeUse(true)
+              : toast.error('Nenhuma ponta selecionada')
+          }
+        >
+          Salvar usos
+        </button>
       )}
       {confirmeUse && (
         <div>
@@ -155,6 +163,8 @@ export function CaseMatrixUsage({
             caseData={caseData}
             onSaveTibUsages={onSaveTibUsages}
             buttonBack={() => setConfirmeUse(false)}
+            clearSelectedTib={() => setSelectedPositions([])}
+            clearSelectedInformation={() => setSelectedCell(null)}
           />
         </div>
       )}
