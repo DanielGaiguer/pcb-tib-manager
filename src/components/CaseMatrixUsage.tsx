@@ -6,6 +6,7 @@ import type { TibProtocol } from '../types/Tib';
 import '../styles/caseMatrix.css';
 import { toast } from 'react-toastify';
 import { InformationTibs } from './InformationTibs';
+import { ConfirmeTib } from './ConfirmeTib';
 
 interface CaseMatrixProps {
   caseData: CaseProtocol[];
@@ -21,6 +22,8 @@ export function CaseMatrixUsage({
   const [selectedPositions, setSelectedPositions] = useState<
     { caseId: string; row: number; col: number }[]
   >([]);
+
+  const [confirmeUse, setConfirmeUse] = useState<boolean>(false);
 
   const dotSize = 18;
   const gap = 6;
@@ -133,6 +136,16 @@ export function CaseMatrixUsage({
         {selectedCell && <InformationTibs selectedTib={selectedCell} />}
         <p>Quantidade de Ponteiras selecionadas: {selectedPositions.length}</p>
       </div>
+      <br />
+      <button onClick={() => setConfirmeUse(true)}>Salvar usos</button>
+      {confirmeUse && (
+        <div>
+          <ConfirmeTib
+            selectedTibs={selectedPositions}
+            buttonBack={() => setConfirmeUse(false)}
+          />
+        </div>
+      )}
     </>
   );
 }
