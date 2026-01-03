@@ -63,6 +63,7 @@ export function CaseMatrixUsage({
   return (
     <>
       {caseData.map((caseItem) => {
+        if (caseItem.active === false) return null;
         const { id, rows, cols } = caseItem;
 
         return (
