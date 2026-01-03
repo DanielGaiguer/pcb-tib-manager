@@ -120,6 +120,6 @@ body .Toastify .Toastify__toast-container .Toastify__toast--error {
 }
 
 .dot.selected {
-  background: #3498db;
-  outline: 2px solid #1f6feb;
+  background: black;
+  outline: 2px solid black;
 }

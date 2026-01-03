@@ -15,21 +15,28 @@ export function CaseMatrixUsage({
   caseData,
   tibs,
 }: CaseMatrixProps): JSX.Element {
-  const [selectedPosition, setSelectedPosition] = useState<{
-    caseId: string;
-    row: number;
-    col: number;
-  } | null>(null);
+  const [selectedPositions, setSelectedPositions] = useState<
+    { caseId: string; row: number; col: number }[]
+  >([]);
 
   console.log(caseData);
   const dotSize = 18;
   const gap = 6;
 
   const selectTib = (caseId: string, row: number, col: number): void => {
-    setSelectedPosition({
-      caseId,
-      row,
-      col,
+    setSelectedPositions((prev) => {
+      const exists = prev.some(
+        (pos) => pos.caseId === caseId && pos.row === row && pos.col === col,
+      );
+
+      if (exists) {
+        return prev.filter(
+          (pos) =>
+            !(pos.caseId === caseId && pos.row === row && pos.col === col),
+        );
+      }
+
+      return [...prev, { caseId, row, col }];
     });
   };
 
@@ -78,10 +85,10 @@ export function CaseMatrixUsage({
                         tib.cols === col &&
                         tib.active,
                     );
-                    const isSelected =
-                      selectedPosition?.caseId === id &&
-                      selectedPosition?.row === row &&
-                      selectedPosition?.col === col;
+                    const isSelected = selectedPositions.some(
+                      (pos) =>
+                        pos.caseId === id && pos.row === row && pos.col === col,
+                    );
 
                     return (
                       <span
