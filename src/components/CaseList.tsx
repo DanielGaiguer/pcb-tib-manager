@@ -4,6 +4,7 @@ import { CaseMatrix } from './CaseMatrix';
 import type { TibProtocol } from '../types/Tib';
 
 type Props = {
+  hasCases: () => boolean;
   casesState: CaseProtocol[];
   tibsState: TibProtocol[];
   onDelete: (caseData: CaseProtocol) => void;
@@ -13,6 +14,7 @@ type Props = {
 };
 
 export function CaseList({
+  hasCases,
   casesState,
   tibsState,
   onDelete,
@@ -25,7 +27,7 @@ export function CaseList({
 
   return (
     <>
-      <h1>Cases Ativas</h1>
+      <h1>{hasCases() ? 'Cases Ativas' : 'Nenhuma Case Cadastrada...'}</h1>
       <ul>
         {casesActive.map((caseData) => (
           <React.Fragment key={caseData.id}>
@@ -51,7 +53,7 @@ export function CaseList({
           onOpenCaseForm(true);
         }}
       >
-        Nova Case
+        Cadastrar Case
       </button>
     </>
   );

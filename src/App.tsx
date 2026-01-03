@@ -104,6 +104,7 @@ function App(): JSX.Element {
         </>
       ) : (
         <CaseList
+          hasCases={hasCases}
           casesState={cases}
           tibsState={tibs}
           onDelete={deleteCase}

@@ -24,7 +24,21 @@ export function CaseForm({
   });
 
   const handleSubmit = (e: React.FormEvent) => {
+    let errors = 0;
     e.preventDefault();
+    if (form.name.length <= 0) {
+      toast.error('Campo nome não pode ficar vazio.');
+      errors++;
+    }
+    if (form.rows <= 0) {
+      toast.error('A case deve possuir no mínimo uma linha.');
+      errors++;
+    }
+    if (form.cols <= 0) {
+      toast.error('A case deve possuir no mínimo uma coluna.');
+      errors++;
+    }
+    if (errors > 0) return;
     onSubmit(form);
     onOpenCaseForm();
     setForm({ id: '', name: '', rows: 0, cols: 0, active: true });
