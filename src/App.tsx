@@ -89,57 +89,61 @@ function App(): JSX.Element {
   };
 
   return (
-    <>
-      <h1>Sistema de Ponteiras PCB</h1>
+    <div className="app">
+      <div className="main">
+        <h1>Sistema de Ponteiras PCB</h1>
 
-      {openCase ? (
-        <>
-          <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
-          <CaseMatrix
-            caseData={openCase}
-            tibs={tibs}
-            onSubmit={addTib}
-            mode="detail"
+        {openCase ? (
+          <>
+            <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
+            <CaseMatrix
+              caseData={openCase}
+              tibs={tibs}
+              onSubmit={addTib}
+              mode="detail"
+            />
+          </>
+        ) : (
+          <CaseList
+            hasCases={hasCases}
+            casesState={cases}
+            tibsState={tibs}
+            onDelete={deleteCase}
+            onEdit={editCase}
+            onOpenCase={setOpenCase}
+            onOpenCaseForm={setOpenCaseForm}
           />
-        </>
-      ) : (
-        <CaseList
-          hasCases={hasCases}
-          casesState={cases}
-          tibsState={tibs}
-          onDelete={deleteCase}
-          onEdit={editCase}
-          onOpenCase={setOpenCase}
-          onOpenCaseForm={setOpenCaseForm}
-        />
-      )}
+        )}
 
-      {openCaseForm && (
-        <div className="center-form-case">
-          <CaseForm
-            onSubmit={addCase}
-            onOpenCaseForm={() => setOpenCaseForm(false)}
-            onDataEdit={dataEditCase}
-          />
-        </div>
-      )}
+        {openCaseForm && (
+          <div className="center-form-case">
+            <CaseForm
+              onSubmit={addCase}
+              onOpenCaseForm={() => setOpenCaseForm(false)}
+              onDataEdit={dataEditCase}
+            />
+          </div>
+        )}
 
-      <br />
-      {!openCase && hasCases() && (
-        <button onClick={() => onOpenRegisterUse(true)}>Usar ponteiras</button>
-      )}
-      {openRegisterUse && (
-        <div className="center-form-case">
-          <RegisterUses
-            cases={cases}
-            tibs={tibs}
-            onSaveTibUsages={saveTibUsages}
-            buttonBack={() => onOpenRegisterUse(false)}
-          />
-        </div>
-      )}
-      <ToastContainer />
-    </>
+        <br />
+        {!openCase && hasCases() && (
+          <button onClick={() => onOpenRegisterUse(true)}>
+            Usar ponteiras
+          </button>
+        )}
+        {openRegisterUse && (
+          <div className="center-form-case">
+            <RegisterUses
+              cases={cases}
+              tibs={tibs}
+              onSaveTibUsages={saveTibUsages}
+              buttonBack={() => onOpenRegisterUse(false)}
+            />
+          </div>
+        )}
+        <ToastContainer />
+      </div>
+    </div>
   );
 }
 
