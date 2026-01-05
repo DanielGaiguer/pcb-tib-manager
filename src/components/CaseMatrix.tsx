@@ -61,7 +61,7 @@ export function CaseMatrix({
   return (
     <>
       <div
-        className="matrix-grid"
+        className={isPreview ? 'matrix-grid preview' : 'matrix-grid detail'} //matrix-grid
         style={{
           gridTemplateColumns: `30px repeat(${cols}, ${dotSize}px)`,
           gap,

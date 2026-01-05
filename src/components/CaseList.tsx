@@ -28,11 +28,14 @@ export function CaseList({
   return (
     <>
       <h1>{hasCases() ? 'Cases Ativas' : 'Nenhuma Case Cadastrada...'}</h1>
-      <ul>
+      <ul className="list-cases">
         {casesActive.map((caseData) => (
           <React.Fragment key={caseData.id}>
-            <li key={caseData.id}>
+            <li className="title-case" key={caseData.id}>
               {caseData.name}
+            </li>
+            <CaseMatrix caseData={caseData} tibs={tibsState} mode="preview" />
+            <div className="div-buttons">
               <button
                 className="btn btn-primary"
                 onClick={() => {
@@ -51,8 +54,7 @@ export function CaseList({
               >
                 Deletar
               </button>
-            </li>
-            <CaseMatrix caseData={caseData} tibs={tibsState} mode="preview" />
+            </div>
           </React.Fragment>
         ))}
       </ul>
