@@ -117,11 +117,13 @@ function App(): JSX.Element {
 
         {openCaseForm && (
           <div className="center-form-case">
-            <CaseForm
-              onSubmit={addCase}
-              onOpenCaseForm={() => setOpenCaseForm(false)}
-              onDataEdit={dataEditCase}
-            />
+            <div className="form-case">
+              <CaseForm
+                onSubmit={addCase}
+                onOpenCaseForm={() => setOpenCaseForm(false)}
+                onDataEdit={dataEditCase}
+              />
+            </div>
           </div>
         )}
 

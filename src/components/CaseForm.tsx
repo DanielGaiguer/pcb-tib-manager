@@ -47,7 +47,10 @@ export function CaseForm({
 
   return (
     <form onSubmit={handleSubmit}>
-      <button onClick={onOpenCaseForm}> Voltar</button>
+      <button className="btn" onClick={onOpenCaseForm}>
+        {' '}
+        Voltar
+      </button>
       <label htmlFor="name">Nome da Case: </label>
       <input
         type="text"
