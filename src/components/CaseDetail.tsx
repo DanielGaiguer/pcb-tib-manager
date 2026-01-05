@@ -9,7 +9,7 @@ type Props = {
 
 export function CaseDetail({ caseData, onBack }: Props): JSX.Element {
   return (
-    <>
+    <div className="case-detail">
       <button className="btn btn-secondary" onClick={onBack}>
         {' '}
         Voltar
@@ -22,6 +22,6 @@ export function CaseDetail({ caseData, onBack }: Props): JSX.Element {
         <li>Quantidade de Colunas: {caseData.cols}</li>
         <li>Status: {caseData.active ? 'Ativo' : 'Inativo'}</li>
       </ul>
-    </>
+    </div>
   );
 }
