@@ -10,7 +10,10 @@ type Props = {
 export function CaseDetail({ caseData, onBack }: Props): JSX.Element {
   return (
     <>
-      <button onClick={onBack}> Voltar</button>
+      <button className="btn btn-secondary" onClick={onBack}>
+        {' '}
+        Voltar
+      </button>
       <h2>{caseData.name}</h2>
 
       <ul>

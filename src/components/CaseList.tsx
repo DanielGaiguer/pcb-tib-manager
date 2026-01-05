@@ -34,6 +34,7 @@ export function CaseList({
             <li key={caseData.id}>
               {caseData.name}
               <button
+                className="btn btn-primary"
                 onClick={() => {
                   onOpenCase(caseData);
                   onOpenCaseForm(false);
@@ -41,8 +42,15 @@ export function CaseList({
               >
                 Abrir
               </button>
-              <button onClick={() => onDelete(caseData)}>Deletar</button>
-              <button onClick={() => onEdit(caseData)}>Editar</button>
+              <button className="btn btn-edit" onClick={() => onEdit(caseData)}>
+                Editar
+              </button>
+              <button
+                className="btn btn-delete"
+                onClick={() => onDelete(caseData)}
+              >
+                Deletar
+              </button>
             </li>
             <CaseMatrix caseData={caseData} tibs={tibsState} mode="preview" />
           </React.Fragment>

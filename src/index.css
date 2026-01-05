@@ -82,7 +82,7 @@ body,
   min-height: 100vh;
   display: flex;
   justify-content: center; /* centraliza horizontal */
-  background: #CFE0BC;
+  background: #93B4D7;
 }
 
 /* CONTEÚDO */
@@ -90,11 +90,83 @@ body,
   max-width: 1200px;
   width: auto;        /* ou simplesmente não declarar */
   padding: 24px;
-  background: #fff;
+  background: #f5f5f5;
   border-radius: 10px;
   box-shadow: 1px 1px 5px black;
 }
 
 li {
   list-style-type: none;
+}
+
+/* BASE DE TODOS OS BOTÕES */
+.btn {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 11px 17px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin: 4px;
+
+  transition:
+    background-color 200ms ease,
+    transform 100ms ease,
+    box-shadow 100ms ease;
+
+  user-select: none;
+}
+
+/* EFEITO DE TOQUE */
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* DESABILITADO */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: #6F94BF;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #5C83B0;
+}
+
+.btn-edit {
+  background: #4F7DB8;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #3E6AA5;
+}
+
+.btn-delete {
+  background: #E6A23C;
+  color: #1a1a1a;
+}
+
+.btn-delete:hover {
+  background: #D8901F;
+}
+
+.btn-secondary {
+  background: #E2E6EA;
+  color: #2F3A45;
+}
+
+.btn-secondary:hover {
+  background: #D5DAE0;
 }
