@@ -27,6 +27,10 @@ function App(): JSX.Element {
     saveLocal(cases, tibs);
   }, [cases, tibs]);
 
+  const resetDataEditCase = () => {
+    setDataEditCase(undefined);
+  };
+
   const addCase = (newCase: CaseProtocol): void => {
     setCases((prev) => [...prev, newCase]);
   };
@@ -40,7 +44,6 @@ function App(): JSX.Element {
   };
 
   const editCase = (caseData: CaseProtocol): void => {
-    console.log(caseData);
     setOpenCaseForm(true);
     setDataEditCase(caseData);
     setCases((prevCases) =>
@@ -48,10 +51,10 @@ function App(): JSX.Element {
         caseMap.id === caseData.id ? { ...caseMap, ...caseData } : caseMap,
       ),
     );
-    console.log(caseData);
   };
 
   const addTib = (newTib: TibProtocol): void => {
+    resetDataEditCase();
     setTibs((prevTibs) => {
       // Verifica existência
       // Retorna boolean
@@ -122,7 +125,6 @@ function App(): JSX.Element {
             <div className="form-case">
               <CaseForm
                 onSubmit={addCase}
-                onEdit={editCase}
                 onOpenCaseForm={() => setOpenCaseForm(false)}
                 onDataEdit={dataEditCase}
               />
