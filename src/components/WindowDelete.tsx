@@ -15,9 +15,6 @@ export function WindowDelete({ onDelete, onConfirmedDel }: Props): JSX.Element {
   return (
     <div className="windowConfirmDel">
       <div className="confirm-card">
-        <button className="btn btn-secondary" onClick={onConfirmedDel}>
-          Voltar
-        </button>
         <h3>Tem certeza que deseja deletar?</h3>
         <button className="btn btn-secondary" onClick={onConfirmedDel}>
           Não

@@ -71,6 +71,7 @@ export function CaseList({
         ))}
       </ul>
       <button
+        className="btn main-button"
         onClick={() => {
           onOpenCaseForm(true);
         }}

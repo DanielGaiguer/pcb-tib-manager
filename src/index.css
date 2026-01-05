@@ -252,3 +252,48 @@ li {
   justify-content: space-between;
   gap: 12px;
 }
+
+.main-button {
+  display: block;
+  margin: 32px auto 0 auto;
+  width: 80%;
+  margin-top: 25px;
+  align-self: center;
+
+  background: #3A6EA5;
+  color: white;
+
+  border: none;
+  border-radius: 14px;
+
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 10px 24px rgba(58, 110, 165, 0.35);
+
+  transition:
+    background-color 200ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}
+
+/* HOVER */
+.main-button:hover {
+  background: #2F5F90;
+  box-shadow: 0 12px 28px rgba(47, 95, 144, 0.45);
+}
+
+/* TOQUE (tablet) */
+.main-button:active {
+  transform: scale(0.97);
+}
+
+/* ACESSIBILIDADE */
+.main-button:focus-visible {
+  outline: 3px solid rgba(58, 110, 165, 0.5);
+  outline-offset: 3px;
+}
+
