@@ -72,6 +72,10 @@ body .Toastify .Toastify__toast-container .Toastify__toast--error {
   margin: 3px;
 }
 
+.matrix-header {
+  font-size: 20px;
+}
+
 /* RESET OBRIGATÓRIO */
 html,
 body,
@@ -202,11 +206,13 @@ li {
 }
 
 .matrix-grid.preview {
-  margin-left: 26%;
+  margin-left: 18%;
 }
 
 .matrix-grid.detail {
-  margin-left: 18%;
+  justify-content: center;
+  margin-left: -10%;
+  margin-top: 5%;
 }
 
 .windowConfirmDel > * {
@@ -297,3 +303,41 @@ li {
   outline-offset: 3px;
 }
 
+.use-tib {
+  display: block;
+  margin: 32px auto 0 auto;
+  width: 80%;
+  align-self: center;
+
+  border: none;
+  border-radius: 14px;
+
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 700;
+
+  margin-top: 0px;
+  background: #2ECC71;
+  color: #ffffff;
+
+  font-weight: 700;
+  padding: 14px 26px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 6px 14px rgba(55, 239, 0, 0.35);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    filter 120ms ease;
+}
+
+.use-tib:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 8px 18px rgba(55, 239, 0, 0.45);
+}
+
+.use-tib:active {
+  transform: scale(0.96);
+}

@@ -127,7 +127,10 @@ function App(): JSX.Element {
 
         <br />
         {!openCase && hasCases() && (
-          <button onClick={() => onOpenRegisterUse(true)}>
+          <button
+            className="btn use-tib"
+            onClick={() => onOpenRegisterUse(true)}
+          >
             Usar ponteiras
           </button>
         )}

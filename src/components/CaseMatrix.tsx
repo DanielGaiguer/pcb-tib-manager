@@ -29,8 +29,8 @@ export function CaseMatrix({
   const { rows, cols, id } = caseData;
   const isPreview = mode === 'preview';
 
-  const dotSize = isPreview ? 20 : 30;
-  const gap = isPreview ? 4 : 8;
+  const dotSize = isPreview ? 30 : 40;
+  const gap = isPreview ? 8 : 16;
 
   const findTibAtPosition = (
     row: number,
