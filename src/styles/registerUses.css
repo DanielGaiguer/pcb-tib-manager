@@ -25,9 +25,8 @@ h3 {
 .usage-count {
   display: block;
   text-align: center;
-  margin: 32px auto 2% auto;
+  margin: 25px auto 2% auto;
   width: 80%;
-  margin-top: 25px;
   align-self: center;
 
   background: #b3ebf2;
@@ -101,7 +100,236 @@ h3 {
 }
 
 .dot.occupied.selected {
-  background-color: #2fbf71;
+  background-color: #3ddc97;
   outline: 1px solid rgba(0, 0, 0, 0.533);
   box-shadow: 0 4px 10px rgba(47, 95, 144, 0.45);
+}
+
+.dot.occupied:hover {
+  background: #5a8fd6;
+}
+
+.dot.occupied.selected:hover {
+  background-color: #0fac68;
+}
+
+/* Container principal do componente ConfirmeTib */
+.confirm-tibs {
+  position: relative;
+  max-width: 1000px;
+  margin: 20px auto;
+  background: #f5f5f5;
+  border-radius: 16px;
+  padding: 28px 32px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Botão Voltar */
+/* Bloco de cada caso */
+.case-block {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.case-block h3 {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2f3a45;
+  margin: 0;
+}
+
+/* Lista de tibs dentro de cada caso */
+.tibs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Item individual de tib */
+.tibs-list > div {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  gap: 12px;
+}
+
+.tib-item {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2f3a45;
+  background: #b3ebf2;
+  padding: 8px 12px;
+  border-radius: 8px;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Botões de decremento e incremento */
+.tibs-list button {
+  background: #4f7db8;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  width: 32px;
+  height: 32px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(58, 110, 165, 0.35);
+  transition: background-color 200ms ease, transform 120ms ease, box-shadow 120ms ease;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente escuro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000; /* Garante que fique acima de tudo */
+}
+
+/* Container do modal (conteúdo interno) */
+.confirm-tibs {
+  position: relative;
+  max-width: 1000px;
+  margin: 0; /* Remove margem para centralização */
+  background: #f5f5f5;
+  border-radius: 16px;
+  padding: 28px 32px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 1001; /* Acima do overlay */
+}
+
+/* Botão Voltar */
+.confirm-tibs button:first-of-type {
+  border: none;
+  border-radius: 14px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(58, 110, 165, 0.35);
+}
+
+/* Bloco de cada caso */
+.case-block {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.case-block h3 {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2f3a45;
+  margin: 0;
+}
+
+/* Lista de tibs dentro de cada caso */
+.tibs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Item individual de tib */
+.tibs-list > div {
+  background: #f5f5f5;
+  border-radius: 10px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  gap: 12px;
+}
+
+.tib-item {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2f3a45;
+  background: #b3ebf2;
+  padding: 8px 12px;
+  border-radius: 8px;
+  min-width: 50px;
+  text-align: center;
+}
+
+.tibs-list button:hover {
+  background: #5a8fd6;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(47, 95, 144, 0.45);
+}
+
+/* Span com o número de usos */
+.tibs-list span:nth-of-type(2) {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2f3a45;
+  min-width: 30px;
+  text-align: center;
+}
+
+.confirm {
+  display: block;
+  margin: 32px auto 0 auto;
+  width: 80%;
+  align-self: center;
+
+  border: none;
+  border-radius: 14px;
+
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 700;
+
+  margin-top: 0px;
+  background: #2ECC71;
+  color: #ffffff;
+
+  font-weight: 700;
+  padding: 14px 26px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 6px 14px rgba(55, 239, 0, 0.35);
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    filter 120ms ease;
+}
+
+.confirm:hover {
+  background: #27AE60;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(46, 204, 113, 0.45);
 }

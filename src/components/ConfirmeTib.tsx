@@ -54,49 +54,55 @@ export function ConfirmeTib({
   };
 
   return (
-    <>
-      <button onClick={buttonBack}>Voltar</button>
+    <div className="modal-overlay">
+      <div className="confirm-tibs">
+        <button className="btn btn-secondary back-button " onClick={buttonBack}>
+          Voltar
+        </button>
 
-      {caseData.map((caseItem) => {
-        const tibsInCase = tibStates.filter(
-          (tib) => tib.caseId === caseItem.id,
-        );
+        {caseData.map((caseItem) => {
+          const tibsInCase = tibStates.filter(
+            (tib) => tib.caseId === caseItem.id,
+          );
 
-        if (tibsInCase.length === 0) return null;
+          if (tibsInCase.length === 0) return null;
 
-        return (
-          <div key={caseItem.id} className="case-block">
-            <h3>{caseItem.name}</h3>
+          return (
+            <div key={caseItem.id} className="case-block">
+              <h3>{caseItem.name}</h3>
 
-            <div className="tibs-list">
-              {tibsInCase.map((tib, index) => (
-                <div key={index}>
-                  <span className="tib-item">
-                    {tib.row + 1}
-                    {columnLabel(tib.col)}
-                  </span>
-                  <button
-                    onClick={() =>
-                      changeTibUses(tib.caseId, tib.row, tib.col, -1)
-                    }
-                  >
-                    -
-                  </button>
-                  <span>{tib.uses}</span>
-                  <button
-                    onClick={() =>
-                      changeTibUses(tib.caseId, tib.row, tib.col, 1)
-                    }
-                  >
-                    +
-                  </button>
-                </div>
-              ))}
+              <div className="tibs-list">
+                {tibsInCase.map((tib, index) => (
+                  <div key={index}>
+                    <span className="tib-item">
+                      {tib.row + 1}
+                      {columnLabel(tib.col)}
+                    </span>
+                    <button
+                      onClick={() =>
+                        changeTibUses(tib.caseId, tib.row, tib.col, -1)
+                      }
+                    >
+                      -
+                    </button>
+                    <span>{tib.uses}</span>
+                    <button
+                      onClick={() =>
+                        changeTibUses(tib.caseId, tib.row, tib.col, 1)
+                      }
+                    >
+                      +
+                    </button>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        );
-      })}
-      <button onClick={handleConfirm}>Confirmar</button>
-    </>
+          );
+        })}
+        <button className="btn confirm" onClick={handleConfirm}>
+          Confirmar
+        </button>
+      </div>
+    </div>
   );
 }
