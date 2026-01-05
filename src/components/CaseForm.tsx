@@ -6,12 +6,14 @@ import { toast } from 'react-toastify';
 
 type Props = {
   onSubmit: (data: CaseProtocol) => void;
+  onEdit: (data: CaseProtocol) => void;
   onOpenCaseForm: () => void;
   onDataEdit?: CaseProtocol;
 };
 
 export function CaseForm({
   onSubmit,
+  onEdit,
   onOpenCaseForm,
   onDataEdit,
 }: Props): JSX.Element {
@@ -39,6 +41,14 @@ export function CaseForm({
       errors++;
     }
     if (errors) return;
+
+    if (onDataEdit) {
+      onEdit(form);
+      onOpenCaseForm();
+      setForm({ id: '', name: '', rows: 0, cols: 0, active: true });
+      toast.success('Case editado com sucesso.');
+      return;
+    }
     onSubmit(form);
     onOpenCaseForm();
     setForm({ id: '', name: '', rows: 0, cols: 0, active: true });
@@ -61,16 +71,6 @@ export function CaseForm({
       />
 
       <br />
-      <label htmlFor="rows">Quantidade de Linhas: </label>
-      <input
-        type="number"
-        id="rows"
-        name="rows"
-        value={form.rows}
-        onChange={(e) => setForm({ ...form, rows: Number(e.target.value) })}
-      />
-
-      <br />
       <label htmlFor="cols">Quantidade de Colunas: </label>
       <input
         type="number"
@@ -78,6 +78,16 @@ export function CaseForm({
         name="cols"
         value={form.cols}
         onChange={(e) => setForm({ ...form, cols: Number(e.target.value) })}
+      />
+
+      <br />
+      <label htmlFor="rows">Quantidade de Linhas: </label>
+      <input
+        type="number"
+        id="rows"
+        name="rows"
+        value={form.rows}
+        onChange={(e) => setForm({ ...form, rows: Number(e.target.value) })}
       />
 
       <br />

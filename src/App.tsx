@@ -40,6 +40,7 @@ function App(): JSX.Element {
   };
 
   const editCase = (caseData: CaseProtocol): void => {
+    console.log(caseData);
     setOpenCaseForm(true);
     setDataEditCase(caseData);
     setCases((prevCases) =>
@@ -47,6 +48,7 @@ function App(): JSX.Element {
         caseMap.id === caseData.id ? { ...caseMap, ...caseData } : caseMap,
       ),
     );
+    console.log(caseData);
   };
 
   const addTib = (newTib: TibProtocol): void => {
@@ -120,6 +122,7 @@ function App(): JSX.Element {
             <div className="form-case">
               <CaseForm
                 onSubmit={addCase}
+                onEdit={editCase}
                 onOpenCaseForm={() => setOpenCaseForm(false)}
                 onDataEdit={dataEditCase}
               />
