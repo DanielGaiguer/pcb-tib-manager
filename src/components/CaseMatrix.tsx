@@ -29,14 +29,14 @@ export function CaseMatrix({
   const { rows, cols, id } = caseData;
   const isPreview = mode === 'preview';
 
-  const maxDotSize = isPreview ? 35 : 45; // tamanho máximo
+  const maxDotSize = isPreview ? 35 : 40; // tamanho máximo
   const minDotSize = 20; // tamanho mínimo para muitas colunas
   const dotSizeDynamic = Math.min(
     maxDotSize,
     Math.max(minDotSize, 400 / cols), // 400px = largura máxima do grid
   );
 
-  const gap = isPreview ? 10 : 18; // define o espaçamento entre as colunas
+  const gap = isPreview ? 8 : 15; // define o espaçamento entre as colunas
 
   const findTibAtPosition = (
     row: number,
@@ -107,17 +107,19 @@ export function CaseMatrix({
           </React.Fragment>
         ))}
       </div>
-      <div className="Form-tib">
+      <div>
         {openTibForm && (
-          <div className="center-form-tib">
-            <TibForm
-              key={`${statePositionTib[0][0]}-${statePositionTib[0][1]}`} //Quando a key muda, o React pensa: “Isso não é o mesmo componente Vou destruir o antigo E criar um novo do zero”, isso e para mudar o formulario.
-              caseData={caseData}
-              tibData={selectedTib}
-              onSubmit={onSubmit}
-              positionTib={statePositionTib}
-              onOpenTibForm={() => onOpenTibForm(false)}
-            />
+          <div className="Form-tib">
+            <div className="form-tib-card">
+              <TibForm
+                key={`${statePositionTib[0][0]}-${statePositionTib[0][1]}`}
+                caseData={caseData}
+                tibData={selectedTib}
+                onSubmit={onSubmit}
+                positionTib={statePositionTib}
+                onOpenTibForm={() => onOpenTibForm(false)}
+              />
+            </div>
           </div>
         )}
       </div>
