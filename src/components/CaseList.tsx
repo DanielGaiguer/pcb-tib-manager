@@ -12,6 +12,7 @@ type Props = {
   onEdit: (caseData: CaseProtocol) => void;
   onOpenCase: (caseData: CaseProtocol) => void;
   onOpenCaseForm: (arg0: boolean) => void;
+  handleNewCase: () => void;
 };
 
 export function CaseList({
@@ -22,6 +23,7 @@ export function CaseList({
   onEdit,
   onOpenCase,
   onOpenCaseForm,
+  handleNewCase,
 }: Props): JSX.Element {
   const casesActive = casesState.filter((c) => c.active);
   const [caseToDelete, setCaseToDelete] = useState<CaseProtocol | null>(null);
@@ -70,12 +72,7 @@ export function CaseList({
           </React.Fragment>
         ))}
       </ul>
-      <button
-        className="btn main-button"
-        onClick={() => {
-          onOpenCaseForm(true);
-        }}
-      >
+      <button className="btn main-button" onClick={() => handleNewCase()}>
         Cadastrar Case
       </button>
     </>
