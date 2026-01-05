@@ -94,7 +94,7 @@ function App(): JSX.Element {
         <h1>Sistema de Ponteiras PCB</h1>
 
         {openCase ? (
-          <>
+          <div className="case-detail">
             <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
             <CaseMatrix
               caseData={openCase}
@@ -102,7 +102,7 @@ function App(): JSX.Element {
               onSubmit={addTib}
               mode="detail"
             />
-          </>
+          </div>
         ) : (
           <CaseList
             hasCases={hasCases}

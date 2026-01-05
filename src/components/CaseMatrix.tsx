@@ -29,8 +29,14 @@ export function CaseMatrix({
   const { rows, cols, id } = caseData;
   const isPreview = mode === 'preview';
 
-  const dotSize = isPreview ? 35 : 45;
-  const gap = isPreview ? 10 : 18;
+  const maxDotSize = isPreview ? 35 : 45; // tamanho máximo
+  const minDotSize = 20; // tamanho mínimo para muitas colunas
+  const dotSizeDynamic = Math.min(
+    maxDotSize,
+    Math.max(minDotSize, 400 / cols), // 400px = largura máxima do grid
+  );
+
+  const gap = isPreview ? 10 : 18; // define o espaçamento entre as colunas
 
   const findTibAtPosition = (
     row: number,
@@ -61,28 +67,21 @@ export function CaseMatrix({
   return (
     <>
       <div
-        className={isPreview ? 'matrix-grid preview' : 'matrix-grid detail'} //matrix-grid
+        className={isPreview ? 'matrix-grid preview' : 'matrix-grid detail'}
         style={{
-          gridTemplateColumns: `30px repeat(${cols}, ${dotSize}px)`,
+          gridTemplateColumns: `30px repeat(${cols}, ${dotSizeDynamic}px)`,
           gap,
         }}
       >
-        <div />
-
-        {/* Cabeçalho das colunas */}
+        <div /> {/* canto superior esquerdo */}
         {Array.from({ length: cols }).map((_, col) => (
           <div key={col} className="matrix-header column">
             {columnLabel(col)}
           </div>
         ))}
-
-        {/* Linhas */}
         {Array.from({ length: rows }).map((_, row) => (
           <React.Fragment key={row}>
-            {/* Cabeçalho da linha */}
             <div className="matrix-header row">{row + 1}</div>
-
-            {/* Bolinhas */}
             {Array.from({ length: cols }).map((_, col) => {
               const occupied = tibs.some(
                 (tib) =>
@@ -91,14 +90,13 @@ export function CaseMatrix({
                   tib.cols === col &&
                   tib.active,
               );
-
               return (
                 <span
                   key={col}
                   className={`dot ${occupied ? 'occupied' : 'free'}`}
                   style={{
-                    width: dotSize,
-                    height: dotSize,
+                    width: dotSizeDynamic,
+                    height: dotSizeDynamic,
                     cursor: isPreview ? 'default' : 'pointer',
                   }}
                   title={`Linha ${row + 1} - Coluna ${columnLabel(col)}`}
