@@ -208,3 +208,47 @@ li {
 .matrix-grid.detail {
   margin-left: 18%;
 }
+
+.windowConfirmDel > * {
+  pointer-events: auto;
+}
+
+
+.windowConfirmDel {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.45); /* overlay elegante */
+}
+
+.confirm-card {
+  background: #f5f5f5;
+  border-radius: 14px;
+  padding: 28px 32px;
+  min-width: 320px;
+  max-width: 420px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.confirm-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2F3A45;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}

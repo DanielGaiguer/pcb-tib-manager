@@ -1,7 +1,8 @@
-import React, { type JSX } from 'react';
+import React, { useState, type JSX } from 'react';
 import type { CaseProtocol } from '../types/Case';
 import { CaseMatrix } from './CaseMatrix';
 import type { TibProtocol } from '../types/Tib';
+import { WindowDelete } from './WindowDelete';
 
 type Props = {
   hasCases: () => boolean;
@@ -23,7 +24,9 @@ export function CaseList({
   onOpenCaseForm,
 }: Props): JSX.Element {
   const casesActive = casesState.filter((c) => c.active);
-  //console.log(casesState);
+  const [caseToDelete, setCaseToDelete] = useState<CaseProtocol | null>(null);
+
+  //const onDeleteCase()
 
   return (
     <>
@@ -50,10 +53,19 @@ export function CaseList({
               </button>
               <button
                 className="btn btn-delete"
-                onClick={() => onDelete(caseData)}
+                onClick={() => setCaseToDelete(caseData)}
               >
                 Deletar
               </button>
+              {caseToDelete?.id === caseData.id && (
+                <WindowDelete
+                  onDelete={() => {
+                    onDelete(caseData);
+                    setCaseToDelete(null);
+                  }}
+                  onConfirmedDel={() => setCaseToDelete(null)}
+                />
+              )}
             </div>
           </React.Fragment>
         ))}
