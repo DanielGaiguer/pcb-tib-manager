@@ -12,7 +12,6 @@
 
 body {
   font-family: sans-serif;
-  background: #41e2ba;
   transition: background-color 300ms ease-in-out;
   line-height: 1.5;
 }
@@ -83,7 +82,7 @@ body,
   min-height: 100vh;
   display: flex;
   justify-content: center; /* centraliza horizontal */
-  background: #f2f2f2; /* só pra visual */
+  background: #CFE0BC;
 }
 
 /* CONTEÚDO */
@@ -92,5 +91,10 @@ body,
   width: auto;        /* ou simplesmente não declarar */
   padding: 24px;
   background: #fff;
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px black;
 }
 
+li {
+  list-style-type: none;
+}
