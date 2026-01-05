@@ -157,7 +157,7 @@ function App(): JSX.Element {
   return (
     <div className="app">
       <div className="main">
-        <h1>Sistema de Ponteiras PCB</h1>
+        <h1 className="title-main">Sistema de Ponteiras PCB</h1>
 
         {/* 🔁 Conteúdo variável */}
         <div className="page-content">{content}</div>

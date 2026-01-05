@@ -32,7 +32,9 @@ export function CaseList({
 
   return (
     <>
-      <h1>{hasCases() ? 'Cases Ativas' : 'Nenhuma Case Cadastrada...'}</h1>
+      <h2 className="subtitle-main">
+        {hasCases() ? 'Cases Ativas' : 'Nenhuma Case Cadastrada...'}
+      </h2>
       <ul className="list-cases">
         {casesActive.map((caseData) => (
           <React.Fragment key={caseData.id}>

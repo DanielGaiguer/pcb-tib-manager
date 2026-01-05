@@ -341,9 +341,8 @@ li {
 
 .main-button {
   display: block;
-  margin: 32px auto 2% auto;
+  margin: 5% auto 2% auto;
   width: 80%;
-  margin-top: 25px;
   align-self: center;
 
   background: #3A6EA5;
@@ -776,3 +775,22 @@ li {
     transform: translateY(0);
   }
 }
+
+.title-main {
+  display: flex;
+  font-size: 35px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.subtitle-main {
+  display: flex;
+  font-size: 25px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  justify-content: center;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
