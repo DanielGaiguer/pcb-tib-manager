@@ -97,7 +97,7 @@ body,
 .main {
   max-width: 1200px;
   width: auto;        /* ou simplesmente não declarar */
-  padding: 24px;
+  padding: 30px;
   background: #f5f5f5;
   border-radius: 10px;
   box-shadow: 1px 1px 5px black;
@@ -206,7 +206,8 @@ li {
 }
 
 .matrix-grid.preview {
-  margin-left: 18%;
+  justify-content: center;
+  margin-left: -10%;
 }
 
 .matrix-grid.detail {
