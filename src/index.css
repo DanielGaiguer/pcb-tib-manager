@@ -191,7 +191,7 @@ body,
 /* CONTEÚDO */
 .main {
   max-width: 1200px;
-  width: 70%;        /* ou simplesmente não declarar */
+  width: 100%;        /* ou simplesmente não declarar */
   padding: 30px;
   background: #f5f5f5;
   border-radius: 10px;
@@ -439,7 +439,7 @@ li {
 }
 
 .case-detail {
-  max-width: 520px;
+  max-width: 1000px;
   margin: 20px auto;
 
   background: #f5f5f5;
