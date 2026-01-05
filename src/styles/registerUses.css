@@ -21,3 +21,31 @@ h3 {
 .matrix-grid {
   justify-content: center;
 }
+
+.usage-count {
+  display: block;
+  text-align: center;
+  margin: 32px auto 2% auto;
+  width: 80%;
+  margin-top: 25px;
+  align-self: center;
+
+  background: #b3ebf2;
+  color: black;
+
+  border: none;
+  border-radius: 14px;
+
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow: 0 2px 5px rgba(58, 110, 165, 0.35);
+
+  transition:
+    background-color 200ms ease,
+    transform 120ms ease,
+    box-shadow 120ms ease;
+}

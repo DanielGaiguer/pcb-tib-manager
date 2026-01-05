@@ -140,14 +140,12 @@ export function CaseMatrixUsage({
           </div>
         );
       })}
-      <br />
       <div className="usage-info">
         {selectedCell && <InformationTibs selectedTib={selectedCell} />}
       </div>
       <p className="usage-count">
         Quantidade de Ponteiras selecionadas: {selectedPositions.length}
       </p>
-      <br />
       {!confirmeUse && (
         <div className="actions">
           <button
