@@ -93,33 +93,42 @@ function App(): JSX.Element {
     setOpenCaseForm(true); // Abre o form
   };
 
-  return (
-    <div className="app">
-      <div className="main">
-        <h1>Sistema de Ponteiras PCB</h1>
+  let content: JSX.Element;
 
-        {openCase ? (
-          <div className="case-detail">
-            <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
-            <CaseMatrix
-              caseData={openCase}
-              tibs={tibs}
-              onSubmit={addTib}
-              mode="detail"
-            />
-          </div>
-        ) : (
-          <CaseList
-            hasCases={hasCases}
-            casesState={cases}
-            tibsState={tibs}
-            onDelete={deleteCase}
-            onEdit={editCase}
-            onOpenCase={setOpenCase}
-            onOpenCaseForm={setOpenCaseForm}
-            handleNewCase={handleNewCase}
-          />
-        )}
+  if (openRegisterUse) {
+    content = (
+      <RegisterUses
+        cases={cases}
+        tibs={tibs}
+        onSaveTibUsages={saveTibUsages}
+        buttonBack={() => onOpenRegisterUse(false)}
+      />
+    );
+  } else if (openCase) {
+    content = (
+      <div className="case-detail">
+        <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
+        <CaseMatrix
+          caseData={openCase}
+          tibs={tibs}
+          onSubmit={addTib}
+          mode="detail"
+        />
+      </div>
+    );
+  } else {
+    content = (
+      <>
+        <CaseList
+          hasCases={hasCases}
+          casesState={cases}
+          tibsState={tibs}
+          onDelete={deleteCase}
+          onEdit={editCase}
+          onOpenCase={setOpenCase}
+          onOpenCaseForm={setOpenCaseForm}
+          handleNewCase={handleNewCase}
+        />
 
         {openCaseForm && (
           <div className="center-form-case">
@@ -133,7 +142,6 @@ function App(): JSX.Element {
           </div>
         )}
 
-        <br />
         {!openCase && hasCases() && (
           <button
             className="btn use-tib"
@@ -142,16 +150,18 @@ function App(): JSX.Element {
             Usar ponteiras
           </button>
         )}
-        {openRegisterUse && (
-          <div className="center-form-case">
-            <RegisterUses
-              cases={cases}
-              tibs={tibs}
-              onSaveTibUsages={saveTibUsages}
-              buttonBack={() => onOpenRegisterUse(false)}
-            />
-          </div>
-        )}
+      </>
+    );
+  }
+
+  return (
+    <div className="app">
+      <div className="main">
+        <h1>Sistema de Ponteiras PCB</h1>
+
+        {/* 🔁 Conteúdo variável */}
+        <div className="page-content">{content}</div>
+
         <ToastContainer />
       </div>
     </div>

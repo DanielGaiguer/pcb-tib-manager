@@ -28,8 +28,8 @@ export function CaseMatrixUsage({
 
   const [confirmeUse, setConfirmeUse] = useState<boolean>(false);
 
-  const dotSize = 18;
-  const gap = 6;
+  const dotSize = 35;
+  const gap = 8;
 
   const selectTib = (
     caseId: string,
@@ -68,7 +68,7 @@ export function CaseMatrixUsage({
 
         return (
           <div key={id}>
-            <h3>{caseItem.name}</h3>
+            <h3 className="title-case">{caseItem.name}</h3>
 
             <div
               className="matrix-grid"
@@ -141,21 +141,26 @@ export function CaseMatrixUsage({
         );
       })}
       <br />
-      <div className="">
+      <div className="usage-info">
         {selectedCell && <InformationTibs selectedTib={selectedCell} />}
-        <p>Quantidade de Ponteiras selecionadas: {selectedPositions.length}</p>
       </div>
+      <p className="usage-count">
+        Quantidade de Ponteiras selecionadas: {selectedPositions.length}
+      </p>
       <br />
       {!confirmeUse && (
-        <button
-          onClick={() =>
-            selectedPositions.length > 0
-              ? setConfirmeUse(true)
-              : toast.error('Nenhuma ponta selecionada')
-          }
-        >
-          Salvar usos
-        </button>
+        <div className="actions">
+          <button
+            className="main-button"
+            onClick={() =>
+              selectedPositions.length > 0
+                ? setConfirmeUse(true)
+                : toast.error('Nenhuma ponta selecionada')
+            }
+          >
+            Salvar usos
+          </button>
+        </div>
       )}
       {confirmeUse && (
         <div>
