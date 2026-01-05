@@ -10,11 +10,11 @@ export function InformationTibs({
   selectedTib,
 }: InformationTibsProps): JSX.Element {
   return (
-    <>
+    <ul>
       <h3>Informações da Ponteira: </h3>
-      <h4>Posição da Ponteira: {selectedTib.position}</h4>
-      <h4>Tipo da Ponteira: {selectedTib.type}</h4>
-      <h4>Diametro da Ponteira: {selectedTib.diameter}</h4>
-    </>
+      <li>Posição da Ponteira: {selectedTib.position}</li>
+      <li>Tipo da Ponteira: {selectedTib.type}</li>
+      <li>Diametro da Ponteira: {selectedTib.diameter}</li>
+    </ul>
   );
 }

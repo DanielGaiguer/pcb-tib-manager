@@ -49,3 +49,59 @@ h3 {
     transform 120ms ease,
     box-shadow 120ms ease;
 }
+
+.usage-info {
+  max-width: 1000px;
+  width: 70%;
+  margin: 20px auto;
+
+  background: #f5f5f5;
+  border-radius: 16px;
+  padding: 28px 32px;
+
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.usage-info h3 {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2f3a45;
+  margin-bottom: 2%;
+}
+
+.usage-info ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+}
+
+.usage-info li {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px 14px;
+
+  font-size: 14px;
+  color: #2f3a45;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.dot.occupied {
+  background-color: #4f7db8;
+}
+
+.dot.occupied.selected {
+  background-color: #2fbf71;
+  outline: 1px solid rgba(0, 0, 0, 0.533);
+  box-shadow: 0 4px 10px rgba(47, 95, 144, 0.45);
+}

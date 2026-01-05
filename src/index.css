@@ -147,22 +147,6 @@ body .Toastify .Toastify__toast-container .Toastify__toast--error {
   transform: scale(0.97);
 }
 
-
-.center-form-tib {
-  position: fixed;
-  inset: 0;              /* top, right, bottom, left = 0 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  background-color: red;
-}
-
-.dot.selected {
-  background: black;
-  outline: 2px solid black;
-}
-
 .dot.occupied {
   margin: 3px;
 }
@@ -542,16 +526,10 @@ li {
 
 /* Bolinha ocupada */
 .dot.occupied {
-  background-color: #4f7db8; /* azul do projeto */
+  background-color: #4f7db8;
   box-shadow: 0 2px 6px rgba(79, 125, 184, 0.35);
 }
 
-/* Bolinha selecionada */
-.dot.selected {
-  background-color: #2f5f90;
-  outline: 2px solid #93b4d7;
-  box-shadow: 0 4px 10px rgba(47, 95, 144, 0.45);
-}
 
 /* Efeito hover */
 .dot.free:hover {
