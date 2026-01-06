@@ -1,4 +1,4 @@
-import { useEffect, useState, type JSX } from 'react';
+import { useEffect, useRef, useState, type JSX } from 'react';
 import { type CaseProtocol } from './types/Case';
 import { type TibProtocol } from './types/Tib';
 import { loadLocal } from './storage/loadLocal';
@@ -24,6 +24,12 @@ function App(): JSX.Element {
   const [openRegisterUse, onOpenRegisterUse] = useState<boolean>(false);
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
+
+  const [pendingSync, setPendingSync] = useState<boolean>(() => {
+    return loadLocal().pendingSync ?? false;
+  });
+
+  const isHydratingFromSheets = useRef(false);
 
   const syncWithSheets = async (
     caixas: CaseProtocol[],
@@ -55,14 +61,49 @@ function App(): JSX.Element {
 
       setCases(casesSheet);
       setTibs(tibsSheet);
+
+      saveLocal(casesSheet, tibsSheet, false);
+
+      isHydratingFromSheets.current = false;
     }
 
     loadFromSheets();
   }, []);
 
   useEffect(() => {
-    saveLocal(cases, tibs);
+    if (isHydratingFromSheets.current) return;
+
+    saveLocal(cases, tibs, true);
+    setPendingSync(true);
   }, [cases, tibs]);
+
+  useEffect(() => {
+    if (!pendingSync) return;
+
+    const timeout = setTimeout(async () => {
+      try {
+        await syncWithSheets(cases, tibs);
+
+        saveLocal(cases, tibs, false);
+        setPendingSync(false);
+      } catch (err) {
+        console.error('Auto-sync falhou, tentará novamente', err);
+      }
+    }, 3000); // ⏱️ debounce de 3s
+
+    return () => clearTimeout(timeout);
+  }, [pendingSync, cases, tibs]);
+
+  useEffect(() => {
+    const handler = () => {
+      if (pendingSync) {
+        syncWithSheets(cases, tibs);
+      }
+    };
+
+    window.addEventListener('beforeunload', handler);
+    return () => window.removeEventListener('beforeunload', handler);
+  }, [pendingSync, cases, tibs]);
 
   const addCase = (newCase: CaseProtocol): void => {
     setCases((prev) => [...prev, newCase]);
