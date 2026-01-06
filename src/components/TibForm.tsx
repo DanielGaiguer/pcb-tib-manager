@@ -31,6 +31,8 @@ export function TibForm({
     active: tibData?.active || true,
   });
 
+  const [middleware, setMiddleware] = useState<boolean>(false);
+
   const isEditing = Boolean(tibData);
 
   const handleSubmit = (e: React.FormEvent) => {

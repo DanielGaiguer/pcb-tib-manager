@@ -496,7 +496,7 @@ li {
 /* Ajustes para preview e detail */
 .matrix-grid.preview {
   justify-content: center;
-  margin-left: -5%;
+  margin-left: -4.3%;
 }
 
 .matrix-grid.detail {
