@@ -93,6 +93,26 @@ function App(): JSX.Element {
     setOpenCaseForm(true); // Abre o form
   };
 
+  const syncWithSheets = async (
+    caixas: CaseProtocol[],
+    pontas: TibProtocol[],
+  ) => {
+    try {
+      const response = await fetch('http://localhost:3000/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ caixas, pontas }),
+      });
+
+      if (!response.ok) throw new Error('Erro na requisição');
+
+      const data = await response.json();
+      console.log('Sync status:', data); // deve retornar { status: 'ok' }
+    } catch (err) {
+      console.error('Falha ao sincronizar:', err);
+    }
+  };
+
   let content: JSX.Element;
 
   if (openRegisterUse) {
@@ -157,6 +177,7 @@ function App(): JSX.Element {
   return (
     <div className="app">
       <div className="main">
+        <button onClick={() => syncWithSheets(cases, tibs)}>Sincronizar</button>
         <h1 className="title-main">Sistema de Ponteiras PCB</h1>
 
         {/* 🔁 Conteúdo variável */}
