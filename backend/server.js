@@ -9,14 +9,20 @@ app.use(cors()); // <- ADICIONE ISSO
 app.use(express.json());
 
 const GOOGLE_SHEETS_URL =
-  'https://script.google.com/macros/s/AKfycbwFoVCIju15oV-SpNRBjVAAPph4Z6wSr6cDIyTBkgUaaGFuqcTeyTTq34uD9an38yMi/exec';
+  'https://script.google.com/macros/s/AKfycbyftagADqm-uc5hbx1vRwktBm8WVClxYkBmcberXfZCZyAigVL0HbdjIUJEOaZJvDwU/exec';
 
 app.post('/sync', async (req, res) => {
   try {
+    console.log('Recebido do React:', JSON.stringify(req.body, null, 2));
+
     const bodyToSend = {
       caixas: Array.isArray(req.body.caixas) ? req.body.caixas : [],
       pontas: Array.isArray(req.body.pontas) ? req.body.pontas : [],
     };
+    console.log(
+      'Body que vai pro Google:',
+      JSON.stringify(bodyToSend, null, 2),
+    );
 
     const response = await fetch(GOOGLE_SHEETS_URL, {
       method: 'POST',
