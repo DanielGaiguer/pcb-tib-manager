@@ -13,16 +13,10 @@ const GOOGLE_SHEETS_URL =
 
 app.post('/sync', async (req, res) => {
   try {
-    console.log('Recebido do React:', JSON.stringify(req.body, null, 2));
-
     const bodyToSend = {
       caixas: Array.isArray(req.body.caixas) ? req.body.caixas : [],
       pontas: Array.isArray(req.body.pontas) ? req.body.pontas : [],
     };
-    console.log(
-      'Body que vai pro Google:',
-      JSON.stringify(bodyToSend, null, 2),
-    );
 
     const response = await fetch(GOOGLE_SHEETS_URL, {
       method: 'POST',

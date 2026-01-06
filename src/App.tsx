@@ -98,8 +98,6 @@ function App(): JSX.Element {
     pontas: TibProtocol[],
   ) => {
     try {
-      console.log('Enviando para o Node:', { caixas, pontas }); // <- isso deve mostrar tudo
-
       const response = await fetch('http://localhost:3000/sync', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
