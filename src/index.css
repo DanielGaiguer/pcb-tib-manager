@@ -803,8 +803,12 @@ li {
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
-/*
 .dot.inactive {
-  background-color: red;
-  box-shadow: 0 2px 6px rgba(79, 125, 184, 0.35);
+  background-color: #c0392b;
+  box-shadow: 0 2px 6px rgba(192, 57, 43, 0.35);
+}
+
+.dot.inactive:hover {
+  filter: brightness(1.2);
+  cursor: pointer;
 }

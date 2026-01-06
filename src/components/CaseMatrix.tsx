@@ -44,7 +44,9 @@ export function CaseMatrix({
   ): TibProtocol | undefined => {
     return tibs.find(
       (tib) =>
-        tib.caseId === id && tib.rows === row && tib.cols === col && tib.active,
+        tib.caseId === id &&
+        tib.rows === row &&
+        tib.cols === col /*&& tib.active*/,
     );
   };
 
@@ -83,24 +85,21 @@ export function CaseMatrix({
           <React.Fragment key={row}>
             <div className="matrix-header row">{row + 1}</div>
             {Array.from({ length: cols }).map((_, col) => {
-              const occupied = tibs.some(
+              const tibAtPosition = tibs.find(
                 (tib) =>
-                  tib.caseId === id &&
-                  tib.rows === row &&
-                  tib.cols === col &&
-                  tib.active,
+                  tib.caseId === id && tib.rows === row && tib.cols === col,
               );
-              const inactive = tibs.some(
-                (tib) =>
-                  tib.caseId === id &&
-                  tib.rows === row &&
-                  tib.cols === col &&
-                  !tib.active,
-              );
+
+              let status: 'free' | 'occupied' | 'inactive' = 'free';
+
+              if (tibAtPosition) {
+                status = tibAtPosition.active ? 'occupied' : 'inactive';
+              }
+
               return (
                 <span
                   key={col}
-                  className={`dot ${occupied ? 'occupied' : 'free'} ${inactive ? 'inactive' : ''}`}
+                  className={`dot ${status}`}
                   style={{
                     width: dotSizeDynamic,
                     height: dotSizeDynamic,
