@@ -11,6 +11,8 @@ import { CaseMatrix } from './components/CaseMatrix';
 import { RegisterUses } from './components/RegisterUses';
 import { ToastContainer } from 'react-toastify';
 import type { TibUsage } from './types/tibUsage';
+import { mapCasesFromSheet } from './utils/mapCasesFromSheet';
+import { mapTibsFromSheet } from './utils/mapTibsFromSheet';
 //import { CaseMatrix } from './components/CaseMatrix';
 
 function App(): JSX.Element {
@@ -22,6 +24,22 @@ function App(): JSX.Element {
   const [openRegisterUse, onOpenRegisterUse] = useState<boolean>(false);
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
+
+  useEffect(() => {
+    async function loadFromSheets() {
+      const res = await fetch('http://localhost:3000/sync');
+      const data = await res.json();
+
+      console.log(data);
+      const casesSheet = mapCasesFromSheet(data.caixas);
+      const tibsSheet = mapTibsFromSheet(data.pontas);
+
+      console.log('cases mapeados:', casesSheet);
+      console.log('tibs mapeados:', tibsSheet);
+    }
+
+    loadFromSheets();
+  }, []);
 
   useEffect(() => {
     saveLocal(cases, tibs);

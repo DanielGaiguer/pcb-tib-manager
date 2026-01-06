@@ -9,7 +9,7 @@ app.use(cors()); // <- ADICIONE ISSO
 app.use(express.json());
 
 const GOOGLE_SHEETS_URL =
-  'https://script.google.com/macros/s/AKfycbyftagADqm-uc5hbx1vRwktBm8WVClxYkBmcberXfZCZyAigVL0HbdjIUJEOaZJvDwU/exec';
+  'https://script.google.com/macros/s/AKfycbzbYphCnzGBKdvYIZa6z301S7vzc2e2WNRpogFKdyoW4rg16zeAR0jN-cr6fNbuWoJn/exec';
 
 app.post('/sync', async (req, res) => {
   try {
@@ -36,6 +36,17 @@ app.post('/sync', async (req, res) => {
   } catch (err) {
     console.error('Erro real:', err);
     res.status(500).json({ error: 'Falha ao sincronizar com Google Sheets' });
+  }
+});
+
+app.get('/sync', async (req, res) => {
+  try {
+    const response = await fetch(GOOGLE_SHEETS_URL);
+    const data = await response.json();
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Erro ao buscar dados do Sheets' });
   }
 });
 
