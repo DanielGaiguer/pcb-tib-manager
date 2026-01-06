@@ -34,8 +34,8 @@ function App(): JSX.Element {
       const casesSheet = mapCasesFromSheet(data.caixas);
       const tibsSheet = mapTibsFromSheet(data.pontas);
 
-      console.log('cases mapeados:', casesSheet);
-      console.log('tibs mapeados:', tibsSheet);
+      setCases(casesSheet);
+      setTibs(tibsSheet);
     }
 
     loadFromSheets();

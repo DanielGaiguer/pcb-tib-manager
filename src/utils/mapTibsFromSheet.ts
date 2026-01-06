@@ -2,7 +2,6 @@ import type { TibProtocol } from '../types/Tib';
 import type { TibSheetRow } from '../types/TIbSheetRow';
 
 export function mapTibsFromSheet(rows: TibSheetRow[]): TibProtocol[] {
-  console.log('formatO:', rows);
   return rows.map((row) => ({
     id: row[0],
     caseId: row[1],
