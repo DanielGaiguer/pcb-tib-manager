@@ -25,12 +25,14 @@ export function Middleware({
 
   return (
     <>
-      <button onClick={closedMiddleware}>Voltar</button>
+      <button className="btn" onClick={closedMiddleware}>
+        Voltar
+      </button>
       <form onSubmit={handleSubmit}>
-        <h1>Por favor digite a senha</h1>
+        <h1>Por favor digite a senha.</h1>
         <label htmlFor="password">Senha de acesso: </label>
         <input
-          type="text"
+          type="password"
           id="password"
           name="password"
           onChange={(e) => setInputPassword(e.target.value)}
