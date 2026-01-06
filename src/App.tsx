@@ -25,12 +25,31 @@ function App(): JSX.Element {
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
   const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
 
+  const syncWithSheets = async (
+    caixas: CaseProtocol[],
+    pontas: TibProtocol[],
+  ) => {
+    try {
+      const response = await fetch('http://localhost:3000/sync', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ caixas, pontas }),
+      });
+
+      if (!response.ok) throw new Error('Erro na requisição');
+
+      const data = await response.json();
+      console.log('Sync status:', data); // deve retornar { status: 'ok' }
+    } catch (err) {
+      console.error('Falha ao sincronizar:', err);
+    }
+  };
+
   useEffect(() => {
     async function loadFromSheets() {
       const res = await fetch('http://localhost:3000/sync');
       const data = await res.json();
 
-      console.log(data);
       const casesSheet = mapCasesFromSheet(data.caixas);
       const tibsSheet = mapTibsFromSheet(data.pontas);
 
@@ -109,26 +128,6 @@ function App(): JSX.Element {
   const handleNewCase = (): void => {
     setDataEditCase(undefined); // Garante form limpo
     setOpenCaseForm(true); // Abre o form
-  };
-
-  const syncWithSheets = async (
-    caixas: CaseProtocol[],
-    pontas: TibProtocol[],
-  ) => {
-    try {
-      const response = await fetch('http://localhost:3000/sync', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ caixas, pontas }),
-      });
-
-      if (!response.ok) throw new Error('Erro na requisição');
-
-      const data = await response.json();
-      console.log('Sync status:', data); // deve retornar { status: 'ok' }
-    } catch (err) {
-      console.error('Falha ao sincronizar:', err);
-    }
   };
 
   let content: JSX.Element;
