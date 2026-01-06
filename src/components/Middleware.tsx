@@ -1,22 +1,24 @@
 import type { JSX } from 'react';
 import React, { useState } from 'react';
-import { saveAccess } from '../storage/saveAccess';
 import { toast } from 'react-toastify';
 
 type Props = {
   closedMiddleware: () => void;
+  acessCompleted: () => void;
 };
 
 const PASSWORD_KEY = 'Senai2025';
-export function Middleware({ closedMiddleware }: Props): JSX.Element {
+export function Middleware({
+  closedMiddleware,
+  acessCompleted,
+}: Props): JSX.Element {
   const [inputPassword, setInputPassword] = useState<string>('');
 
   const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
     const passwordFilter = inputPassword.trim();
     if (passwordFilter === PASSWORD_KEY) {
-      saveAccess();
-      closedMiddleware();
+      acessCompleted();
       toast.success('Acesso liberado com sucesso!');
     }
   };

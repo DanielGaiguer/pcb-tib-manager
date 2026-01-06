@@ -34,11 +34,11 @@ export function TibForm({
     active: tibData?.active || true,
   });
 
-  const [isLogged, setIsLogged] = useState<boolean>(false);
-  const [middleware, setMiddleware] = useState<boolean>(true);
+  const [isLogged, setIsLogged] = useState<boolean>(() => canAccess());
+  const [middleware, setMiddleware] = useState<boolean>(!canAccess());
 
   React.useEffect(() => {
-    localStorage.clear();
+    //localStorage.clear();
     if (canAccess()) {
       setIsLogged(true);
     } else {
@@ -74,135 +74,143 @@ export function TibForm({
     return (
       <Middleware
         closedMiddleware={() => {
-          saveAccess(); // marca acesso agora
           setMiddleware(false);
+          onOpenTibForm();
+        }}
+        acessCompleted={() => {
+          saveAccess(); // marca acesso agora
           setIsLogged(true); // agora usuário está logado
+          setMiddleware(false);
         }}
       />
     );
   }
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <button onClick={onOpenTibForm}> Voltar</button>
-      <h2>{isEditing ? 'Editar Tib' : 'Cadastrar Tib'}</h2>
+  if (isLogged) {
+    return (
+      <form onSubmit={handleSubmit}>
+        <button onClick={onOpenTibForm}> Voltar</button>
+        <h2>{isEditing ? 'Editar Tib' : 'Cadastrar Tib'}</h2>
 
-      <label htmlFor="position">Posição da Ponteira:</label>
-      <input
-        type="text"
-        id="position"
-        name="position"
-        value={form.position}
-        onChange={(e) => setForm({ ...form, position: e.target.value })}
-      />
-
-      <br />
-      <label htmlFor="type">Tipo da Ponteira:</label>
-      <input
-        type="text"
-        id="type"
-        name="type"
-        value={form.type}
-        onChange={(e) => setForm({ ...form, type: e.target.value })}
-      />
-
-      <br />
-      <label htmlFor="diameter">Diâmetro da Ponteira:</label>
-      <input
-        type="text"
-        id="diameter"
-        name="diameter"
-        value={form.diameter}
-        onChange={(e) => {
-          const value = e.target.value.replace(',', '.');
-
-          if (!/^\d*([.,]?\d*)?$/.test(value)) {
-            toast.error('Este campo não deve conter letras.');
-            return;
-          }
-
-          setForm({ ...form, diameter: value });
-        }}
-      />
-
-      <br />
-      <label htmlFor="position">Quantidade de usos da ponteira:</label>
-      <input
-        type="text"
-        id="name"
-        name="name"
-        value={form.uses}
-        onChange={(e) => {
-          if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
-            toast.error('Este campo não deve conter letras.');
-            return;
-          }
-          setForm({ ...form, uses: Number(e.target.value) });
-        }}
-      />
-
-      <br />
-
-      <label htmlFor="active">Status da Ponteira: </label>
-
-      <label>
+        <label htmlFor="position">Posição da Ponteira:</label>
         <input
-          type="radio"
-          id="active"
-          name="active"
-          checked={form.active === true}
-          onChange={() => setForm({ ...form, active: true })}
+          type="text"
+          id="position"
+          name="position"
+          value={form.position}
+          onChange={(e) => setForm({ ...form, position: e.target.value })}
         />
-        Ativa
-      </label>
 
-      <label>
+        <br />
+        <label htmlFor="type">Tipo da Ponteira:</label>
         <input
-          type="radio"
-          id="active"
-          name="active"
-          checked={form.active === false}
-          onChange={() => setForm({ ...form, active: false })}
+          type="text"
+          id="type"
+          name="type"
+          value={form.type}
+          onChange={(e) => setForm({ ...form, type: e.target.value })}
         />
-        Inativa
-      </label>
 
-      <br />
+        <br />
+        <label htmlFor="diameter">Diâmetro da Ponteira:</label>
+        <input
+          type="text"
+          id="diameter"
+          name="diameter"
+          value={form.diameter}
+          onChange={(e) => {
+            const value = e.target.value.replace(',', '.');
 
-      <label htmlFor="rows">Linha da Ponteira (Sistema):</label>
-      <input
-        type="text"
-        id="rows"
-        name="rows"
-        value={form.rows}
-        onChange={(e) => {
-          if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
-            toast.error('Este campo não deve conter letras.');
-            return;
-          }
-          setForm({ ...form, rows: Number(e.target.value) });
-        }}
-      />
+            if (!/^\d*([.,]?\d*)?$/.test(value)) {
+              toast.error('Este campo não deve conter letras.');
+              return;
+            }
 
-      <br />
-      <label htmlFor="cols">Coluna da Ponteira (Sistema):</label>
-      <input
-        type="text"
-        id="cols"
-        name="cols"
-        value={form.cols}
-        onChange={(e) => {
-          if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
-            toast.error('Este campo não deve conter letras.');
-            return;
-          }
-          setForm({ ...form, cols: Number(e.target.value) });
-        }}
-      />
+            setForm({ ...form, diameter: value });
+          }}
+        />
 
-      <br />
+        <br />
+        <label htmlFor="position">Quantidade de usos da ponteira:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          value={form.uses}
+          onChange={(e) => {
+            if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
+              toast.error('Este campo não deve conter letras.');
+              return;
+            }
+            setForm({ ...form, uses: Number(e.target.value) });
+          }}
+        />
 
-      <button type="submit">Salvar</button>
-    </form>
-  );
+        <br />
+
+        <label htmlFor="active">Status da Ponteira: </label>
+
+        <label>
+          <input
+            type="radio"
+            id="active"
+            name="active"
+            checked={form.active === true}
+            onChange={() => setForm({ ...form, active: true })}
+          />
+          Ativa
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            id="active"
+            name="active"
+            checked={form.active === false}
+            onChange={() => setForm({ ...form, active: false })}
+          />
+          Inativa
+        </label>
+
+        <br />
+
+        <label htmlFor="rows">Linha da Ponteira (Sistema):</label>
+        <input
+          type="text"
+          id="rows"
+          name="rows"
+          value={form.rows}
+          onChange={(e) => {
+            if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
+              toast.error('Este campo não deve conter letras.');
+              return;
+            }
+            setForm({ ...form, rows: Number(e.target.value) });
+          }}
+        />
+
+        <br />
+        <label htmlFor="cols">Coluna da Ponteira (Sistema):</label>
+        <input
+          type="text"
+          id="cols"
+          name="cols"
+          value={form.cols}
+          onChange={(e) => {
+            if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
+              toast.error('Este campo não deve conter letras.');
+              return;
+            }
+            setForm({ ...form, cols: Number(e.target.value) });
+          }}
+        />
+
+        <br />
+
+        <button type="submit">Salvar</button>
+      </form>
+    );
+  }
+
+  return <h1>Voce nao tem acesso a esta pagina</h1>;
 }

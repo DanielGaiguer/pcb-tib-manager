@@ -1,4 +1,4 @@
-import { saveAccess } from './saveAccess';
+//import { saveAccess } from './saveAccess';
 
 const ACCESS_KEY = 'accessedAt';
 
@@ -17,6 +17,6 @@ export function canAccess(): boolean {
   }
 
   // Se não tiver registro ou passou de 30 minutos, salva o acesso agora
-  saveAccess();
+  //saveAccess();
   return false;
 }
