@@ -235,7 +235,6 @@ function App(): JSX.Element {
   return (
     <div className="app">
       <div className="main">
-        <button onClick={() => syncWithSheets(cases, tibs)}>Sincronizar</button>
         <h1 className="title-main">Sistema de Ponteiras PCB</h1>
 
         {/* 🔁 Conteúdo variável */}
