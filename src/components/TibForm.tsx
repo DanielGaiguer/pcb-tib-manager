@@ -3,6 +3,7 @@ import { type JSX } from 'react';
 import { type TibProtocol } from '../types/Tib';
 import type { CaseProtocol } from '../types/Case';
 import { toast } from 'react-toastify';
+import { Middleware } from './middleware';
 
 type Props = {
   caseData: CaseProtocol;
@@ -31,7 +32,8 @@ export function TibForm({
     active: tibData?.active || true,
   });
 
-  const [middleware, setMiddleware] = useState<boolean>(false);
+  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const [middleware, setMiddleware] = useState<boolean>(true);
 
   const isEditing = Boolean(tibData);
 
@@ -56,6 +58,12 @@ export function TibForm({
     onOpenTibForm();
     toast.success('Ponteira cadastrada com sucesso!');
   };
+
+  if (!isLogged) {
+    if (middleware) {
+      return <Middleware closedMiddleware={() => setMiddleware(false)} />;
+    }
+  }
 
   return (
     <form onSubmit={handleSubmit}>
