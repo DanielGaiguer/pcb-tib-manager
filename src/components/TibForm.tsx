@@ -101,7 +101,6 @@ export function TibForm({
           onChange={(e) => setForm({ ...form, position: e.target.value })}
         />
 
-        <br />
         <label htmlFor="type">Tipo da Ponteira:</label>
         <input
           type="text"
@@ -111,7 +110,6 @@ export function TibForm({
           onChange={(e) => setForm({ ...form, type: e.target.value })}
         />
 
-        <br />
         <label htmlFor="diameter">Diâmetro da Ponteira:</label>
         <input
           type="text"
@@ -130,7 +128,6 @@ export function TibForm({
           }}
         />
 
-        <br />
         <label htmlFor="position">Quantidade de usos da ponteira:</label>
         <input
           type="text"
@@ -145,8 +142,6 @@ export function TibForm({
             setForm({ ...form, uses: Number(e.target.value) });
           }}
         />
-
-        <br />
 
         <label htmlFor="active">Status da Ponteira: </label>
 
@@ -172,8 +167,6 @@ export function TibForm({
           Inativa
         </label>
 
-        <br />
-
         <label htmlFor="rows">Linha da Ponteira (Sistema):</label>
         <input
           type="text"
@@ -189,7 +182,6 @@ export function TibForm({
           }}
         />
 
-        <br />
         <label htmlFor="cols">Coluna da Ponteira (Sistema):</label>
         <input
           type="text"
@@ -204,8 +196,6 @@ export function TibForm({
             setForm({ ...form, cols: Number(e.target.value) });
           }}
         />
-
-        <br />
 
         <button type="submit">Salvar</button>
       </form>

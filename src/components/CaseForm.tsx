@@ -1,6 +1,5 @@
 import { useState, type JSX } from 'react';
 import { type CaseProtocol } from '../types/Case';
-//import { Button } from './button';
 import React from 'react';
 import { toast } from 'react-toastify';
 

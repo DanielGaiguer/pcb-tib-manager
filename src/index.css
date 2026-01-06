@@ -529,7 +529,6 @@ li {
   box-shadow: 0 2px 6px rgba(79, 125, 184, 0.35);
 }
 
-
 /* Efeito hover */
 .dot.free:hover {
   filter: brightness(1.1);
@@ -659,7 +658,7 @@ li {
 .Form-tib .form-tib-card {
   background: #f5f5f5;
   border-radius: 16px;
-  padding: 28px 32px;
+  padding: 15px 32px;
   width: 100%;
   max-width: 480px; /* tamanho máximo do form */
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
@@ -676,7 +675,7 @@ li {
   font-weight: 700;
   color: #2f3a45;
   text-align: center;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
 }
 
 /* LABELS */
@@ -802,4 +801,10 @@ li {
   font-size: 14px;
 
   transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+/*
+.dot.inactive {
+  background-color: red;
+  box-shadow: 0 2px 6px rgba(79, 125, 184, 0.35);
 }

@@ -28,8 +28,6 @@ export function CaseList({
   const casesActive = casesState.filter((c) => c.active);
   const [caseToDelete, setCaseToDelete] = useState<CaseProtocol | null>(null);
 
-  //const onDeleteCase()
-
   return (
     <>
       <h2 className="subtitle-main">

@@ -90,10 +90,17 @@ export function CaseMatrix({
                   tib.cols === col &&
                   tib.active,
               );
+              const inactive = tibs.some(
+                (tib) =>
+                  tib.caseId === id &&
+                  tib.rows === row &&
+                  tib.cols === col &&
+                  !tib.active,
+              );
               return (
                 <span
                   key={col}
-                  className={`dot ${occupied ? 'occupied' : 'free'}`}
+                  className={`dot ${occupied ? 'occupied' : 'free'} ${inactive ? 'inactive' : ''}`}
                   style={{
                     width: dotSizeDynamic,
                     height: dotSizeDynamic,
