@@ -30,7 +30,6 @@ export function ConfirmeTib({
   };
 
   const handleConfirm = () => {
-    console.log(tibStates);
     onSaveTibUsages(tibStates);
     clearSelectedTib();
     clearSelectedInformation();

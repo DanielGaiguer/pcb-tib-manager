@@ -3,7 +3,7 @@ import { type JSX } from 'react';
 import { type TibProtocol } from '../types/Tib';
 import type { CaseProtocol } from '../types/Case';
 import { toast } from 'react-toastify';
-import { Middleware } from './middleware';
+import { Middleware } from './Middleware';
 import { saveAccess } from '../storage/saveAccess';
 import { canAccess } from '../storage/canAccess';
 
@@ -23,16 +23,17 @@ export function TibForm({
   onOpenTibForm,
 }: Props): JSX.Element {
   const [form, setForm] = useState<TibProtocol>({
-    id: tibData?.id || crypto.randomUUID(),
-    caseId: tibData?.caseId || caseData.id,
-    rows: tibData?.rows || positionTib[0][0],
-    cols: tibData?.cols || positionTib[0][1],
-    position: tibData?.position || positionTib[1][0] + positionTib[1][1],
-    type: tibData?.type || '',
-    diameter: tibData?.diameter || '0',
-    uses: tibData?.uses || 0,
-    active: tibData?.active || true,
+    id: tibData?.id ?? crypto.randomUUID(),
+    caseId: tibData?.caseId ?? caseData.id,
+    rows: tibData?.rows ?? positionTib[0][0],
+    cols: tibData?.cols ?? positionTib[0][1],
+    position: tibData?.position ?? positionTib[1][0] + positionTib[1][1],
+    type: tibData?.type ?? '',
+    diameter: tibData?.diameter ?? '0',
+    uses: tibData?.uses ?? 0,
+    active: tibData?.active ?? true,
   });
+  //O ?? só ignora: null e undefined
 
   const [isLogged, setIsLogged] = useState<boolean>(() => canAccess());
   const [middleware, setMiddleware] = useState<boolean>(!canAccess());
@@ -67,7 +68,11 @@ export function TibForm({
 
     if (onSubmit) onSubmit(form);
     onOpenTibForm();
-    toast.success('Ponteira cadastrada com sucesso!');
+    if (!isEditing) {
+      toast.success('Ponteira cadastrada com sucesso!');
+    } else {
+      toast.success('Ponteira atualizada com sucesso!');
+    }
   };
 
   if (!isLogged && middleware) {
