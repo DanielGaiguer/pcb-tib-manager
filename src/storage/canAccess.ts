@@ -16,7 +16,7 @@ export function canAccess(): boolean {
     }
   }
 
-  // Se não tiver registro ou passou de 15 minutos, salva o acesso agora
+  // Se não tiver registro ou passou de 30 minutos, salva o acesso agora
   saveAccess();
   return false;
 }

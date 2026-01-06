@@ -4,6 +4,8 @@ import { type TibProtocol } from '../types/Tib';
 import type { CaseProtocol } from '../types/Case';
 import { toast } from 'react-toastify';
 import { Middleware } from './middleware';
+import { saveAccess } from '../storage/saveAccess';
+import { canAccess } from '../storage/canAccess';
 
 type Props = {
   caseData: CaseProtocol;
@@ -35,6 +37,15 @@ export function TibForm({
   const [isLogged, setIsLogged] = useState<boolean>(false);
   const [middleware, setMiddleware] = useState<boolean>(true);
 
+  React.useEffect(() => {
+    localStorage.clear();
+    if (canAccess()) {
+      setIsLogged(true);
+    } else {
+      setIsLogged(false);
+    }
+  }, []);
+
   const isEditing = Boolean(tibData);
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -59,10 +70,16 @@ export function TibForm({
     toast.success('Ponteira cadastrada com sucesso!');
   };
 
-  if (!isLogged) {
-    if (middleware) {
-      return <Middleware closedMiddleware={() => setMiddleware(false)} />;
-    }
+  if (!isLogged && middleware) {
+    return (
+      <Middleware
+        closedMiddleware={() => {
+          saveAccess(); // marca acesso agora
+          setMiddleware(false);
+          setIsLogged(true); // agora usuário está logado
+        }}
+      />
+    );
   }
 
   return (
@@ -73,28 +90,28 @@ export function TibForm({
       <label htmlFor="position">Posição da Ponteira:</label>
       <input
         type="text"
-        id="name"
-        name="name"
+        id="position"
+        name="position"
         value={form.position}
         onChange={(e) => setForm({ ...form, position: e.target.value })}
       />
 
       <br />
-      <label htmlFor="position">Tipo da Ponteira:</label>
+      <label htmlFor="type">Tipo da Ponteira:</label>
       <input
         type="text"
-        id="name"
-        name="name"
+        id="type"
+        name="type"
         value={form.type}
         onChange={(e) => setForm({ ...form, type: e.target.value })}
       />
 
       <br />
-      <label htmlFor="position">Diâmetro da Ponteira:</label>
+      <label htmlFor="diameter">Diâmetro da Ponteira:</label>
       <input
         type="text"
-        id="name"
-        name="name"
+        id="diameter"
+        name="diameter"
         value={form.diameter}
         onChange={(e) => {
           const value = e.target.value.replace(',', '.');
@@ -155,8 +172,8 @@ export function TibForm({
       <label htmlFor="rows">Linha da Ponteira (Sistema):</label>
       <input
         type="text"
-        id="name"
-        name="name"
+        id="rows"
+        name="rows"
         value={form.rows}
         onChange={(e) => {
           if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
@@ -168,11 +185,11 @@ export function TibForm({
       />
 
       <br />
-      <label htmlFor="rows">Coluna da Ponteira (Sistema):</label>
+      <label htmlFor="cols">Coluna da Ponteira (Sistema):</label>
       <input
         type="text"
-        id="name"
-        name="name"
+        id="cols"
+        name="cols"
         value={form.cols}
         onChange={(e) => {
           if (!/^\d*([.,]?\d*)?$/.test(e.target.value)) {
