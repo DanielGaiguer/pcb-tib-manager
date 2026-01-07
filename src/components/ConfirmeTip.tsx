@@ -1,7 +1,7 @@
 import type { JSX } from 'react';
 import React, { useState } from 'react';
-import type { CaseProtocol } from '../types/Case';
-import type { TipUsage } from '../types/TipUsage';
+import type { CaseProtocol } from '../types/case';
+import type { TipUsage } from '../types/tipUsage';
 import { toast } from 'react-toastify';
 
 interface ConfirmeTipsProtocol {

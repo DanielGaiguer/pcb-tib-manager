@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import type { JSX } from 'react';
-import type { CaseProtocol } from '../types/Case';
-import type { TipProtocol } from '../types/Tip';
+import type { CaseProtocol } from '../types/case';
+import type { TipProtocol } from '../types/tip';
 //import { TibForm } from './TibForm';
 import '../styles/caseMatrix.css';
 import { toast } from 'react-toastify';
 import { InformationTips } from './InformationTips';
 import { ConfirmeTip } from './ConfirmeTip';
-import type { TipUsage } from '../types/TipUsage';
+import type { TipUsage } from '../types/tipUsage';
 
 interface CaseMatrixProps {
   caseData: CaseProtocol[];

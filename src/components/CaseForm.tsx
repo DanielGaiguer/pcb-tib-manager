@@ -1,5 +1,5 @@
 import { useState, type JSX } from 'react';
-import { type CaseProtocol } from '../types/Case';
+import { type CaseProtocol } from '../types/case';
 import React from 'react';
 import { toast } from 'react-toastify';
 

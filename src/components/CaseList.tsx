@@ -1,7 +1,7 @@
 import React, { useState, type JSX } from 'react';
-import type { CaseProtocol } from '../types/Case';
+import type { CaseProtocol } from '../types/case';
 import { CaseMatrix } from './CaseMatrix';
-import type { TipProtocol } from '../types/Tip';
+import type { TipProtocol } from '../types/tip';
 import { WindowDelete } from './WindowDelete';
 
 type Props = {

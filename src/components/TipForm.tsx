@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { type JSX } from 'react';
-import { type TipProtocol } from '../types/Tip';
-import type { CaseProtocol } from '../types/Case';
+import { type TipProtocol } from '../types/tip';
+import type { CaseProtocol } from '../types/case';
 import { toast } from 'react-toastify';
 import { Middleware } from './Middleware';
 import { saveAccess } from '../storage/saveAccess';

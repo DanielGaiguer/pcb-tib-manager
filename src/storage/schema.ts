@@ -1,5 +1,5 @@
-import type { CaseProtocol } from '../types/Case';
-import type { TipProtocol } from '../types/Tip';
+import type { CaseProtocol } from '../types/case';
+import type { TipProtocol } from '../types/tip';
 
 export interface AppStorage {
   cases: CaseProtocol[];

@@ -1,9 +1,9 @@
 import type { JSX } from 'react';
 import React from 'react';
-import type { CaseProtocol } from '../types/Case';
-import type { TipProtocol } from '../types/Tip';
+import type { CaseProtocol } from '../types/case';
+import type { TipProtocol } from '../types/tip';
 import { CaseMatrixUsage } from './CaseMatrixUsage';
-import type { TipUsage } from '../types/TipUsage';
+import type { TipUsage } from '../types/tipUsage';
 import '../styles/registerUses.css';
 
 type Props = {

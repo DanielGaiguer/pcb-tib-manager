@@ -1,5 +1,5 @@
-import type { TipProtocol } from '../types/Tip';
-import type { TipSheetRow } from '../types/TipSheetRow';
+import type { TipProtocol } from '../types/tip';
+import type { TipSheetRow } from '../types/tipSheetRow';
 
 export function mapTipsFromSheet(rows: TipSheetRow[]): TipProtocol[] {
   return rows.map((row) => ({

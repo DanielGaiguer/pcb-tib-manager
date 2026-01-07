@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 import React from 'react';
-import type { TipProtocol } from '../types/Tip';
+import type { TipProtocol } from '../types/tip';
 
 interface InformationTipsProps {
   selectedTip: TipProtocol;

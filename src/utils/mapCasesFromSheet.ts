@@ -1,5 +1,5 @@
-import type { CaseProtocol } from '../types/Case';
-import type { CaseSheetRow } from '../types/CaseSheetRow';
+import type { CaseProtocol } from '../types/case';
+import type { CaseSheetRow } from '../types/caseSheetRow';
 
 export function mapCasesFromSheet(rows: CaseSheetRow[]): CaseProtocol[] {
   return rows.map((row) => ({

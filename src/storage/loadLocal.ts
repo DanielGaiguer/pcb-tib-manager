@@ -1,5 +1,5 @@
-import type { CaseProtocol } from '../types/Case';
-import type { TipProtocol } from '../types/Tip';
+import type { CaseProtocol } from '../types/case';
+import type { TipProtocol } from '../types/tip';
 
 const CASES_KEY = 'cases';
 const TIPS_KEY = 'tips';
