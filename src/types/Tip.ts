@@ -1,4 +1,4 @@
-export interface TibProtocol {
+export interface TipProtocol {
   id: string;
   caseId: string;
   rows: number;

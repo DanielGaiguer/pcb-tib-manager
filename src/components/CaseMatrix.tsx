@@ -1,31 +1,31 @@
 import React, { useState } from 'react';
 import type { JSX } from 'react';
 import type { CaseProtocol } from '../types/Case';
-import type { TibProtocol } from '../types/Tib';
-import { TibForm } from './TibForm';
+import type { TipProtocol } from '../types/Tip';
+import { TipForm } from './TipForm';
 import '../styles/caseMatrix.css';
 
 interface CaseMatrixProps {
   caseData: CaseProtocol;
-  tibs: TibProtocol[];
-  onSubmit?: ((tib: TibProtocol) => void) | undefined;
+  tips: TipProtocol[];
+  onSubmit?: ((tip: TipProtocol) => void) | undefined;
   mode?: 'preview' | 'detail';
 }
 
 export function CaseMatrix({
   caseData,
-  tibs,
+  tips,
   onSubmit,
   mode = 'detail',
 }: CaseMatrixProps): JSX.Element {
-  const [selectedTib, setSelectedTib] = useState<TibProtocol | null>(null);
-  const [statePositionTib, setStatePositionTib] = useState<
+  const [selectedTip, setSelectedTip] = useState<TipProtocol | null>(null);
+  const [statePositionTip, setStatePositionTip] = useState<
     [[number, number], [number, string]]
   >([
     [0, 0],
     [0, ''],
   ]);
-  const [openTibForm, onOpenTibForm] = useState<boolean>(false);
+  const [openTipForm, onOpenTipForm] = useState<boolean>(false);
   const { rows, cols, id } = caseData;
   const isPreview = mode === 'preview';
 
@@ -38,28 +38,28 @@ export function CaseMatrix({
 
   const gap = isPreview ? 8 : 15; // define o espaçamento entre as colunas
 
-  const findTibAtPosition = (
+  const findTipAtPosition = (
     row: number,
     col: number,
-  ): TibProtocol | undefined => {
-    return tibs.find(
-      (tib) =>
-        tib.caseId === id &&
-        tib.rows === row &&
-        tib.cols === col /*&& tib.active*/,
+  ): TipProtocol | undefined => {
+    return tips.find(
+      (tip) =>
+        tip.caseId === id &&
+        tip.rows === row &&
+        tip.cols === col /*&& tip.active*/,
     );
   };
 
-  const selectTib = (row: number, col: number): void => {
-    const tib = findTibAtPosition(row, col);
+  const selectTip = (row: number, col: number): void => {
+    const tip = findTipAtPosition(row, col);
 
-    setStatePositionTib([
+    setStatePositionTip([
       [row, col],
       [row + 1, columnLabel(col)],
     ]);
 
-    setSelectedTib(tib ?? null); // salva a tib inteira (ou null)
-    onOpenTibForm(true);
+    setSelectedTip(tip ?? null); // salva a tip inteira (ou null)
+    onOpenTipForm(true);
   };
 
   const columnLabel = (index: number): string => {
@@ -85,15 +85,15 @@ export function CaseMatrix({
           <React.Fragment key={row}>
             <div className="matrix-header row">{row + 1}</div>
             {Array.from({ length: cols }).map((_, col) => {
-              const tibAtPosition = tibs.find(
-                (tib) =>
-                  tib.caseId === id && tib.rows === row && tib.cols === col,
+              const tipAtPosition = tips.find(
+                (tip) =>
+                  tip.caseId === id && tip.rows === row && tip.cols === col,
               );
 
               let status: 'free' | 'occupied' | 'inactive' = 'free';
 
-              if (tibAtPosition) {
-                status = tibAtPosition.active ? 'occupied' : 'inactive';
+              if (tipAtPosition) {
+                status = tipAtPosition.active ? 'occupied' : 'inactive';
               }
 
               return (
@@ -106,7 +106,7 @@ export function CaseMatrix({
                     cursor: isPreview ? 'default' : 'pointer',
                   }}
                   title={`Linha ${row + 1} - Coluna ${columnLabel(col)}`}
-                  onClick={() => !isPreview && selectTib(row, col)}
+                  onClick={() => !isPreview && selectTip(row, col)}
                 />
               );
             })}
@@ -114,16 +114,16 @@ export function CaseMatrix({
         ))}
       </div>
       <div>
-        {openTibForm && (
-          <div className="Form-tib">
-            <div className="form-tib-card">
-              <TibForm
-                key={`${statePositionTib[0][0]}-${statePositionTib[0][1]}`}
+        {openTipForm && (
+          <div className="Form-tip">
+            <div className="form-tip-card">
+              <TipForm
+                key={`${statePositionTip[0][0]}-${statePositionTip[0][1]}`}
                 caseData={caseData}
-                tibData={selectedTib}
+                tipData={selectedTip}
                 onSubmit={onSubmit}
-                positionTib={statePositionTib}
-                onOpenTibForm={() => onOpenTibForm(false)}
+                positionTip={statePositionTip}
+                onOpenTipForm={() => onOpenTipForm(false)}
               />
             </div>
           </div>

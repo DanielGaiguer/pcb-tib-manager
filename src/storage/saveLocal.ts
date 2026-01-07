@@ -1,15 +1,15 @@
 import { type CaseProtocol } from '../types/Case';
-import { type TibProtocol } from '../types/Tib';
+import { type TipProtocol } from '../types/Tip';
 
 const CASES_KEY = 'cases';
-const TIBS_KEY = 'tibs';
+const TIPS_KEY = 'tips';
 
 export function saveLocal(
   cases: CaseProtocol[],
-  tibs: TibProtocol[],
+  tips: TipProtocol[],
   pendingSync: boolean,
 ) {
   localStorage.setItem(CASES_KEY, JSON.stringify(cases));
-  localStorage.setItem(TIBS_KEY, JSON.stringify(tibs));
+  localStorage.setItem(TIPS_KEY, JSON.stringify(tips));
   localStorage.setItem('pendingSync', JSON.stringify(pendingSync));
 }

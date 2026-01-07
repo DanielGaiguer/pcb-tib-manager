@@ -1,13 +1,13 @@
 import React, { useState, type JSX } from 'react';
 import type { CaseProtocol } from '../types/Case';
 import { CaseMatrix } from './CaseMatrix';
-import type { TibProtocol } from '../types/Tib';
+import type { TipProtocol } from '../types/Tip';
 import { WindowDelete } from './WindowDelete';
 
 type Props = {
   hasCases: () => boolean;
   casesState: CaseProtocol[];
-  tibsState: TibProtocol[];
+  tipsState: TipProtocol[];
   onDelete: (caseData: CaseProtocol) => void;
   onEdit: (caseData: CaseProtocol) => void;
   onOpenCase: (caseData: CaseProtocol) => void;
@@ -18,7 +18,7 @@ type Props = {
 export function CaseList({
   hasCases,
   casesState,
-  tibsState,
+  tipsState,
   onDelete,
   onEdit,
   onOpenCase,
@@ -39,7 +39,7 @@ export function CaseList({
             <li className="title-case" key={caseData.id}>
               {caseData.name}
             </li>
-            <CaseMatrix caseData={caseData} tibs={tibsState} mode="preview" />
+            <CaseMatrix caseData={caseData} tips={tipsState} mode="preview" />
             <div className="div-buttons">
               <button
                 className="btn btn-primary"

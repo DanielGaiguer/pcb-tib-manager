@@ -1,4 +1,4 @@
-export interface TibUsage {
+export interface TipUsage {
   caseId: string;
   row: number;
   col: number;

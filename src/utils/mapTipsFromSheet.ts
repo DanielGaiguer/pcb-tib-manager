@@ -1,7 +1,7 @@
-import type { TibProtocol } from '../types/Tib';
-import type { TibSheetRow } from '../types/TIbSheetRow';
+import type { TipProtocol } from '../types/Tip';
+import type { TipSheetRow } from '../types/TipSheetRow';
 
-export function mapTibsFromSheet(rows: TibSheetRow[]): TibProtocol[] {
+export function mapTipsFromSheet(rows: TipSheetRow[]): TipProtocol[] {
   return rows.map((row) => ({
     id: row[0],
     caseId: row[1],

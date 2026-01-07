@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import type { JSX } from 'react';
 import type { CaseProtocol } from '../types/Case';
-import type { TibProtocol } from '../types/Tib';
+import type { TipProtocol } from '../types/Tip';
 //import { TibForm } from './TibForm';
 import '../styles/caseMatrix.css';
 import { toast } from 'react-toastify';
-import { InformationTibs } from './InformationTibs';
-import { ConfirmeTib } from './ConfirmeTib';
-import type { TibUsage } from '../types/tibUsage';
+import { InformationTips } from './InformationTips';
+import { ConfirmeTip } from './ConfirmeTip';
+import type { TipUsage } from '../types/TipUsage';
 
 interface CaseMatrixProps {
   caseData: CaseProtocol[];
-  tibs: TibProtocol[];
-  onSaveTibUsages: (tibs: TibUsage[]) => void;
+  tips: TipProtocol[];
+  onSaveTipUsages: (tips: TipUsage[]) => void;
 }
 
 export function CaseMatrixUsage({
   caseData,
-  tibs,
-  onSaveTibUsages,
+  tips,
+  onSaveTipUsages,
 }: CaseMatrixProps): JSX.Element {
-  const [selectedCell, setSelectedCell] = useState<TibProtocol | null>(null);
+  const [selectedCell, setSelectedCell] = useState<TipProtocol | null>(null);
 
   const [selectedPositions, setSelectedPositions] = useState<
     { caseId: string; row: number; col: number; uses: number }[]
@@ -92,7 +92,7 @@ export function CaseMatrixUsage({
                   <div className="matrix-header row">{row + 1}</div>
 
                   {Array.from({ length: cols }).map((_, col) => {
-                    const hasTib = tibs.some(
+                    const hasTib = tips.some(
                       (tib) =>
                         tib.caseId === id &&
                         tib.rows === row &&
@@ -119,7 +119,7 @@ export function CaseMatrixUsage({
                             return;
                           }
                           selectTib(id, row, col, 1);
-                          const tib = tibs.find(
+                          const tib = tips.find(
                             (t) =>
                               t.caseId === id &&
                               t.rows === row &&
@@ -143,7 +143,7 @@ export function CaseMatrixUsage({
 
       {selectedCell && (
         <div className="usage-info">
-          <InformationTibs selectedTib={selectedCell} />
+          <InformationTips selectedTip={selectedCell} />
         </div>
       )}
 
@@ -166,12 +166,12 @@ export function CaseMatrixUsage({
       )}
       {confirmeUse && (
         <div>
-          <ConfirmeTib
-            selectedTibs={selectedPositions}
+          <ConfirmeTip
+            selectedTips={selectedPositions}
             caseData={caseData}
-            onSaveTibUsages={onSaveTibUsages}
+            onSaveTipUsages={onSaveTipUsages}
             buttonBack={() => setConfirmeUse(false)}
-            clearSelectedTib={() => setSelectedPositions([])}
+            clearSelectedTip={() => setSelectedPositions([])}
             clearSelectedInformation={() => setSelectedCell(null)}
           />
         </div>

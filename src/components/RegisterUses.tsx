@@ -1,22 +1,22 @@
 import type { JSX } from 'react';
 import React from 'react';
 import type { CaseProtocol } from '../types/Case';
-import type { TibProtocol } from '../types/Tib';
+import type { TipProtocol } from '../types/Tip';
 import { CaseMatrixUsage } from './CaseMatrixUsage';
-import type { TibUsage } from '../types/tibUsage';
+import type { TipUsage } from '../types/TipUsage';
 import '../styles/registerUses.css';
 
 type Props = {
   cases: CaseProtocol[];
-  tibs: TibProtocol[];
-  onSaveTibUsages: (tibs: TibUsage[]) => void;
+  tips: TipProtocol[];
+  onSaveTipUsages: (tips: TipUsage[]) => void;
   buttonBack: () => void;
 };
 
 export function RegisterUses({
   cases,
-  tibs,
-  onSaveTibUsages,
+  tips,
+  onSaveTipUsages,
   buttonBack,
 }: Props): JSX.Element {
   return (
@@ -26,8 +26,8 @@ export function RegisterUses({
       </button>
       <CaseMatrixUsage
         caseData={cases}
-        tibs={tibs}
-        onSaveTibUsages={onSaveTibUsages}
+        tips={tips}
+        onSaveTipUsages={onSaveTipUsages}
       />
     </div>
   );

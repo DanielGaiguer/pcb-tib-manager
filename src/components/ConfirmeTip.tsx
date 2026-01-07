@@ -1,28 +1,28 @@
 import type { JSX } from 'react';
 import React, { useState } from 'react';
 import type { CaseProtocol } from '../types/Case';
-import type { TibUsage } from '../types/tibUsage';
+import type { TipUsage } from '../types/TipUsage';
 import { toast } from 'react-toastify';
 
-interface ConfirmeTibsProtocol {
-  selectedTibs: { caseId: string; row: number; col: number; uses: number }[];
+interface ConfirmeTipsProtocol {
+  selectedTips: { caseId: string; row: number; col: number; uses: number }[];
   caseData: CaseProtocol[];
-  onSaveTibUsages: (tibs: TibUsage[]) => void;
+  onSaveTipUsages: (tips: TipUsage[]) => void;
   buttonBack: () => void;
-  clearSelectedTib: () => void;
+  clearSelectedTip: () => void;
   clearSelectedInformation: () => void;
 }
 
-export function ConfirmeTib({
-  selectedTibs,
+export function ConfirmeTip({
+  selectedTips,
   caseData,
-  onSaveTibUsages,
+  onSaveTipUsages,
   buttonBack,
-  clearSelectedTib,
+  clearSelectedTip,
   clearSelectedInformation,
-}: ConfirmeTibsProtocol): JSX.Element {
-  const [tibStates, setTibStates] = useState(
-    selectedTibs.map((tib) => ({ ...tib })), // cria cópia de cada tib
+}: ConfirmeTipsProtocol): JSX.Element {
+  const [tipStates, setTipStates] = useState(
+    selectedTips.map((tip) => ({ ...tip })), // cria cópia de cada tip
   );
 
   const columnLabel = (index: number): string => {
@@ -30,64 +30,64 @@ export function ConfirmeTib({
   };
 
   const handleConfirm = () => {
-    onSaveTibUsages(tibStates);
-    clearSelectedTib();
+    onSaveTipUsages(tipStates);
+    clearSelectedTip();
     clearSelectedInformation();
     buttonBack();
     toast.success('Usos adicionados com sucesso!');
   };
 
-  const changeTibUses = (
+  const changeTipUses = (
     caseId: string,
     row: number,
     col: number,
     delta: number,
   ) => {
-    setTibStates((prev) =>
-      prev.map((tib) =>
-        tib.caseId === caseId && tib.row === row && tib.col === col
-          ? { ...tib, uses: Math.max(0, tib.uses + delta) } // evita negativo
-          : tib,
+    setTipStates((prev) =>
+      prev.map((tip) =>
+        tip.caseId === caseId && tip.row === row && tip.col === col
+          ? { ...tip, uses: Math.max(0, tip.uses + delta) } // evita negativo
+          : tip,
       ),
     );
   };
 
   return (
     <div className="modal-overlay">
-      <div className="confirm-tibs">
+      <div className="confirm-tips">
         <button className="btn btn-secondary back-button " onClick={buttonBack}>
           Voltar
         </button>
 
         {caseData.map((caseItem) => {
-          const tibsInCase = tibStates.filter(
-            (tib) => tib.caseId === caseItem.id,
+          const tipsInCase = tipStates.filter(
+            (tip) => tip.caseId === caseItem.id,
           );
 
-          if (tibsInCase.length === 0) return null;
+          if (tipsInCase.length === 0) return null;
 
           return (
             <div key={caseItem.id} className="case-block">
               <h3>{caseItem.name}</h3>
 
-              <div className="tibs-list">
-                {tibsInCase.map((tib, index) => (
+              <div className="tips-list">
+                {tipsInCase.map((tip, index) => (
                   <div key={index}>
-                    <span className="tib-item">
-                      {tib.row + 1}
-                      {columnLabel(tib.col)}
+                    <span className="tip-item">
+                      {tip.row + 1}
+                      {columnLabel(tip.col)}
                     </span>
                     <button
                       onClick={() =>
-                        changeTibUses(tib.caseId, tib.row, tib.col, -1)
+                        changeTipUses(tip.caseId, tip.row, tip.col, -1)
                       }
                     >
                       -
                     </button>
-                    <span>{tib.uses}</span>
+                    <span>{tip.uses}</span>
                     <button
                       onClick={() =>
-                        changeTibUses(tib.caseId, tib.row, tib.col, 1)
+                        changeTipUses(tip.caseId, tip.row, tip.col, 1)
                       }
                     >
                       +

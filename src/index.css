@@ -382,7 +382,7 @@ li {
   outline-offset: 3px;
 }
 
-.use-tib {
+.use-tip {
   display: block;
   margin: 32px auto 0 auto;
   width: 80%;
@@ -412,12 +412,12 @@ li {
     filter 120ms ease;
 }
 
-.use-tib:hover {
+.use-tip:hover {
   filter: brightness(1.05);
   box-shadow: 0 8px 18px rgba(55, 239, 0, 0.45);
 }
 
-.use-tib:active {
+.use-tip:active {
   transform: scale(0.96);
 }
 
@@ -539,8 +539,8 @@ li {
   cursor: pointer;
 }
 
-/* FORMULÁRIO DO TIB */
-.center-form-tib {
+/* FORMULÁRIO DO TIp */
+.center-form-tip {
   position: fixed;
   inset: 0;
   z-index: 2000;
@@ -553,7 +553,7 @@ li {
 }
 
 /* CARD DO FORM */
-.Form-tib .form-tib-card {
+.Form-tip .form-tip-card {
   background: #f5f5f5;
   border-radius: 16px;
   padding: 28px 32px;
@@ -568,7 +568,7 @@ li {
 }
 
 /* TITULO DO FORM */
-.Form-tib h3 {
+.Form-tip h3 {
   font-size: 18px;
   font-weight: 600;
   color: #2f3a45;
@@ -576,8 +576,8 @@ li {
 }
 
 /* INPUTS */
-.Form-tib input[type='text'],
-.Form-tib input[type='number'] {
+.Form-tip input[type='text'],
+.Form-tip input[type='number'] {
   width: 100%;
   padding: 10px 12px;
   border-radius: 10px;
@@ -586,26 +586,26 @@ li {
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
-.Form-tib input:focus {
+.Form-tip input:focus {
   border-color: #6f94bf;
   box-shadow: 0 0 0 2px rgba(111, 148, 191, 0.25);
 }
 
 /* RADIO */
-.Form-tib input[type='radio'] {
+.Form-tip input[type='radio'] {
   margin-right: 6px;
   accent-color: #6f94bf;
 }
 
 /* LABELS */
-.Form-tib label {
+.Form-tip label {
   font-size: 14px;
   font-weight: 600;
   color: #2f3a45;
 }
 
 /* BOTÕES */
-.Form-tib button {
+.Form-tip button {
   padding: 12px 24px;
   border-radius: 14px;
   font-weight: 700;
@@ -615,22 +615,22 @@ li {
   transition: transform 120ms ease, box-shadow 120ms ease, filter 120ms ease;
 }
 
-.Form-tib button[type='submit'] {
+.Form-tip button[type='submit'] {
   background: linear-gradient(135deg, #6f94bf, #4f7db8);
   color: white;
   box-shadow: 0 8px 18px rgba(79, 125, 184, 0.35);
 }
 
-.Form-tib button[type='submit']:hover {
+.Form-tip button[type='submit']:hover {
   box-shadow: 0 10px 24px rgba(79, 125, 184, 0.45);
 }
 
-.Form-tib button[type='submit']:active {
+.Form-tip button[type='submit']:active {
   transform: scale(0.97);
 }
 
 /* BOTÃO VOLTAR */
-.Form-tib button.back-btn {
+.Form-tip button.back-btn {
   background: transparent;
   color: #4f7db8;
   font-weight: 600;
@@ -638,12 +638,12 @@ li {
   padding: 4px 0;
 }
 
-.Form-tib button.back-btn:hover {
+.Form-tip button.back-btn:hover {
   text-decoration: underline;
 }
 
-/* OVERLAY DO FORM TIB */
-.Form-tib {
+/* OVERLAY DO FORM TIp */
+.Form-tip {
   position: fixed;
   inset: 0; /* top, right, bottom, left = 0 */
   display: flex;
@@ -655,7 +655,7 @@ li {
 }
 
 /* CARD INTERNO DO FORM */
-.Form-tib .form-tib-card {
+.Form-tip .form-tip-card {
   background: #f5f5f5;
   border-radius: 16px;
   padding: 15px 32px;
@@ -669,7 +669,7 @@ li {
 }
 
 /* TÍTULO */
-.Form-tib h2 {
+.Form-tip h2 {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 20px;
   font-weight: 700;
@@ -679,7 +679,7 @@ li {
 }
 
 /* LABELS */
-.Form-tib label {
+.Form-tip label {
   font-size: 14px;
   font-weight: 600;
   color: #2f3a45;
@@ -689,8 +689,8 @@ li {
 }
 
 /* INPUTS DE TEXTO E NÚMERO */
-.Form-tib input[type='text'],
-.Form-tib input[type='number'] {
+.Form-tip input[type='text'],
+.Form-tip input[type='number'] {
   width: 100%;
   padding: 10px 14px;
   border-radius: 10px;
@@ -699,19 +699,19 @@ li {
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
-.Form-tib input:focus {
+.Form-tip input:focus {
   border-color: #6f94bf;
   box-shadow: 0 0 0 2px rgba(111, 148, 191, 0.25);
 }
 
 /* RADIO BUTTONS */
-.Form-tib .radio-group {
+.Form-tip .radio-group {
   display: flex;
   gap: 20px;
   margin: 6px 0 12px 0;
 }
 
-.Form-tib input[type='radio'] {
+.Form-tip input[type='radio'] {
   margin-left: 15px;
   margin-right: 5px;
   vertical-align: middle;
@@ -719,7 +719,7 @@ li {
 }
 
 /* BOTÃO VOLTAR */
-.Form-tib button.back-btn {
+.Form-tip button.back-btn {
   background: transparent;
   color: #4f7db8;
   font-weight: 600;
@@ -729,12 +729,12 @@ li {
   cursor: pointer;
 }
 
-.Form-tib button.back-btn:hover {
+.Form-tip button.back-btn:hover {
   text-decoration: underline;
 }
 
 /* BOTÃO SALVAR */
-.Form-tib button[type='submit'] {
+.Form-tip button[type='submit'] {
   margin-top: 12px;
   padding: 14px;
   border-radius: 14px;
@@ -748,16 +748,16 @@ li {
   transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
-.Form-tib button[type='submit']:hover {
+.Form-tip button[type='submit']:hover {
   box-shadow: 0 10px 24px rgba(79, 125, 184, 0.45);
 }
 
-.Form-tib button[type='submit']:active {
+.Form-tip button[type='submit']:active {
   transform: scale(0.97);
 }
 
 /* GRID DE CAMPOS (opcional) */
-.Form-tib .form-fields {
+.Form-tip .form-fields {
   display: flex;
   flex-direction: column;
   gap: 14px;
@@ -812,3 +812,4 @@ li {
 
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
+tip

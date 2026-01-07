@@ -1,4 +1,4 @@
-export type TibSheetRow = [
+export type TipSheetRow = [
   id: string,
   caseId: string,
   row: number,

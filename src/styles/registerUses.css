@@ -114,7 +114,7 @@ h3 {
 }
 
 /* Container principal do componente ConfirmeTib */
-.confirm-tibs {
+.confirm-tips {
   position: relative;
   max-width: 1000px;
   margin: 20px auto;
@@ -147,15 +147,15 @@ h3 {
   margin: 0;
 }
 
-/* Lista de tibs dentro de cada caso */
-.tibs-list {
+/* Lista de tips dentro de cada caso */
+.tips-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
 /* Item individual de tib */
-.tibs-list > div {
+.tips-list > div {
   background: #f5f5f5;
   border-radius: 10px;
   padding: 12px 16px;
@@ -178,7 +178,7 @@ h3 {
 }
 
 /* Botões de decremento e incremento */
-.tibs-list button {
+.tips-list button {
   background: #4f7db8;
   color: #ffffff;
   border: none;
@@ -209,7 +209,7 @@ h3 {
 }
 
 /* Container do modal (conteúdo interno) */
-.confirm-tibs {
+.confirm-tips {
   position: relative;
   max-width: 1000px;
   margin: 0; /* Remove margem para centralização */
@@ -224,7 +224,7 @@ h3 {
 }
 
 /* Botão Voltar */
-.confirm-tibs button:first-of-type {
+.confirm-tips button:first-of-type {
   border: none;
   border-radius: 14px;
   padding: 12px 24px;
@@ -253,15 +253,15 @@ h3 {
   margin: 0;
 }
 
-/* Lista de tibs dentro de cada caso */
-.tibs-list {
+/* Lista de tips dentro de cada caso */
+.tips-list {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
 /* Item individual de tib */
-.tibs-list > div {
+.tips-list > div {
   background: #f5f5f5;
   border-radius: 10px;
   padding: 12px 16px;
@@ -283,14 +283,14 @@ h3 {
   text-align: center;
 }
 
-.tibs-list button:hover {
+.tips-list button:hover {
   background: #5a8fd6;
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(47, 95, 144, 0.45);
 }
 
 /* Span com o número de usos */
-.tibs-list span:nth-of-type(2) {
+.tips-list span:nth-of-type(2) {
   font-size: 18px;
   font-weight: 700;
   color: #2f3a45;

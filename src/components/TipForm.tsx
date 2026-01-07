@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { type JSX } from 'react';
-import { type TibProtocol } from '../types/Tib';
+import { type TipProtocol } from '../types/Tip';
 import type { CaseProtocol } from '../types/Case';
 import { toast } from 'react-toastify';
 import { Middleware } from './Middleware';
@@ -9,29 +9,29 @@ import { canAccess } from '../storage/canAccess';
 
 type Props = {
   caseData: CaseProtocol;
-  tibData: TibProtocol | null;
-  onSubmit: ((tibData: TibProtocol) => void) | undefined;
-  positionTib: [[number, number], [number, string]];
-  onOpenTibForm: () => void;
+  tipData: TipProtocol | null;
+  onSubmit: ((tipData: TipProtocol) => void) | undefined;
+  positionTip: [[number, number], [number, string]];
+  onOpenTipForm: () => void;
 };
 
-export function TibForm({
+export function TipForm({
   caseData,
-  tibData,
+  tipData,
   onSubmit,
-  positionTib,
-  onOpenTibForm,
+  positionTip,
+  onOpenTipForm,
 }: Props): JSX.Element {
-  const [form, setForm] = useState<TibProtocol>({
-    id: tibData?.id ?? crypto.randomUUID(),
-    caseId: tibData?.caseId ?? caseData.id,
-    rows: tibData?.rows ?? positionTib[0][0],
-    cols: tibData?.cols ?? positionTib[0][1],
-    position: tibData?.position ?? positionTib[1][0] + positionTib[1][1],
-    type: tibData?.type ?? '',
-    diameter: tibData?.diameter ?? '0',
-    uses: tibData?.uses ?? 0,
-    active: tibData?.active ?? true,
+  const [form, setForm] = useState<TipProtocol>({
+    id: tipData?.id ?? crypto.randomUUID(),
+    caseId: tipData?.caseId ?? caseData.id,
+    rows: tipData?.rows ?? positionTip[0][0],
+    cols: tipData?.cols ?? positionTip[0][1],
+    position: tipData?.position ?? positionTip[1][0] + positionTip[1][1],
+    type: tipData?.type ?? '',
+    diameter: tipData?.diameter ?? '0',
+    uses: tipData?.uses ?? 0,
+    active: tipData?.active ?? true,
   });
   //O ?? só ignora: null e undefined
 
@@ -47,7 +47,7 @@ export function TibForm({
     }
   }, []);
 
-  const isEditing = Boolean(tibData);
+  const isEditing = Boolean(tipData);
 
   const handleSubmit = (e: React.FormEvent) => {
     let errors = 0;
@@ -67,7 +67,7 @@ export function TibForm({
     if (errors) return;
 
     if (onSubmit) onSubmit(form);
-    onOpenTibForm();
+    onOpenTipForm();
     if (!isEditing) {
       toast.success('Ponteira cadastrada com sucesso!');
     } else {
@@ -80,7 +80,7 @@ export function TibForm({
       <Middleware
         closedMiddleware={() => {
           setMiddleware(false);
-          onOpenTibForm();
+          onOpenTipForm();
         }}
         acessCompleted={() => {
           saveAccess(); // marca acesso agora
@@ -94,7 +94,7 @@ export function TibForm({
   if (isLogged) {
     return (
       <form onSubmit={handleSubmit}>
-        <button onClick={onOpenTibForm}> Voltar</button>
+        <button onClick={onOpenTipForm}> Voltar</button>
         <h2>{isEditing ? 'Editar Tib' : 'Cadastrar Tib'}</h2>
 
         <label htmlFor="position">Posição da Ponteira:</label>

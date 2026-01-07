@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type JSX } from 'react';
 import { type CaseProtocol } from './types/Case';
-import { type TibProtocol } from './types/Tib';
+import { type TipProtocol } from './types/Tip';
 import { loadLocal } from './storage/loadLocal';
 import { saveLocal } from './storage/saveLocal';
 import { CaseForm } from './components/CaseForm';
@@ -10,9 +10,9 @@ import { CaseDetail } from './components/CaseDetail';
 import { CaseMatrix } from './components/CaseMatrix';
 import { RegisterUses } from './components/RegisterUses';
 import { ToastContainer } from 'react-toastify';
-import type { TibUsage } from './types/tibUsage';
+import type { TipUsage } from './types/TipUsage';
 import { mapCasesFromSheet } from './utils/mapCasesFromSheet';
-import { mapTibsFromSheet } from './utils/mapTibsFromSheet';
+import { mapTipsFromSheet } from './utils/mapTipsFromSheet';
 //import { CaseMatrix } from './components/CaseMatrix';
 
 function App(): JSX.Element {
@@ -23,7 +23,7 @@ function App(): JSX.Element {
   );
   const [openRegisterUse, onOpenRegisterUse] = useState<boolean>(false);
   const [cases, setCases] = useState<CaseProtocol[]>(() => loadLocal().cases);
-  const [tibs, setTibs] = useState<TibProtocol[]>(() => loadLocal().tibs);
+  const [tips, setTips] = useState<TipProtocol[]>(() => loadLocal().tips);
 
   const [pendingSync, setPendingSync] = useState<boolean>(() => {
     return loadLocal().pendingSync ?? false;
@@ -33,7 +33,7 @@ function App(): JSX.Element {
 
   const syncWithSheets = async (
     caixas: CaseProtocol[],
-    pontas: TibProtocol[],
+    pontas: TipProtocol[],
   ) => {
     try {
       const response = await fetch('http://localhost:3000/sync', {
@@ -57,12 +57,12 @@ function App(): JSX.Element {
       const data = await res.json();
 
       const casesSheet = mapCasesFromSheet(data.caixas);
-      const tibsSheet = mapTibsFromSheet(data.pontas);
+      const tipsSheet = mapTipsFromSheet(data.pontas);
 
       setCases(casesSheet);
-      setTibs(tibsSheet);
+      setTips(tipsSheet);
 
-      saveLocal(casesSheet, tibsSheet, false);
+      saveLocal(casesSheet, tipsSheet, false);
 
       isHydratingFromSheets.current = false;
     }
@@ -73,18 +73,18 @@ function App(): JSX.Element {
   useEffect(() => {
     if (isHydratingFromSheets.current) return;
 
-    saveLocal(cases, tibs, true);
+    saveLocal(cases, tips, true);
     setPendingSync(true);
-  }, [cases, tibs]);
+  }, [cases, tips]);
 
   useEffect(() => {
     if (!pendingSync) return;
 
     const timeout = setTimeout(async () => {
       try {
-        await syncWithSheets(cases, tibs);
+        await syncWithSheets(cases, tips);
 
-        saveLocal(cases, tibs, false);
+        saveLocal(cases, tips, false);
         setPendingSync(false);
       } catch (err) {
         console.error('Auto-sync falhou, tentará novamente', err);
@@ -92,18 +92,18 @@ function App(): JSX.Element {
     }, 3000); // ⏱️ debounce de 3s
 
     return () => clearTimeout(timeout);
-  }, [pendingSync, cases, tibs]);
+  }, [pendingSync, cases, tips]);
 
   useEffect(() => {
     const handler = () => {
       if (pendingSync) {
-        syncWithSheets(cases, tibs);
+        syncWithSheets(cases, tips);
       }
     };
 
     window.addEventListener('beforeunload', handler);
     return () => window.removeEventListener('beforeunload', handler);
-  }, [pendingSync, cases, tibs]);
+  }, [pendingSync, cases, tips]);
 
   const addCase = (newCase: CaseProtocol): void => {
     setCases((prev) => [...prev, newCase]);
@@ -127,36 +127,36 @@ function App(): JSX.Element {
     );
   };
 
-  const addTib = (newTib: TibProtocol): void => {
-    setTibs((prevTibs) => {
+  const addTip = (newTip: TipProtocol): void => {
+    setTips((prevTips) => {
       // Verifica existência
       // Retorna boolean
       // Não altera o array
-      const exists = prevTibs.some((tib) => tib.id === newTib.id);
+      const exists = prevTips.some((tip) => tip.id === newTip.id);
 
       if (exists) {
         //“Na posição onde o id bate, coloque OUTRO objeto”
         // Isso é substituição, não adição.
-        return prevTibs.map((tib) => (tib.id === newTib.id ? newTib : tib));
+        return prevTips.map((tip) => (tip.id === newTip.id ? newTip : tip));
       }
 
-      return [...prevTibs, newTib];
+      return [...prevTips, newTip];
     });
   };
 
-  const saveTibUsages = (usages: TibUsage[]) => {
-    setTibs((prevTibs) =>
-      prevTibs.map((tib) => {
+  const saveTipUsages = (usages: TipUsage[]) => {
+    setTips((prevTips) =>
+      prevTips.map((tip) => {
         const usage = usages.find(
           (u) =>
-            u.caseId === tib.caseId && u.col === tib.cols && u.row === tib.rows,
+            u.caseId === tip.caseId && u.col === tip.cols && u.row === tip.rows,
         );
 
         if (usage) {
-          return { ...tib, uses: tib.uses + usage.uses };
+          return { ...tip, uses: tip.uses + usage.uses };
         }
 
-        return tib;
+        return tip;
       }),
     );
   };
@@ -177,8 +177,8 @@ function App(): JSX.Element {
     content = (
       <RegisterUses
         cases={cases}
-        tibs={tibs}
-        onSaveTibUsages={saveTibUsages}
+        tips={tips}
+        onSaveTipUsages={saveTipUsages}
         buttonBack={() => onOpenRegisterUse(false)}
       />
     );
@@ -188,8 +188,8 @@ function App(): JSX.Element {
         <CaseDetail caseData={openCase} onBack={() => setOpenCase(null)} />
         <CaseMatrix
           caseData={openCase}
-          tibs={tibs}
-          onSubmit={addTib}
+          tips={tips}
+          onSubmit={addTip}
           mode="detail"
         />
       </div>
@@ -200,7 +200,7 @@ function App(): JSX.Element {
         <CaseList
           hasCases={hasCases}
           casesState={cases}
-          tibsState={tibs}
+          tipsState={tips}
           onDelete={deleteCase}
           onEdit={editCase}
           onOpenCase={setOpenCase}
@@ -222,7 +222,7 @@ function App(): JSX.Element {
 
         {!openCase && hasCases() && (
           <button
-            className="btn use-tib"
+            className="btn use-tip"
             onClick={() => onOpenRegisterUse(true)}
           >
             Usar ponteiras
