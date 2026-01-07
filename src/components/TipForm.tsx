@@ -95,7 +95,7 @@ export function TipForm({
     return (
       <form onSubmit={handleSubmit}>
         <button onClick={onOpenTipForm}> Voltar</button>
-        <h2>{isEditing ? 'Editar Tib' : 'Cadastrar Tib'}</h2>
+        <h2>{isEditing ? 'Editar Ponteira' : 'Cadastrar Ponteira'}</h2>
 
         <label htmlFor="position">Posição da Ponteira:</label>
         <input
