@@ -15,7 +15,7 @@ import { mapCasesFromSheet } from './utils/mapCasesFromSheet';
 import { mapTipsFromSheet } from './utils/mapTipsFromSheet';
 //import { CaseMatrix } from './components/CaseMatrix';
 
-const API_URL = 'https://backend-pcb-tip-manager.onrender.com';
+const API_URL = 'https://backend-pcb-tip-manager.onrender.com/sync';
 
 function App(): JSX.Element {
   const [openCase, setOpenCase] = useState<CaseProtocol | null>(null);
