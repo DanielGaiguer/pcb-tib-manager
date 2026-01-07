@@ -15,6 +15,8 @@ import { mapCasesFromSheet } from './utils/mapCasesFromSheet';
 import { mapTipsFromSheet } from './utils/mapTipsFromSheet';
 //import { CaseMatrix } from './components/CaseMatrix';
 
+const API_URL = 'https://backend-pcb-tip-manager.onrender.com';
+
 function App(): JSX.Element {
   const [openCase, setOpenCase] = useState<CaseProtocol | null>(null);
   const [openCaseForm, setOpenCaseForm] = useState<boolean>(false);
@@ -36,7 +38,7 @@ function App(): JSX.Element {
     pontas: TipProtocol[],
   ) => {
     try {
-      const response = await fetch('http://localhost:3000/sync', {
+      const response = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ caixas, pontas }),
@@ -53,7 +55,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     async function loadFromSheets() {
-      const res = await fetch('http://localhost:3000/sync');
+      const res = await fetch(API_URL);
       const data = await res.json();
 
       const casesSheet = mapCasesFromSheet(data.caixas);
