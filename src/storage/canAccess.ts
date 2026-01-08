@@ -1,22 +1,12 @@
-//import { saveAccess } from './saveAccess';
-
 const ACCESS_KEY = 'accessedAt';
+const THIRTY_MINUTES = 30 * 60 * 1000;
 
 export function canAccess(): boolean {
   const timestampString = localStorage.getItem(ACCESS_KEY);
+  if (!timestampString) return false;
 
-  if (timestampString) {
-    const lastAccess = JSON.parse(timestampString) as number; // timestamp em ms
-    const now = Date.now();
-    const diffMinutes = (now - lastAccess) / (1000 * 60); // diferença em minutos
+  const lastAccess = Number(JSON.parse(timestampString));
+  const now = Date.now();
 
-    if (diffMinutes <= 30) {
-      // Acesso permitido
-      return true;
-    }
-  }
-
-  // Se não tiver registro ou passou de 30 minutos, salva o acesso agora
-  //saveAccess();
-  return false;
+  return now - lastAccess <= THIRTY_MINUTES;
 }

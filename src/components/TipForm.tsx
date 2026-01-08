@@ -5,7 +5,7 @@ import type { CaseProtocol } from '../types/case';
 import { toast } from 'react-toastify';
 import { Middleware } from './Middleware';
 import { saveAccess } from '../storage/saveAccess';
-import { canAccess } from '../storage/canAccess';
+import { useAccessGuard } from '../hooks/useAccessGuard';
 
 type Props = {
   caseData: CaseProtocol;
@@ -35,17 +35,8 @@ export function TipForm({
   });
   //O ?? só ignora: null e undefined
 
-  const [isLogged, setIsLogged] = useState<boolean>(() => canAccess());
-  const [middleware, setMiddleware] = useState<boolean>(!canAccess());
-
-  React.useEffect(() => {
-    //localStorage.clear();
-    if (canAccess()) {
-      setIsLogged(true);
-    } else {
-      setIsLogged(false);
-    }
-  }, []);
+  // Usando o componente Hook
+  const { isLogged, setIsLogged, middleware, setMiddleware } = useAccessGuard();
 
   const isEditing = Boolean(tipData);
 
@@ -207,5 +198,5 @@ export function TipForm({
     );
   }
 
-  return <h1>Voce nao tem acesso a esta pagina</h1>;
+  return <h1>Erro 404</h1>;
 }

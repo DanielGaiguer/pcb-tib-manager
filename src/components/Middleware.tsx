@@ -9,7 +9,7 @@ type Props = {
 
 const PASSWORD_KEY = 'Senai2025';
 export function Middleware({
-  closedMiddleware,
+  closedMiddleware, // Funcao para fechar o Middlleware
   acessCompleted,
 }: Props): JSX.Element {
   const [inputPassword, setInputPassword] = useState<string>('');
