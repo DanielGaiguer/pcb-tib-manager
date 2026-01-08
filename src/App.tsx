@@ -15,6 +15,7 @@ import { mapCasesFromSheet } from './utils/mapCasesFromSheet';
 import { mapTipsFromSheet } from './utils/mapTipsFromSheet';
 import { useAccessGuard } from './hooks/useAccessGuard';
 import { Middleware } from './components/Middleware';
+import { Loading } from './components/Loading';
 //import { CaseMatrix } from './components/CaseMatrix';
 
 const API_URL = 'https://backend-pcb-tip-manager.onrender.com/sync';
@@ -36,6 +37,8 @@ function App(): JSX.Element {
   const isHydratingFromSheets = useRef(false);
 
   const { isLogged, setIsLogged, middleware, setMiddleware } = useAccessGuard();
+
+  const [loading, setLoading] = useState<boolean>(false);
 
   const syncWithSheets = async (
     caixas: CaseProtocol[],
@@ -59,6 +62,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     async function loadFromSheets() {
+      setLoading(true); // mostra loading
       isHydratingFromSheets.current = true;
       const res = await fetch(API_URL);
       const data = await res.json();
@@ -72,6 +76,7 @@ function App(): JSX.Element {
       saveLocal(casesSheet, tipsSheet, false);
 
       isHydratingFromSheets.current = false;
+      setLoading(false); // esconde loading
     }
 
     loadFromSheets();
@@ -273,6 +278,7 @@ function App(): JSX.Element {
   return (
     <div className="app">
       <div className="main">
+        {loading && <Loading message="Sincronizando dados..." />}
         <h1 className="title-main">Sistema de Ponteiras PCB</h1>
 
         {/* 🔁 Conteúdo variável */}
