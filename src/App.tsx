@@ -51,7 +51,7 @@ function App(): JSX.Element {
       if (!response.ok) throw new Error('Erro na requisição');
 
       const data = await response.json();
-      console.log('Resgatado da planilha:', data); // deve retornar { status: 'ok' }
+      console.log('Resgatado da planilha:', data); // deve retornar { status: 'ok'  }
     } catch (err) {
       console.error('Falha ao sincronizar:', err);
     }
