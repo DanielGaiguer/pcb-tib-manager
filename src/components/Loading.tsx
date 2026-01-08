@@ -1,6 +1,6 @@
 import React from 'react';
 import type { JSX } from 'react';
-import './Loading.css'; // Importa os estilos
+import './loading.css'; // Importa os estilos
 
 type LoadingProps = {
   message?: string; // Mensagem opcional
