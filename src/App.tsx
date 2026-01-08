@@ -13,6 +13,8 @@ import { ToastContainer } from 'react-toastify';
 import type { TipUsage } from './types/tipUsage';
 import { mapCasesFromSheet } from './utils/mapCasesFromSheet';
 import { mapTipsFromSheet } from './utils/mapTipsFromSheet';
+import { useAccessGuard } from './hooks/useAccessGuard';
+import { Middleware } from './components/Middleware';
 //import { CaseMatrix } from './components/CaseMatrix';
 
 const API_URL = 'https://backend-pcb-tip-manager.onrender.com/sync';
@@ -32,6 +34,8 @@ function App(): JSX.Element {
   });
 
   const isHydratingFromSheets = useRef(false);
+
+  const { isLogged, setIsLogged, middleware, setMiddleware } = useAccessGuard();
 
   const syncWithSheets = async (
     caixas: CaseProtocol[],
@@ -211,15 +215,32 @@ function App(): JSX.Element {
         />
 
         {openCaseForm && (
-          <div className="center-form-case">
-            <div className="form-case">
-              <CaseForm
-                onSubmit={addCase}
-                onOpenCaseForm={() => setOpenCaseForm(false)}
-                onDataEdit={dataEditCase}
-              />
+          <>
+            <div className="center-form-case">
+              <div className="form-case">
+                {!isLogged && middleware && (
+                  <Middleware
+                    closedMiddleware={() => {
+                      setMiddleware(true);
+                      setOpenCaseForm(false);
+                    }}
+                    acessCompleted={() => {
+                      setIsLogged(true);
+                      setOpenCaseForm(true);
+                    }}
+                  />
+                )}
+
+                {isLogged && (
+                  <CaseForm
+                    onSubmit={addCase}
+                    onOpenCaseForm={() => setOpenCaseForm(false)}
+                    onDataEdit={dataEditCase}
+                  />
+                )}
+              </div>
             </div>
-          </div>
+          </>
         )}
 
         {!openCase && hasCases() && (
