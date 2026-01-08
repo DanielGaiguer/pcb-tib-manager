@@ -14,13 +14,13 @@ export function CaseForm({
   onOpenCaseForm,
   onDataEdit,
 }: Props): JSX.Element {
-  const [form, setForm] = useState<CaseProtocol>({
-    id: onDataEdit?.id ? onDataEdit.id : crypto.randomUUID(),
-    name: onDataEdit?.name ? onDataEdit.name : '',
-    rows: onDataEdit?.rows ? onDataEdit.rows : 0,
-    cols: onDataEdit?.cols ? onDataEdit.cols : 0,
-    active: onDataEdit?.active ? onDataEdit.active : true,
-  });
+  const [form, setForm] = useState<CaseProtocol>(() => ({
+    id: onDataEdit?.id ?? crypto.randomUUID(),
+    name: onDataEdit?.name ?? '',
+    rows: onDataEdit?.rows ?? 0,
+    cols: onDataEdit?.cols ?? 0,
+    active: onDataEdit?.active ?? true,
+  }));
 
   const handleSubmit = (e: React.FormEvent) => {
     let errors = 0;

@@ -51,7 +51,7 @@ function App(): JSX.Element {
       if (!response.ok) throw new Error('Erro na requisição');
 
       const data = await response.json();
-      console.log('Sync status:', data); // deve retornar { status: 'ok' }
+      console.log('Resgatado da planilha:', data); // deve retornar { status: 'ok' }
     } catch (err) {
       console.error('Falha ao sincronizar:', err);
     }
@@ -59,6 +59,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     async function loadFromSheets() {
+      isHydratingFromSheets.current = true;
       const res = await fetch(API_URL);
       const data = await res.json();
 
@@ -88,6 +89,7 @@ function App(): JSX.Element {
 
     const timeout = setTimeout(async () => {
       try {
+        console.log('Enviando para a planilha');
         await syncWithSheets(cases, tips);
 
         saveLocal(cases, tips, false);
@@ -111,8 +113,19 @@ function App(): JSX.Element {
     return () => window.removeEventListener('beforeunload', handler);
   }, [pendingSync, cases, tips]);
 
-  const addCase = (newCase: CaseProtocol): void => {
-    setCases((prev) => [...prev, newCase]);
+  const handleSubmitCase = (caseData: CaseProtocol) => {
+    if (dataEditCase) {
+      // Edição: atualiza o case existente
+      setCases((prev) =>
+        prev.map((c) => (c.id === caseData.id ? caseData : c)),
+      );
+    } else {
+      // Novo: adiciona
+      setCases((prev) => [...prev, caseData]);
+    }
+
+    setOpenCaseForm(false);
+    setDataEditCase(undefined); // limpa edição
   };
 
   const deleteCase = (caseData: CaseProtocol): void => {
@@ -124,13 +137,14 @@ function App(): JSX.Element {
   };
 
   const editCase = (caseData: CaseProtocol): void => {
+    setMiddleware(true);
     setOpenCaseForm(true);
     setDataEditCase(caseData);
-    setCases((prevCases) =>
-      prevCases.map((caseMap) =>
-        caseMap.id === caseData.id ? { ...caseMap, ...caseData } : caseMap,
-      ),
-    );
+    // setCases((prevCases) =>
+    //   prevCases.map((caseMap) =>
+    //     caseMap.id === caseData.id ? { ...caseMap, ...caseData } : caseMap,
+    //   ),
+    // );
   };
 
   const addTip = (newTip: TipProtocol): void => {
@@ -168,8 +182,7 @@ function App(): JSX.Element {
   };
 
   const hasCases = (): boolean => {
-    if (cases.find((caseItem) => caseItem.active === true)) return true;
-    return false;
+    return cases.some((c) => c.active);
   };
 
   const handleNewCase = (): void => {
@@ -218,10 +231,11 @@ function App(): JSX.Element {
           <>
             <div className="center-form-case">
               <div className="form-case">
+                {/* Aplicando Middleware: */}
                 {!isLogged && middleware && (
                   <Middleware
                     closedMiddleware={() => {
-                      setMiddleware(true);
+                      setMiddleware(false);
                       setOpenCaseForm(false);
                     }}
                     acessCompleted={() => {
@@ -233,7 +247,8 @@ function App(): JSX.Element {
 
                 {isLogged && (
                   <CaseForm
-                    onSubmit={addCase}
+                    key={dataEditCase ? dataEditCase.id : 'new-case'}
+                    onSubmit={handleSubmitCase}
                     onOpenCaseForm={() => setOpenCaseForm(false)}
                     onDataEdit={dataEditCase}
                   />

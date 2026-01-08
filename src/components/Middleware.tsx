@@ -20,7 +20,11 @@ export function Middleware({
     if (passwordFilter === PASSWORD_KEY) {
       acessCompleted();
       toast.success('Acesso liberado com sucesso!');
+      return;
     }
+
+    toast.error('Senha incorreta.');
+    setInputPassword('');
   };
 
   return (
@@ -35,6 +39,7 @@ export function Middleware({
           type="password"
           id="password"
           name="password"
+          value={inputPassword}
           onChange={(e) => setInputPassword(e.target.value)}
         />
         <button type="submit" className="btn btn-edit">
