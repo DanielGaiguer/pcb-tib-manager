@@ -39,6 +39,7 @@ export function Middleware({
           type="password"
           id="password"
           name="password"
+          autoComplete="on"
           value={inputPassword}
           onChange={(e) => setInputPassword(e.target.value)}
         />

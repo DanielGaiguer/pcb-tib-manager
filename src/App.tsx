@@ -141,11 +141,12 @@ function App(): JSX.Element {
       } catch (err) {
         console.error('Auto-sync falhou, tentará novamente', err);
       }
-    }, 3000); // ⏱️ debounce de 3s
+    }, 3000); // debounce de 3s
 
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(timeout); // Vai resetar o timeout
   }, [pendingSync, cases, tips]);
 
+  // Vai renderizar se o estado de pendingSync, cases e tips
   useEffect(() => {
     const handler = () => {
       if (pendingSync) {
@@ -181,6 +182,7 @@ function App(): JSX.Element {
   };
 
   const editCase = (caseData: CaseProtocol): void => {
+    setOpenCaseForm(false);
     setMiddleware(true);
     setOpenCaseForm(true);
     setDataEditCase(caseData);
@@ -294,10 +296,11 @@ function App(): JSX.Element {
                 {!isLogged && middleware && (
                   <Middleware
                     closedMiddleware={() => {
-                      setMiddleware(false);
+                      setMiddleware(true);
                       setOpenCaseForm(false);
                     }}
                     acessCompleted={() => {
+                      setMiddleware(false);
                       setIsLogged(true);
                       setOpenCaseForm(true);
                     }}
