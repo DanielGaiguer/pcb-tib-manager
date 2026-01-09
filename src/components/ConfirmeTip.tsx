@@ -11,6 +11,7 @@ interface ConfirmeTipsProtocol {
   buttonBack: () => void;
   clearSelectedTip: () => void;
   clearSelectedInformation: () => void;
+  closeWindow: () => void;
 }
 
 export function ConfirmeTip({
@@ -20,6 +21,7 @@ export function ConfirmeTip({
   buttonBack,
   clearSelectedTip,
   clearSelectedInformation,
+  closeWindow,
 }: ConfirmeTipsProtocol): JSX.Element {
   const [tipStates, setTipStates] = useState(
     selectedTips.map((tip) => ({ ...tip })), // cria cópia de cada tip
@@ -34,6 +36,7 @@ export function ConfirmeTip({
     clearSelectedTip();
     clearSelectedInformation();
     buttonBack();
+    closeWindow();
     toast.success('Usos adicionados com sucesso!');
   };
 

@@ -28,6 +28,7 @@ export function RegisterUses({
         caseData={cases}
         tips={tips}
         onSaveTipUsages={onSaveTipUsages}
+        closeWindow={buttonBack}
       />
     </div>
   );

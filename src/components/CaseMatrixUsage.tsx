@@ -13,12 +13,14 @@ interface CaseMatrixProps {
   caseData: CaseProtocol[];
   tips: TipProtocol[];
   onSaveTipUsages: (tips: TipUsage[]) => void;
+  closeWindow: () => void;
 }
 
 export function CaseMatrixUsage({
   caseData,
   tips,
   onSaveTipUsages,
+  closeWindow,
 }: CaseMatrixProps): JSX.Element {
   const [selectedCell, setSelectedCell] = useState<TipProtocol | null>(null);
 
@@ -173,6 +175,7 @@ export function CaseMatrixUsage({
             buttonBack={() => setConfirmeUse(false)}
             clearSelectedTip={() => setSelectedPositions([])}
             clearSelectedInformation={() => setSelectedCell(null)}
+            closeWindow={closeWindow}
           />
         </div>
       )}
