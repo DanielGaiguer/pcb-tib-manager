@@ -52,7 +52,7 @@ function App(): JSX.Element {
   // Estado para renderizar componente de Loading
   const [loading, setLoading] = useState<boolean>(false);
 
-  // Essa função é responsavel por sincronizar os dados do estado com a planilha do Google Sheets
+  // Essa função é responsavel por sincronizar, por enviar os dados do estado e salva-los com a planilha do Google Sheets
   const syncWithSheets = async (
     caixas: CaseProtocol[],
     pontas: TipProtocol[],
@@ -80,44 +80,63 @@ function App(): JSX.Element {
     }
   };
 
-  useEffect(() => {
-    async function loadFromSheets() {
-      setLoading(true); // mostra loading
-      isHydratingFromSheets.current = true;
-      const res = await fetch(API_URL);
-      const data = await res.json();
+  // Uma função useEffect, será executada toda vez que o componente for renderizado
 
+  // Funções que fazem efeitos colaterais, como buscar dados de uma API ou atualizar estado com setState, não podem rodar durante a renderização do componente. Colocando a função dentro de useEffect, garantimos que ela rode depois que o componente renderizou, de forma segura, e apenas quando quisermos (com o [] de dependências)
+  useEffect(() => {
+    // vai criar a função que vai carregar os dados do googlw sheets
+    async function loadFromSheets() {
+      setLoading(true); // mostra loading, enquanto a funcao é executada
+      isHydratingFromSheets.current = true; // Declara que os dados da aplicação, são os dados que estão na planilha
+      const res = await fetch(API_URL); // Quando nao declarado, faz um get por padrão
+      const data = await res.json(); // Vai criar em uma variavel os dados do get
+
+      // Vai chamar uma funçao, que ira reorganizar os dados, para serem extraidos na aplicacao, pois os formatos que veem, direto da API, sao formatos diferentes
       const casesSheet = mapCasesFromSheet(data.caixas);
       const tipsSheet = mapTipsFromSheet(data.pontas);
 
+      // Vai setar o estado com estes dados
       setCases(casesSheet);
       setTips(tipsSheet);
 
+      // Vai salvar no localStorage
       saveLocal(casesSheet, tipsSheet, false);
 
+      //Essa linha marca o fim da hidratação: ela diz à aplicação ‘ok, os dados da planilha já chegaram, podem ser usados normalmente’. Sem isso, outras partes do app poderiam pensar que os dados ainda estão sendo carregados e agir errado. Serve como uma flag para outras partes do código saberem que os dados estão sendo carregados da planilha, e não de outro lugar (como localStorage ou estado já existente).
       isHydratingFromSheets.current = false;
+
       setLoading(false); // esconde loading
     }
 
-    loadFromSheets();
+    loadFromSheets(); // Chama a função
   }, []);
 
+  // Esse useEffect sera renderizado sempre que os estados cases, tips, mudarem
   useEffect(() => {
+    //Impede que o efeito rode enquanto a aplicação estiver carregando os dados do Google Sheets. Isso evita sobreposição ou sobrescrita dos dados que acabaram de ser carregados da planilha.
     if (isHydratingFromSheets.current) return;
 
+    // vai salvar os dados no localStorage, o terceiro parametro serve para dizer se precisa sincronizar ou não com o Google Sheets
     saveLocal(cases, tips, true);
+    // Apresenta a mesma informação, porem no estado
     setPendingSync(true);
   }, [cases, tips]);
 
+  // Esse useEffect sera renderizado sempre que os estados cases, tips e pendingSync mudarem
   useEffect(() => {
+    // Se ele for false, vai parar a funcao
     if (!pendingSync) return;
 
+    // Vai criar um timeout para enviar os dados para a planilha, enquanto as mudanças estiverem pendente
     const timeout = setTimeout(async () => {
       try {
-        console.log('Enviando para a planilha');
+        //console.log('Enviando para a planilha');
+        // Vai mandar para a planilha
         await syncWithSheets(cases, tips);
 
+        // Vai atualizar o localStorage, e vai dizer que nao esta mais pendente a atualizacao necessaria na planilha
         saveLocal(cases, tips, false);
+        // Tambem vai atualizar isso no estado
         setPendingSync(false);
       } catch (err) {
         console.error('Auto-sync falhou, tentará novamente', err);
