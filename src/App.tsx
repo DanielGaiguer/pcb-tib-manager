@@ -149,55 +149,65 @@ function App(): JSX.Element {
   // Vai renderizar se o estado de pendingSync, cases e tips
   useEffect(() => {
     const handler = () => {
+      // Verifica se há alterações pendentes (pendingSync). Se houver, tenta sincronizar os dados (syncWithSheets) antes da página ser fechada.
       if (pendingSync) {
-        syncWithSheets(cases, tips);
+        syncWithSheets(cases, tips); // Vai sincronizar com o sheets
       }
     };
 
+    // Adiciona um “ouvinte” para o evento beforeunload. Esse evento é disparado quando o usuário tenta fechar a aba, recarregar a página ou sair do site. Nesse caso, o handler é chamado.
     window.addEventListener('beforeunload', handler);
     return () => window.removeEventListener('beforeunload', handler);
   }, [pendingSync, cases, tips]);
 
+  // Funcao para ser chamada no submit de adicionar Case
   const handleSubmitCase = (caseData: CaseProtocol) => {
     if (dataEditCase) {
-      // Edição: atualiza o case existente
+      // Se tiver dados de edicao no estado, inves de criar um novo vai atualiza o case existente
+      //Vai setar o estado
       setCases((prev) =>
+        //Vai rodar todos os cases, se o id daquela posicao, for igual o id que esta sendo enviado, vai retornar casedata, senao, vai retornar o mesmo da posicao
         prev.map((c) => (c.id === caseData.id ? caseData : c)),
       );
     } else {
-      // Novo: adiciona
+      // Novo: apenas adiciona
       setCases((prev) => [...prev, caseData]);
     }
 
-    setOpenCaseForm(false);
-    setDataEditCase(undefined); // limpa edição
+    setOpenCaseForm(false); // Vai fechar o formulario de case
+    setDataEditCase(undefined); // vai limpar a edição
   };
 
+  // Funcao para deletar case
   const deleteCase = (caseData: CaseProtocol): void => {
+    // vai setar o estado de cases
     setCases((prevCases) =>
+      // Vai rodar o array de cases
       prevCases.map((caseMap) =>
+        //Se o id da posicao, for igual ao do parametro, vai retornar o mesmo elemeno, mas com active: false, senao retorna o mesmo elemento
         caseMap.id === caseData.id ? { ...caseMap, active: false } : caseMap,
       ),
     );
   };
 
+  // Funcao para edicao da Case
   const editCase = (caseData: CaseProtocol): void => {
-    setOpenCaseForm(false);
+    //setOpenCaseForm(false);
+    // vai abrir o Middleware, pedir login
     setMiddleware(true);
+    // vai abrir o formulario da case
     setOpenCaseForm(true);
+    // Vai setar o estado de edicao com aquela case
     setDataEditCase(caseData);
-    // setCases((prevCases) =>
-    //   prevCases.map((caseMap) =>
-    //     caseMap.id === caseData.id ? { ...caseMap, ...caseData } : caseMap,
-    //   ),
-    // );
   };
 
+  // Funcao para adicionar a tip ao estado global
   const addTip = (newTip: TipProtocol): void => {
     setTips((prevTips) => {
       // Verifica existência
       // Retorna boolean
       // Não altera o array
+      // Retorna true se pelo menos um elemento do array satisfizer a condição da função.
       const exists = prevTips.some((tip) => tip.id === newTip.id);
 
       if (exists) {
@@ -206,10 +216,12 @@ function App(): JSX.Element {
         return prevTips.map((tip) => (tip.id === newTip.id ? newTip : tip));
       }
 
+      // Retorna o estado atual mais o novo tip
       return [...prevTips, newTip];
     });
   };
 
+  //Funcao para pegar somente as tips usadas
   const saveTipUsages = (usages: TipUsage[]) => {
     setTips((prevTips) =>
       prevTips.map((tip) => {
