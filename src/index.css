@@ -812,4 +812,37 @@ li {
 
   transition: border-color 150ms ease, box-shadow 150ms ease;
 }
-tip
+
+.btn-sync-sheets {
+  background-color: #F39C12;
+  color: #fff;
+
+  display: block;
+  margin: 2% auto 0 auto;
+  width: 80%;
+  align-self: center;
+
+  border: none;
+  border-radius: 14px;
+
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 700;
+
+  font-weight: 700;
+  padding: 14px 26px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 6px 14px rgba(243, 156, 18, 0.35);
+
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    filter 120ms ease;
+}
+
+.btn-sync-sheets:hover {
+  filter: brightness(1.05);
+}

@@ -54,7 +54,10 @@ function App(): JSX.Element {
       if (!response.ok) throw new Error('Erro na requisição');
 
       const data = await response.json();
-      console.log('Resgatado da planilha:', data); // deve retornar { status: 'ok'  }
+
+      if (data.status !== 'ok') {
+        throw new Error('Resposta inesperada da API');
+      }
     } catch (err) {
       console.error('Falha ao sincronizar:', err);
     }
@@ -195,6 +198,21 @@ function App(): JSX.Element {
     setOpenCaseForm(true); // Abre o form
   };
 
+  const handleManualSync = async () => {
+    try {
+      setLoading(true);
+
+      await syncWithSheets(cases, tips);
+
+      saveLocal(cases, tips, false);
+      setPendingSync(false);
+    } catch (err) {
+      console.error('Erro no sync manual:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   let content: JSX.Element;
 
   if (openRegisterUse) {
@@ -264,12 +282,21 @@ function App(): JSX.Element {
         )}
 
         {!openCase && hasCases() && (
-          <button
-            className="btn use-tip"
-            onClick={() => onOpenRegisterUse(true)}
-          >
-            Usar ponteiras
-          </button>
+          <>
+            <button
+              className="btn use-tip"
+              onClick={() => onOpenRegisterUse(true)}
+            >
+              Usar ponteiras
+            </button>
+            <button
+              className="btn btn-sync-sheets"
+              onClick={handleManualSync}
+              disabled={loading}
+            >
+              {loading ? 'Salvando...' : 'Salvar na Planilha'}
+            </button>
+          </>
         )}
       </>
     );
