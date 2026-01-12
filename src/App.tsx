@@ -16,6 +16,7 @@ import { mapTipsFromSheet } from './utils/mapTipsFromSheet';
 import { useAccessGuard } from './hooks/useAccessGuard';
 import { Middleware } from './components/Middleware';
 import { Loading } from './components/Loading';
+import './styles/dotsStyles.css';
 //import { CaseMatrix } from './components/CaseMatrix';
 
 // URL do backend:
