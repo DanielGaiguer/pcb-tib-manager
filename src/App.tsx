@@ -221,7 +221,7 @@ function App(): JSX.Element {
     });
   };
 
-  //Funcao para pegar somente as tips usadas
+  //Funcao para registrar usos
   const saveTipUsages = (usages: TipUsage[]) => {
     setTips((prevTips) =>
       prevTips.map((tip) => {

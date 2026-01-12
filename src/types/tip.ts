@@ -8,4 +8,5 @@ export interface TipProtocol {
   diameter: string;
   uses: number;
   active: boolean;
+  group: string;
 }
