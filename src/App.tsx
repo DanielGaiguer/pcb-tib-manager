@@ -198,7 +198,7 @@ function App(): JSX.Element {
   const editCase = (caseData: CaseProtocol): void => {
     //setOpenCaseForm(false);
     // vai abrir o Middleware, pedir login
-    setMiddleware(true);
+    if (!isLogged) setMiddleware(true);
     // vai abrir o formulario da case
     setOpenCaseForm(true);
     // Vai setar o estado de edicao com aquela case
