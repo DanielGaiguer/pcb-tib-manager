@@ -32,6 +32,7 @@ export function TipForm({
     diameter: tipData?.diameter ?? '0',
     uses: tipData?.uses ?? 0,
     active: tipData?.active ?? true,
+    // group: tipData?.group ?? '',
   });
   //O ?? só ignora: null e undefined
 
@@ -97,14 +98,21 @@ export function TipForm({
           onChange={(e) => setForm({ ...form, position: e.target.value })}
         />
 
-        <label htmlFor="type">Tipo da Ponteira:</label>
+        <label htmlFor="type">Tipo da Ponteira (Escolha uma opção):</label>
         <input
+          list="typeList"
           type="text"
           id="type"
           name="type"
           value={form.type}
           onChange={(e) => setForm({ ...form, type: e.target.value })}
         />
+        <datalist id="typeList">
+          <option value="Brocas"></option>
+          <option value="Fresas Piramidais"></option>
+          <option value="Fresas Engraving"></option>
+          <option value="Fresas de Topo Reto"></option>
+        </datalist>
 
         <label htmlFor="diameter">Diâmetro da Ponteira:</label>
         <input
@@ -138,6 +146,7 @@ export function TipForm({
             setForm({ ...form, uses: Number(e.target.value) });
           }}
         />
+        {/* <label htmlFor="group">Qual o grupo desta ponteira</label> */}
 
         <label htmlFor="active">Status da Ponteira: </label>
 
