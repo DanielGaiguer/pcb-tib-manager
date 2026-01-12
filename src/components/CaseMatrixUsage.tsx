@@ -109,7 +109,7 @@ export function CaseMatrixUsage({
                   <div className="matrix-header row">{row + 1}</div>
 
                   {Array.from({ length: cols }).map((_, col) => {
-                    const hasTib = tips.some(
+                    const hasTip = tips.some(
                       (tip) =>
                         tip.caseId === id &&
                         tip.rows === row &&
@@ -141,19 +141,19 @@ export function CaseMatrixUsage({
                     return (
                       <span
                         key={col}
-                        className={`dot ${typeTip} ${hasTib ? 'occupied' : 'free'} ${isSelected ? 'selected' : ''}`}
+                        className={`dot ${typeTip} ${hasTip ? 'occupied' : 'free'} ${isSelected ? 'selected' : ''}`}
                         style={{
                           width: dotSize,
                           height: dotSize,
                         }}
                         title={`Linha ${row + 1} - Coluna ${columnLabel(col)}`}
                         onClick={() => {
-                          if (!hasTib) {
+                          if (!hasTip) {
                             emptyWarning();
                             return;
                           }
                           selectTip(id, row, col, 1);
-                          const tib = tips.find(
+                          const tip = tips.find(
                             (t) =>
                               t.caseId === id &&
                               t.rows === row &&
@@ -161,8 +161,8 @@ export function CaseMatrixUsage({
                               t.active,
                           );
 
-                          if (tib) {
-                            setSelectedCell(tib);
+                          if (tip) {
+                            setSelectedCell(tip);
                           }
                         }}
                       />

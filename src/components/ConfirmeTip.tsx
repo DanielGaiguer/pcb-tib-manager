@@ -26,6 +26,7 @@ export function ConfirmeTip({
   const [tipStates, setTipStates] = useState(
     selectedTips.map((tip) => ({ ...tip })), // cria cópia de cada tip
   );
+  // const [confirmedButton, setConfirmedButton] = useState<boolean>(false);
 
   const columnLabel = (index: number): string => {
     return String.fromCharCode(65 + index); // A, B, C...
