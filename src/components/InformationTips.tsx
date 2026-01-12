@@ -15,7 +15,6 @@ export function InformationTips({
       <li>Posição da Ponteira: {selectedTip.position}</li>
       <li>Tipo da Ponteira: {selectedTip.type}</li>
       <li>Diametro da Ponteira: {selectedTip.diameter}</li>
-      {/* <li>Grupo da Ponteira: {selectedTip.group}</li> */}
     </ul>
   );
 }

@@ -25,7 +25,12 @@ export function CaseMatrixUsage({
   const [selectedCell, setSelectedCell] = useState<TipProtocol | null>(null);
 
   const [selectedPositions, setSelectedPositions] = useState<
-    { caseId: string; row: number; col: number; uses: number }[]
+    {
+      caseId: string;
+      row: number;
+      col: number;
+      uses: number;
+    }[]
   >([]);
 
   const [confirmeUse, setConfirmeUse] = useState<boolean>(false);
@@ -33,7 +38,7 @@ export function CaseMatrixUsage({
   const dotSize = 35;
   const gap = 8;
 
-  const selectTib = (
+  const selectTip = (
     caseId: string,
     row: number,
     col: number,
@@ -53,6 +58,16 @@ export function CaseMatrixUsage({
 
       return [...prev, { caseId, row, col, uses }];
     });
+  };
+
+  const checkTypeTip = (
+    tipType: string | undefined,
+    tipDiameter: string | undefined,
+  ) => {
+    if (tipType === 'Broca') {
+      return 'Broca' + String(tipDiameter).replace('.', '-');
+    }
+    return tipType?.replaceAll(' ', '');
   };
 
   const emptyWarning = () => {
@@ -95,21 +110,38 @@ export function CaseMatrixUsage({
 
                   {Array.from({ length: cols }).map((_, col) => {
                     const hasTib = tips.some(
-                      (tib) =>
-                        tib.caseId === id &&
-                        tib.rows === row &&
-                        tib.cols === col &&
-                        tib.active,
+                      (tip) =>
+                        tip.caseId === id &&
+                        tip.rows === row &&
+                        tip.cols === col &&
+                        tip.active,
                     );
+
+                    const tipAtPosition = tips.find(
+                      (tip) =>
+                        tip.caseId === id &&
+                        tip.rows === row &&
+                        tip.cols === col,
+                    );
+
                     const isSelected = selectedPositions.some(
                       (pos) =>
                         pos.caseId === id && pos.row === row && pos.col === col,
                     );
 
+                    let typeTip: string | undefined = '';
+
+                    if (tipAtPosition) {
+                      typeTip = checkTypeTip(
+                        tipAtPosition?.type,
+                        tipAtPosition?.diameter,
+                      );
+                    }
+
                     return (
                       <span
                         key={col}
-                        className={`dot ${hasTib ? 'occupied' : 'free'} ${isSelected ? 'selected' : ''}`}
+                        className={`dot ${typeTip} ${hasTib ? 'occupied' : 'free'} ${isSelected ? 'selected' : ''}`}
                         style={{
                           width: dotSize,
                           height: dotSize,
@@ -120,7 +152,7 @@ export function CaseMatrixUsage({
                             emptyWarning();
                             return;
                           }
-                          selectTib(id, row, col, 1);
+                          selectTip(id, row, col, 1);
                           const tib = tips.find(
                             (t) =>
                               t.caseId === id &&
