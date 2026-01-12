@@ -19,6 +19,7 @@ import { Loading } from './components/Loading';
 import './styles/dotsStyles.css';
 import './styles/btnStyles.css';
 import './styles/formTip.css';
+import './styles/formCase.css';
 //import { CaseMatrix } from './components/CaseMatrix';
 
 // URL do backend:

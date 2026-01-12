@@ -138,3 +138,7 @@
   filter: brightness(1.2);
   cursor: pointer;
 }
+
+.dot.occupied {
+  margin: 3px;
+}
