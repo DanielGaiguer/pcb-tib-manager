@@ -1,0 +1,93 @@
+/* EFEITO DE TOQUE */
+.btn:active {
+  transform: scale(0.97);
+}
+
+/* DESABILITADO */
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: #6F94BF;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #5C83B0;
+}
+
+.btn-edit {
+  background: #4F7DB8;
+  color: white;
+}
+
+.btn-edit:hover {
+  background: #3E6AA5;
+}
+
+.btn-delete {
+  background: #E6A23C;
+  color: #1a1a1a;
+}
+
+.btn-delete:hover {
+  background: #D8901F;
+}
+
+.btn-secondary {
+  background: #E2E6EA;
+  color: #2F3A45;
+}
+
+.btn-secondary:hover {
+  background: #D5DAE0;
+}
+
+.list-cases {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.div-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+
+.btn-sync-sheets {
+  background-color: #F39C12;
+  color: #fff;
+
+  display: block;
+  margin: 2% auto 0 auto;
+  width: 80%;
+  align-self: center;
+
+  border: none;
+  border-radius: 14px;
+
+  padding: 16px 36px;
+  font-size: 18px;
+  font-weight: 700;
+
+  font-weight: 700;
+  padding: 14px 26px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+
+  box-shadow: 0 6px 14px rgba(243, 156, 18, 0.35);
+
+  transition:
+    transform 120ms ease,
+    box-shadow 120ms ease,
+    filter 120ms ease;
+}
+
+.btn-sync-sheets:hover {
+  filter: brightness(1.05);
+}

@@ -128,3 +128,13 @@
 .dot.occupied.FresaEngraving:hover {
   background: #AB9680;
 }
+
+.dot.inactive {
+  background-color: #c0392b;
+  box-shadow: 0 2px 6px rgba(192, 57, 43, 0.35);
+}
+
+.dot.inactive:hover {
+  filter: brightness(1.2);
+  cursor: pointer;
+}
