@@ -95,24 +95,6 @@ h3 {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
-.dot.occupied {
-  background-color: #4f7db8;
-}
-
-.dot.occupied.selected {
-  background-color: #3ddc97;
-  outline: 1px solid rgba(0, 0, 0, 0.533);
-  box-shadow: 0 4px 10px rgba(47, 95, 144, 0.45);
-}
-
-.dot.occupied:hover {
-  background: #5a8fd6;
-}
-
-.dot.occupied.selected:hover {
-  background-color: #0fac68;
-}
-
 /* Container principal do componente ConfirmeTib */
 .confirm-tips {
   position: relative;
@@ -127,7 +109,6 @@ h3 {
   gap: 20px;
 }
 
-/* Botão Voltar */
 /* Bloco de cada caso */
 .case-block {
   background: #ffffff;

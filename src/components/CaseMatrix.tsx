@@ -66,6 +66,16 @@ export function CaseMatrix({
     return String.fromCharCode(65 + index); // A, B, C...
   };
 
+  const checkTypeTip = (
+    tipType: string | undefined,
+    tipDiameter: string | undefined,
+  ) => {
+    if (tipType === 'Broca') {
+      return 'Broca' + String(tipDiameter).replace('.', '-');
+    }
+    return tipType?.replaceAll(' ', '');
+  };
+
   return (
     <>
       <div
@@ -91,15 +101,20 @@ export function CaseMatrix({
               );
 
               let status: 'free' | 'occupied' | 'inactive' = 'free';
+              let typeTip: string | undefined = '';
 
               if (tipAtPosition) {
                 status = tipAtPosition.active ? 'occupied' : 'inactive';
+                typeTip = checkTypeTip(
+                  tipAtPosition?.type,
+                  tipAtPosition?.diameter,
+                );
               }
 
               return (
                 <span
                   key={col}
-                  className={`dot ${status}`}
+                  className={`dot ${status} ${typeTip}`}
                   style={{
                     width: dotSizeDynamic,
                     height: dotSizeDynamic,

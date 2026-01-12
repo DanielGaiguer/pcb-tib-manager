@@ -108,7 +108,7 @@ export function TipForm({
           onChange={(e) => setForm({ ...form, type: e.target.value })}
         />
         <datalist id="typeList">
-          <option value="Brocas"></option>
+          <option value="Broca"></option>
           <option value="Fresas Piramidais"></option>
           <option value="Fresas Engraving"></option>
           <option value="Fresas de Topo Reto"></option>
