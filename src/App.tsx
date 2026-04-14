@@ -23,7 +23,7 @@ import './styles/formCase.css';
 //import { CaseMatrix } from './components/CaseMatrix';
 
 // URL do backend:
-const API_URL = 'https://backend-pcb-tip-manager.onrender.com/sync';
+const API_URL = 'https://backend-pcb-tip-manager.vercel.app';
 
 function App(): JSX.Element {
   // Estado para abrir o componente, nele tem os dados que serao extraidos e usados no componente, se nao tiver nada, ele nao renderiza
